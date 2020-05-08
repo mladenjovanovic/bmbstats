@@ -27,6 +27,7 @@ plot_control(
   bar_color = "black",
   line_color = "black",
   line_alpha = 0.5,
+  SESOI_alpha = 0.2,
   font_size = 8,
   legend_position = "none",
   coord_flip = TRUE
@@ -72,6 +73,8 @@ plot_control(
 \item{line_color}{Line color. Default is "black"}
 
 \item{line_alpha}{Line transparency. Default is 0.5}
+
+\item{SESOI_alpha}{Transparency for the SESOI band. Default is 0.2}
 
 \item{font_size}{Overall size of fonts}
 

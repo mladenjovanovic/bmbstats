@@ -23,6 +23,7 @@
 #' @param bar_color Color of the summary bar
 #' @param line_color Line color. Default is "black"
 #' @param line_alpha Line transparency. Default is 0.5
+#' @param SESOI_alpha Transparency for the SESOI band. Default is 0.2
 #' @param font_size Overall size of fonts
 #' @param legend_position Position of the legend. Default is "none". See \code{\link[ggplot2]{theme}}
 #'     for more info
@@ -72,6 +73,7 @@ plot_control <- function(group_colors = c(
                          bar_color = "black",
                          line_color = "black",
                          line_alpha = 0.5,
+                         SESOI_alpha = 0.2,
                          font_size = 8,
                          legend_position = "none",
                          coord_flip = TRUE) {
@@ -96,6 +98,7 @@ plot_control <- function(group_colors = c(
     bar_color = bar_color,
     line_color = line_color,
     line_alpha = line_alpha,
+    SESOI_alpha = SESOI_alpha,
     font_size = font_size,
     legend_position = legend_position,
     coord_flip = coord_flip
@@ -324,7 +327,7 @@ plot_raincloud_SESOI <- function(data,
       xmax = SESOI_upper,
       ymin = -Inf,
       ymax = Inf,
-      alpha = 0.2,
+      alpha = control$SESOI_alpha,
       fill = control$effect_colors[2]
     ) +
     ggstance::stat_summaryh(

@@ -7,9 +7,9 @@
 cohens_d(group_a, group_b, paired = FALSE, na.rm = FALSE)
 }
 \arguments{
-\item{group_a}{Numeric vector. This groups represents baseline/control or Pre-test in the paired design}
+\item{group_a}{Numeric vector. This group represents baseline/control or Pre-test in the paired design}
 
-\item{group_b}{Numeric vector}
+\item{group_b}{Numeric vector. This group represents Post-test in the paired design}
 
 \item{paired}{Paired groups? Default is \code{FALSE}}
 

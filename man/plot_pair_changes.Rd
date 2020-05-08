@@ -15,9 +15,9 @@ plot_pair_changes(
 )
 }
 \arguments{
-\item{group_a}{Numeric vector. This groups represents baseline/control or Pre-test in the paired design}
+\item{group_a}{Numeric vector. This group represents baseline/control or Pre-test in the paired design}
 
-\item{group_b}{Numeric vector}
+\item{group_b}{Numeric vector. This group represents Post-test in the paired design}
 
 \item{value_label}{Character string. Label to be used for y-axis. Default is \code{NULL}}
 

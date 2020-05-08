@@ -17,7 +17,8 @@ Imports:
     ggplot2,
     ggstance,
     ggridges,
-    cowplot
+    cowplot,
+    rlang
 RoxygenNote: 7.1.0
 Suggests: 
     testthat
