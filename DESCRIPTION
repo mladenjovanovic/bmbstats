@@ -1,0 +1,23 @@
+Package: bmbstats
+Title: Bootstrap Magnitude-based Statistics
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Mladen",
+           family = "Jovanović",
+           role = c("aut", "cre"),
+           email = "coach.mladen.jovanovic@gmail.com")
+Description: Set of functions for analysis and graphing of common sport science problems.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Depends:
+    R (>= 2.10)
+Imports:
+    stats,
+    ggplot2,
+    ggstance,
+    ggridges,
+    cowplot
+RoxygenNote: 7.1.0
+Suggests: 
+    testthat
