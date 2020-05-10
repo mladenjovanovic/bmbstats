@@ -13,14 +13,17 @@
 #' @param cloud_quantile_lines_color Color of the quantile lines
 #' @param cloud_quantile_lines_adjust Should quantile lines be extended?
 #' @param points_shape Point shape. Default is 21
+#' @param points_color Point color. Default is "black"
+#' @param points_fill Point fill. Default is "transparent"
 #' @param points_size Point size
 #' @param points_alpha Transparency of the points
 #' @param points_jitter Should jitter be used?
 #' @param points_jitter_width Width of the jitter
 #' @param points_gap Gap between points and cloud
-#' @param bar_nudge Gap between summary bar and cloud
-#' @param bar_size Size of the summary bar
-#' @param bar_color Color of the summary bar
+#' @param summary_bar_nudge Gap between summary bar and cloud
+#' @param summary_bar_size Size of the summary bar
+#' @param summary_bar_color Color of the summary bar
+#' @param line_size Line size
 #' @param line_color Line color. Default is "black"
 #' @param line_alpha Line transparency. Default is 0.5
 #' @param SESOI_alpha Transparency for the SESOI band. Default is 0.2
@@ -63,14 +66,17 @@ plot_control <- function(group_colors = c(
                          cloud_quantile_lines_color = "white",
                          cloud_quantile_lines_adjust = FALSE,
                          points_shape = 21,
+                         points_color = "black",
+                         points_fill = "transparent",
                          points_size = 2,
                          points_alpha = 0.5,
                          points_jitter = TRUE,
                          points_jitter_width = 0.1,
                          points_gap = 0.1,
-                         bar_nudge = 0.075,
-                         bar_size = 1,
-                         bar_color = "black",
+                         summary_bar_nudge = 0.075,
+                         summary_bar_size = 1,
+                         summary_bar_color = "black",
+                         line_size = 1,
                          line_color = "black",
                          line_alpha = 0.5,
                          SESOI_alpha = 0.2,
@@ -88,14 +94,17 @@ plot_control <- function(group_colors = c(
     cloud_quantile_lines_color = cloud_quantile_lines_color,
     cloud_quantile_lines_adjust = cloud_quantile_lines_adjust,
     points_shape = points_shape,
+    points_color = points_color,
+    points_fill = points_fill,
     points_size = points_size,
     points_alpha = points_alpha,
     points_jitter = points_jitter,
     points_jitter_width = points_jitter_width,
     points_gap = points_gap,
-    bar_nudge = bar_nudge,
-    bar_size = bar_size,
-    bar_color = bar_color,
+    summary_bar_nudge = summary_bar_nudge,
+    summary_bar_size = summary_bar_size,
+    summary_bar_color = summary_bar_color,
+    line_size = line_size,
     line_color = line_color,
     line_alpha = line_alpha,
     SESOI_alpha = SESOI_alpha,
@@ -188,9 +197,9 @@ plot_raincloud <- function(data,
     ggstance::stat_summaryh(
       fun.data = mean_sd_h,
       geom = "pointrangeh",
-      position = ggplot2::position_nudge(y = control$bar_nudge),
-      size = control$bar_size,
-      color = control$bar_color
+      position = ggplot2::position_nudge(y = control$summary_bar_nudge),
+      size = control$summary_bar_size,
+      color = control$summary_bar_color
     ) +
     ggplot2::ylab(NULL) +
     ggplot2::xlab(value_label) +
@@ -333,9 +342,9 @@ plot_raincloud_SESOI <- function(data,
     ggstance::stat_summaryh(
       fun.data = mean_sd_h,
       geom = "pointrangeh",
-      position = ggplot2::position_nudge(y = control$bar_nudge),
-      size = control$bar_size,
-      color = control$bar_color
+      position = ggplot2::position_nudge(y = control$summary_bar_nudge),
+      size = control$summary_bar_size,
+      color = control$summary_bar_color
     ) +
     ggplot2::ylab(NULL) +
     ggplot2::xlab(value_label) +

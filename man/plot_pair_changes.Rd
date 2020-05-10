@@ -36,7 +36,7 @@ Returns \code{link[ggplot2]{ggplot}} object
 Plot pair changes
 }
 \details{
-To provide labels from groups, use \code{comment} attribute
+To provide labels for groups, use \code{comment} attribute
 }
 \examples{
 plot_pair_changes(rnorm(100, 100, 20),

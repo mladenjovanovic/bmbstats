@@ -17,14 +17,17 @@ plot_control(
   cloud_quantile_lines_color = "white",
   cloud_quantile_lines_adjust = FALSE,
   points_shape = 21,
+  points_color = "black",
+  points_fill = "transparent",
   points_size = 2,
   points_alpha = 0.5,
   points_jitter = TRUE,
   points_jitter_width = 0.1,
   points_gap = 0.1,
-  bar_nudge = 0.075,
-  bar_size = 1,
-  bar_color = "black",
+  summary_bar_nudge = 0.075,
+  summary_bar_size = 1,
+  summary_bar_color = "black",
+  line_size = 1,
   line_color = "black",
   line_alpha = 0.5,
   SESOI_alpha = 0.2,
@@ -54,6 +57,10 @@ plot_control(
 
 \item{points_shape}{Point shape. Default is 21}
 
+\item{points_color}{Point color. Default is "black"}
+
+\item{points_fill}{Point fill. Default is "transparent"}
+
 \item{points_size}{Point size}
 
 \item{points_alpha}{Transparency of the points}
@@ -64,11 +71,13 @@ plot_control(
 
 \item{points_gap}{Gap between points and cloud}
 
-\item{bar_nudge}{Gap between summary bar and cloud}
+\item{summary_bar_nudge}{Gap between summary bar and cloud}
 
-\item{bar_size}{Size of the summary bar}
+\item{summary_bar_size}{Size of the summary bar}
 
-\item{bar_color}{Color of the summary bar}
+\item{summary_bar_color}{Color of the summary bar}
+
+\item{line_size}{Line size}
 
 \item{line_color}{Line color. Default is "black"}
 
