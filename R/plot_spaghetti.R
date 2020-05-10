@@ -8,12 +8,31 @@
 #' @return \code{\link[ggplot2]{ggplot2}} object
 #' @export
 #' @examples
-#' plot_spaghetti(
-#'   sleep,
-#'   id = "ID",
-#'   observations = "group",
-#'   value = "extra"
+#' test_data <- expand.grid(
+#'   id = 1:10,
+#'   obs = 1:10
 #' )
+#'
+#' test_data$val <- with(
+#'   test_data,
+#'   rnorm(nrow(test_data), obs, id)
+#' )
+#'
+#' plot_spaghetti(
+#'   test_data,
+#'   id = "id",
+#'   observations = "obs",
+#'   value = "val",
+#'   SESOI_lower = -1,
+#'   SESOI_upper = 1,
+#'   control = plot_control(
+#'     points_shape = 21,
+#'     points_fill = "white",
+#'     points_alpha = 1,
+#'     points_size = 0.75,
+#'     line_size = 0.75,
+#'     legend_position = "right"
+#'   ))
 plot_spaghetti <- function(data,
                            id,
                            observations,
