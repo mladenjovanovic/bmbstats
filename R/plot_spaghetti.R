@@ -1,5 +1,5 @@
-# =============================================================================
-#' Raincloud plot
+#' Spaghetti plot
+#'
 #' @inheritParams plot_raincloud
 #' @inheritParams basic_arguments
 #' @param id Character string. Name of  the column in \code{data}

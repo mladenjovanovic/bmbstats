@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot_spaghetti.R
 \name{plot_spaghetti}
 \alias{plot_spaghetti}
-\title{Raincloud plot}
+\title{Spaghetti plot}
 \usage{
 plot_spaghetti(
   data,
@@ -39,7 +39,7 @@ plot_spaghetti(
 \code{\link[ggplot2]{ggplot2}} object
 }
 \description{
-Raincloud plot
+Spaghetti plot
 }
 \examples{
 test_data <- expand.grid(
