@@ -15,6 +15,8 @@
 \item{SESOI_lower}{Lower smallest effect size of interest threshold. Default is 0}
 
 \item{SESOI_upper}{Upper smallest effect size of interest threshold.  Default is 0}
+
+\item{confidence}{Default is 0.95}
 }
 \description{
 Basic arguments

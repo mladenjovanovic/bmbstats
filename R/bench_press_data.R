@@ -1,7 +1,7 @@
 #' Bench press data
-#' 
+#'
 #' Effects of training intervention using N=20 subject on bench press 1RM
-#' 
+#'
 #' @format A data frame with 20 rows and 5 variables:
 #' \describe{
 #'   \item{Athlete}{Name of the athlete}

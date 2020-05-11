@@ -13,7 +13,6 @@
 #'   OLP_regression(`OS 1`, `OS 3`)
 #' )
 OLP_regression <- function(group_a, group_b, na.rm = FALSE) {
-
   if (na.rm) {
     na.idx <- is.na(group_a) | is.na(group_b)
     group_a <- group_a[!na.idx]

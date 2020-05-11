@@ -66,5 +66,6 @@ plot_spaghetti(
     points_size = 0.75,
     line_size = 0.75,
     legend_position = "right"
-  ))
+  )
+)
 }

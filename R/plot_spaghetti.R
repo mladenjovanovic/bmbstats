@@ -32,7 +32,8 @@
 #'     points_size = 0.75,
 #'     line_size = 0.75,
 #'     legend_position = "right"
-#'   ))
+#'   )
+#' )
 plot_spaghetti <- function(data,
                            id,
                            observations,
@@ -83,7 +84,8 @@ plot_spaghetti <- function(data,
         yend = segments_y[, 1],
         y = segments_y[, 2],
         xend = segments_x[, 1],
-        x = segments_x[, 2])
+        x = segments_x[, 2]
+      )
     }
   )
   # Merge into single DF
@@ -110,7 +112,8 @@ plot_spaghetti <- function(data,
 
   gg <- ggplot2::ggplot(
     plot_data,
-    ggplot2::aes(x = x, y = y)) +
+    ggplot2::aes(x = x, y = y)
+  ) +
     cowplot::theme_cowplot(control$font_size) +
     ggplot2::geom_segment(
       data = plot_data.seg,
@@ -119,9 +122,11 @@ plot_spaghetti <- function(data,
         y = y,
         xend = xend,
         yend = yend,
-        color = magnitude),
+        color = magnitude
+      ),
       alpha = control$line_alpha,
-      size = control$line_size) +
+      size = control$line_size
+    ) +
     ggplot2::scale_discrete_manual(
       aesthetics = c("color"),
       values = control$effect_colors,
@@ -134,7 +139,8 @@ plot_spaghetti <- function(data,
       shape = control$points_shape,
       size = control$points_size,
       color = control$points_color,
-      fill = control$points_fill) +
+      fill = control$points_fill
+    ) +
     ggplot2::theme(
       legend.position = control$legend_position,
       legend.title = ggplot2::element_blank()
@@ -147,5 +153,4 @@ plot_spaghetti <- function(data,
   }
 
   return(gg)
-
 }

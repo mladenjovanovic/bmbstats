@@ -5,5 +5,6 @@
 #' @param na.rm Should NAs be removed? Default is \code{FALSE}
 #' @param SESOI_lower Lower smallest effect size of interest threshold. Default is 0
 #' @param SESOI_upper Upper smallest effect size of interest threshold.  Default is 0
+#' @param confidence Default is 0.95
 #' @name basic_arguments
 NULL
