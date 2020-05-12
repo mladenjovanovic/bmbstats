@@ -17,20 +17,20 @@
 #'
 #' practical <- criterion * 1.2 + rnorm(n = 100, mean = -12, sd = 5)
 #'
-#' comment(practical) <- "practical"
-#' comment(criterion) <- "criterion"
-#'
-#' plot_pair_OLP(
-#'   practical,
+#' plot_pair_OLP(practical,
 #'   criterion,
 #'   SESOI_lower = -10,
-#'   SESOI_upper = 10
+#'   SESOI_upper = 10,
+#'   group_a_label = "Practical",
+#'   group_b_label = "Criterion"
 #' )
 plot_pair_OLP <- function(group_a,
                           group_b,
                           SESOI_lower = 0,
                           SESOI_upper = 0,
                           confidence = 0.95,
+                          group_a_label = "Group A",
+                          group_b_label = "Group B",
                           control = plot_control(),
                           na.rm = FALSE) {
 
@@ -43,12 +43,6 @@ plot_pair_OLP <- function(group_a,
   if (length(group_a) != length(group_b)) {
     stop("Group A and Group B differ in size. Unable to proceed")
   }
-
-  group_a_label <- comment(group_a)
-  group_b_label <- comment(group_b)
-
-  if (is.null(group_a_label)) group_a_label <- "Group A"
-  if (is.null(group_b_label)) group_b_label <- "Group B"
 
   # Prepare DF
   plot_data <- data.frame(

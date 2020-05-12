@@ -1,5 +1,4 @@
 #' Plot pair changes
-#' @details To provide labels for groups, use \code{comment} attribute
 #' @inheritParams basic_arguments
 #' @inheritParams plot_raincloud
 #' @param value_label Character string. Label to be used for y-axis. Default is \code{NULL}
@@ -18,6 +17,8 @@ plot_pair_changes <- function(group_a,
                               group_label = NULL,
                               SESOI_lower = 0,
                               SESOI_upper = 0,
+                              group_a_label = "Group A",
+                              group_b_label = "Group B",
                               control = plot_control()) {
 
   # +++++++++++++++++++++++++++++++++++++++++++
@@ -31,13 +32,6 @@ plot_pair_changes <- function(group_a,
   if (length(group_a) != length(group_b)) {
     stop("Group A and Group B differ in size. Unable to proceed")
   }
-
-  group_a_label <- comment(group_a)
-  group_b_label <- comment(group_b)
-
-
-  if (is.null(group_a_label)) group_a_label <- "Group A"
-  if (is.null(group_b_label)) group_b_label <- "Group B"
 
   n_obs <- length(group_a)
   change <- group_b - group_a

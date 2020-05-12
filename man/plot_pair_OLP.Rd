@@ -10,6 +10,8 @@ plot_pair_OLP(
   SESOI_lower = 0,
   SESOI_upper = 0,
   confidence = 0.95,
+  group_a_label = "Group A",
+  group_b_label = "Group B",
   control = plot_control(),
   na.rm = FALSE
 )
@@ -24,6 +26,10 @@ plot_pair_OLP(
 \item{SESOI_upper}{Upper smallest effect size of interest threshold.  Default is 0}
 
 \item{confidence}{Default is 0.95}
+
+\item{group_a_label}{Character vector. The name of the \code{group_a}. Default is "Group A"}
+
+\item{group_b_label}{Character vector. The name of the \code{group_b}. Default is "Group B"}
 
 \item{control}{Plotting control object returned from \code{\link{plot_control}}}
 
@@ -44,14 +50,12 @@ criterion <- rnorm(
 
 practical <- criterion * 1.2 + rnorm(n = 100, mean = -12, sd = 5)
 
-comment(practical) <- "practical"
-comment(criterion) <- "criterion"
-
-plot_pair_OLP(
-  practical,
+plot_pair_OLP(practical,
   criterion,
   SESOI_lower = -10,
-  SESOI_upper = 10
+  SESOI_upper = 10,
+  group_a_label = "Practical",
+  group_b_label = "Criterion"
 )
 }
 \seealso{

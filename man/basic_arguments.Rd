@@ -8,6 +8,10 @@
 
 \item{group_b}{Numeric vector. This group represents experimental, Post-test in the paired design, or "criterion" measure}
 
+\item{group_a_label}{Character vector. The name of the \code{group_a}. Default is "Group A"}
+
+\item{group_b_label}{Character vector. The name of the \code{group_b}. Default is "Group B"}
+
 \item{paired}{Paired groups? Default is \code{FALSE}}
 
 \item{na.rm}{Should NAs be removed? Default is \code{FALSE}}

@@ -1,0 +1,24 @@
+#' YoYoIR1 and MAS data set
+#'
+#' Results of YoYoIR1(m) and MAS(km/h) tests for N=30 female soccer athletes.
+#'     This data is generated using the research from the references
+#' @references
+#'   1. Mujika, Iñigo et al. (2009). Fitness determinants of success in men's and women's football.
+#'        Journal of sports sciences. 27. 107-14. 10.1080/02640410802428071.
+#'        \href{https://www.researchgate.net/publication/23572994_Fitness_determinants_of_success_in_men's_and_women's_football}{Researchgate}
+#'
+#'   2. Heaney, Nathan et al. (2009). Comparison of a YOYO IR1 test and a VO2max test as a determination
+#'        of training speeds and evaluation of aerobic power.
+#'        \href{https://www.researchgate.net/publication/266854849_Comparison_of_a_YOYO_IR1_test_and_a_VO2max_test_as_a_determination_of_training_speeds_and_evaluation_of_aerobic_power}{Researchgate}
+#'
+#' @format A data frame with 30 rows and 3 variables:
+#' \describe{
+#'   \item{Athlete}{Name of the athlete}
+#'   \item{YoYoIR1}{Result achieved in Yo-Yo Intermittent Recovery Level 1.
+#'                   Scores are in meters}
+#'   \item{MAS}{Result achieved in Maximum Aerobic Speed test.
+#'              Scores are in km/h}
+#' }
+#'
+#' @usage data(yoyo_mas_data)
+"yoyo_mas_data"

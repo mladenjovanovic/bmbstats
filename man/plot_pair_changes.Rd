@@ -11,6 +11,8 @@ plot_pair_changes(
   group_label = NULL,
   SESOI_lower = 0,
   SESOI_upper = 0,
+  group_a_label = "Group A",
+  group_b_label = "Group B",
   control = plot_control()
 )
 }
@@ -27,6 +29,10 @@ plot_pair_changes(
 
 \item{SESOI_upper}{Upper smallest effect size of interest threshold.  Default is 0}
 
+\item{group_a_label}{Character vector. The name of the \code{group_a}. Default is "Group A"}
+
+\item{group_b_label}{Character vector. The name of the \code{group_b}. Default is "Group B"}
+
 \item{control}{Plotting control object returned from \code{\link{plot_control}}}
 }
 \value{
@@ -34,9 +40,6 @@ Returns \code{link[ggplot2]{ggplot}} object
 }
 \description{
 Plot pair changes
-}
-\details{
-To provide labels for groups, use \code{comment} attribute
 }
 \examples{
 plot_pair_changes(rnorm(100, 100, 20),
