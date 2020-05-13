@@ -101,54 +101,43 @@ predicted <- predict(model)
 SESOI_lower <- -0.5
 SESOI_upper <- 0.5
 
-# Mean square error
-mean(
-  loss_quadratic(
-    observed = observed,
-    predicted = predicted,
-    SESOI_lower = SESOI_lower,
-    SESOI_upper = SESOI_upper
-  )
+# Square loss
+loss_quadratic(
+  observed = observed,
+  predicted = predicted,
+  SESOI_lower = SESOI_lower,
+  SESOI_upper = SESOI_upper
 )
 
-# Mean absolute error
-mean(
-  loss_absolute(
-    observed = observed,
-    predicted = predicted,
-    SESOI_lower = SESOI_lower,
-    SESOI_upper = SESOI_upper
-  )
+# Absolute loss
+loss_absolute(
+  observed = observed,
+  predicted = predicted,
+  SESOI_lower = SESOI_lower,
+  SESOI_upper = SESOI_upper
 )
 
-# Mean error (or bias)
-# Mean square error
-mean(
-  loss_difference(
-    observed = observed,
-    predicted = predicted,
-    SESOI_lower = SESOI_lower,
-    SESOI_upper = SESOI_upper
-  )
+# Difference
+loss_difference(
+  observed = observed,
+  predicted = predicted,
+  SESOI_lower = SESOI_lower,
+  SESOI_upper = SESOI_upper
 )
 
-# Mean Huber
-mean(
-  loss_huber(
-    observed = observed,
-    predicted = predicted,
-    SESOI_lower = SESOI_lower,
-    SESOI_upper = SESOI_upper
-  )
+# Huber loss
+loss_huber(
+  observed = observed,
+  predicted = predicted,
+  SESOI_lower = SESOI_lower,
+  SESOI_upper = SESOI_upper
 )
 
-# Mean Hinge
-mean(
-  loss_hinge(
-    observed = observed,
-    predicted = predicted,
-    SESOI_lower = SESOI_lower,
-    SESOI_upper = SESOI_upper
-  )
+# Hinge loss
+loss_hinge(
+  observed = observed,
+  predicted = predicted,
+  SESOI_lower = SESOI_lower,
+  SESOI_upper = SESOI_upper
 )
 }
