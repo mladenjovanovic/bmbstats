@@ -4,6 +4,8 @@
 \alias{basic_arguments}
 \title{Basic arguments}
 \arguments{
+\item{x}{Numeric vector}
+
 \item{group_a}{Numeric vector. This group represents baseline/control, Pre-test in the paired design, or "practical" measure}
 
 \item{group_b}{Numeric vector. This group represents experimental, Post-test in the paired design, or "criterion" measure}
