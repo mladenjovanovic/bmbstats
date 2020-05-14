@@ -1,5 +1,10 @@
 #' Basic arguments
 #' @param x Numeric vector
+#' @param model Model object
+#' @param predictors Data frame
+#' @param outcome Vector
+#' @param observed Numeric vector
+#' @param predicted Numeric vector
 #' @param group_a Numeric vector. This group represents baseline/control, Pre-test in the paired design, or "practical" measure
 #' @param group_b Numeric vector. This group represents experimental, Post-test in the paired design, or "criterion" measure
 #' @param group_a_label Character vector. The name of the \code{group_a}. Default is "Group A"

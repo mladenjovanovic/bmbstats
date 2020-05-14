@@ -6,6 +6,16 @@
 \arguments{
 \item{x}{Numeric vector}
 
+\item{model}{Model object}
+
+\item{predictors}{Data frame}
+
+\item{outcome}{Vector}
+
+\item{observed}{Numeric vector}
+
+\item{predicted}{Numeric vector}
+
 \item{group_a}{Numeric vector. This group represents baseline/control, Pre-test in the paired design, or "practical" measure}
 
 \item{group_b}{Numeric vector. This group represents experimental, Post-test in the paired design, or "criterion" measure}

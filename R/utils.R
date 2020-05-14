@@ -78,3 +78,18 @@ get_magnitude <- function(x,
     ordered = TRUE
   )
 }
+
+#' Function or numeric
+#' Check if the parameter \code{x} is a function, or numeric. If it is a function,
+#'      then parameters \code{...} are forwarded to \code{x}. If it is a numeric, then
+#'      the \code{x} is returned
+#' @param x Function or numeric
+#' @param ... Forwarded to \code{x} if function
+#' @return If function \code{x{...}} is returned. If numeric \code{x} is returned
+func_num <- function(x, ...) {
+  if (is.function(x)) {
+    x(...)
+  } else {
+    x
+  }
+}

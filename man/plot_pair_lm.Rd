@@ -60,6 +60,6 @@ plot_pair_OLP(practical,
 }
 \seealso{
 \code{\link{plot_pair_BA}} for Bland-Altman plot and
-   \code{\link{plot_pair_OLP}} for ordinary-least-squares residuals
-    plot
+\code{\link{plot_pair_OLP}} for ordinary-least-squares residuals
+plot
 }

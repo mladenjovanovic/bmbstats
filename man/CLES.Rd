@@ -35,7 +35,7 @@ Numeric
 }
 \description{
 \code{CLES} calculates the probability that a random observation from Group B is higher/larger
-    than a random observation from Group A. Groups are considered independent.
+than a random observation from Group A. Groups are considered independent.
 }
 \examples{
 CLES(

@@ -7,13 +7,13 @@
 \format{
 A data frame with 20 rows and 7 variables:
 \describe{
-  \item{Athlete}{Name of the athlete}
-  \item{TS}{True score}
-  \item{OS 1}{Observed score 1}
-  \item{OS 2}{Observed score 2}
-  \item{OS 3}{Observed score 3}
-  \item{OS 4}{Observed score 4}
-  \item{OS 5}{Observed score 5}
+\item{Athlete}{Name of the athlete}
+\item{TS}{True score}
+\item{OS 1}{Observed score 1}
+\item{OS 2}{Observed score 2}
+\item{OS 3}{Observed score 3}
+\item{OS 4}{Observed score 4}
+\item{OS 5}{Observed score 5}
 }
 }
 \usage{
@@ -21,15 +21,16 @@ data(weight_data)
 }
 \description{
 Example data to demonstrate measurement error concept. Data consists of
-    20 athletes with their \emph{True Score (TS)} bodyweight (kg) and five
-    \emph{Observation Scores (OS)} measured over 5 occasions using measuring
-    scale with \emph{fixed bias}, \emph{proportional bias}, and \emph{random error}.
-    The mathematical notation is the following:
-    \deqn{OS = Fixed\; Bias + (Proportional \; Bias\times TS) + \epsilon}
-    The following relationship between TS and OS is used in this data sample:
-    \deqn{OS = 1 + (1.01 \times TS) + \mathcal{N}(0,\, 0.5)}
+20 athletes with their \emph{True Score (TS)} bodyweight (kg) and five
+\emph{Observation Scores (OS)} measured over 5 occasions using measuring
+scale with \emph{fixed bias}, \emph{proportional bias}, and \emph{random error}.
+The mathematical notation is the following:
+\deqn{OS = Fixed\; Bias + (Proportional \; Bias\times TS) + \epsilon}
+The following relationship between TS and OS is used in this data sample:
+\deqn{OS = 1 + (1.01 \times TS) + \mathcal{N}(0,\, 0.5)}
 }
 \details{
-True Score has the \code{mean} of 75kg and \code{sd} of 10
+\preformatted{True Score has the \code{mean} of 75kg and \code{sd} of 10
+}
 }
 \keyword{datasets}

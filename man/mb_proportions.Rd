@@ -38,7 +38,7 @@ Data frame with lower, equivalent and higher columns
 }
 \description{
 \code{mb_proportions} calculates lower/equivalent/higher difference
-    proportions between two groups
+proportions between two groups
 }
 \examples{
 mb_proportions(rnorm(100), rnorm(100))

@@ -132,7 +132,7 @@ List with plot control elements
 }
 \description{
 Returns default plotting parameters for \code{\link{plot_raincloud}},
-   \code{\link{plot_raincloud_SESOI}}, and \code{\link{plot_pair_changes}}
+\code{\link{plot_raincloud_SESOI}}, and \code{\link{plot_pair_changes}}
 }
 \examples{
 plot_raincloud(data.frame(data = rnorm(100)), value = "data")

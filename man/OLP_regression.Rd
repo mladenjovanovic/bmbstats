@@ -5,7 +5,7 @@
 \title{OLP regression}
 \source{
 Function modified using the function from
-   \url{https://stat.ethz.ch/pipermail/r-help/2011-July/285022.html}
+\url{https://stat.ethz.ch/pipermail/r-help/2011-July/285022.html}
 }
 \usage{
 OLP_regression(group_a, group_b, na.rm = FALSE)

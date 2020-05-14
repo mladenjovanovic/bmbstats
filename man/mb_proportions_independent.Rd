@@ -35,5 +35,5 @@ Data frame with lower, equivalent and higher columns
 }
 \description{
 \code{mb_proportions_independent} calculates lower/equivalent/higher
-     difference proportions between two independent groups
+difference proportions between two independent groups
 }

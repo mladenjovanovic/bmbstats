@@ -60,6 +60,6 @@ plot_pair_BA(practical,
 }
 \seealso{
 \code{\link{plot_pair_lm}} for lm residuals plot and
-   \code{\link{plot_pair_OLP}} for ordinary-least-squares residuals
-    plot
+\code{\link{plot_pair_OLP}} for ordinary-least-squares residuals
+plot
 }

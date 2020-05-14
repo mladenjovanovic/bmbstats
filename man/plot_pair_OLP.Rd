@@ -60,5 +60,5 @@ plot_pair_OLP(practical,
 }
 \seealso{
 \code{\link{plot_pair_BA}} for Bland-Altman plot and
-   \code{\link{plot_pair_lm}} for lm residuals plot
+\code{\link{plot_pair_lm}} for lm residuals plot
 }
