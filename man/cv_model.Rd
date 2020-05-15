@@ -49,7 +49,7 @@ and the predictor terms on the right-hand side.}
 }}
 }
 \value{
-A \code{cv_model} object.
+A \code{bmbstats_cv_model} object.
 }
 \description{
 \code{cv_model()} fits a model.

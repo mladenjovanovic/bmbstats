@@ -29,7 +29,7 @@
 #'
 #' @return
 #'
-#' A `cv_model` object.
+#' A `bmbstats_cv_model` object.
 #'
 #' @examples
 #' m1 <- cv_model(
@@ -108,6 +108,9 @@ cv_model_bridge <- function(processed, ...) {
     model = fit$model,
     predicted = fit$predicted,
     performance = fit$performance,
+    residual = fit$residual,
+    residual_magnitude = fit$residual_magnitude,
+    cross_validation = fit$cross_validation,
     control = fit$control,
     na.rm = fit$na.rm,
     blueprint = processed$blueprint
@@ -127,6 +130,11 @@ cv_model_impl <- function(predictors,
                           control = model_control(),
                           na.rm = FALSE) {
 
+  # Set-up seed for reproducibility
+  set.seed(control$seed)
+
+  # ------------------------------------
+  # Training models
   model <- model_func(
     predictors = predictors,
     outcome = outcome,
@@ -143,6 +151,13 @@ cv_model_impl <- function(predictors,
     na.rm = na.rm
   )
 
+  residual <- predicted - outcome
+  residual_magnitude <- get_magnitude(
+    residual,
+    SESOI_lower = func_num(SESOI_lower, predictors, outcome, na.rm),
+    SESOI_upper = func_num(SESOI_upper, predictors, outcome, na.rm),
+  )
+
   performance <- perf_func(
     observed = outcome,
     predicted = predicted,
@@ -150,6 +165,272 @@ cv_model_impl <- function(predictors,
     SESOI_upper = func_num(SESOI_upper, predictors, outcome, na.rm),
     na.rm = na.rm
   )
+
+  # ------------------------------------
+  # Cross-validation
+  iter <- control$iter
+  cv_folds <- control$cv_folds
+  cv_repeats <- control$cv_repeats
+  cv_strata <- control$cv_strata
+
+  if (!is.null(cv_folds)) {
+    # If there is no repeats defined then assume 1
+    if (is.null(cv_repeats)) {
+      cv_repeats <- 1
+      control$cv_repeats <- 1
+    }
+  }
+
+  # Check if strata is NULL
+  if (is.null(cv_strata)) {
+    cv_strata <- seq(1, nrow(predictors))
+    control$cv_strata <- cv_strata
+  }
+
+  # Progress bar
+  # Show progress bar
+  if (iter) {
+    pb <- progress::progress_bar$new(
+      total = cv_folds * cv_repeats,
+      format = "(:spin) [:bar] :percent eta: :eta"
+    )
+    pb$tick(0)
+    message(
+      paste("Cross-validating: ",
+            cv_folds,
+            " folds, ",
+            cv_repeats,
+            " repeats",
+            sep = ""
+      )
+    )
+  }
+
+  # Create CV folds
+  # Set-up seed for reproducibility
+  set.seed(control$seed)
+
+  cv_folds <- caret::createMultiFolds(
+    y = cv_strata,
+    k = cv_folds,
+    times = cv_repeats
+  )
+
+  # ----------------------------------------------------------------------------
+  # Loop through CV folds
+  cv_results <- purrr::map2(cv_folds, names(cv_folds), function(obs, fold_name) {
+    if (iter) pb$tick()
+
+    # Split the data into train and test
+    train_predictors <- predictors[obs, ]
+    test_predictors <- predictors[-obs, ]
+    train_outcome <- outcome[obs]
+    test_outcome <- outcome[-obs]
+
+    train_index <- obs
+    test_index <- seq(1, nrow(predictors))[-obs]
+
+    # Set-up seed for reproducibility
+    set.seed(control$seed)
+
+    # Train model using training data
+    train_model <- model_func(
+      predictors = train_predictors,
+      outcome = train_outcome,
+      SESOI_lower = func_num(SESOI_lower, train_predictors, train_outcome, na.rm),
+      SESOI_upper = func_num(SESOI_upper, train_predictors, train_outcome, na.rm),
+      na.rm = na.rm
+    )
+
+    train_predicted <- predict_func(
+      model = train_model,
+      predictors = train_predictors,
+      SESOI_lower = func_num(SESOI_lower, train_predictors, train_outcome, na.rm),
+      SESOI_upper = func_num(SESOI_upper, train_predictors, train_outcome, na.rm),
+      na.rm = na.rm
+    )
+
+    train_residual <- train_predicted - train_outcome
+
+    train_residual_magnitude <- get_magnitude(
+      train_residual,
+      SESOI_lower = func_num(SESOI_lower, train_predictors, train_outcome, na.rm),
+      SESOI_upper = func_num(SESOI_upper, train_predictors, train_outcome, na.rm),
+    )
+
+    train_performance <- perf_func(
+      observed = train_outcome,
+      predicted = train_predicted,
+      SESOI_lower = func_num(SESOI_lower, train_predictors, train_outcome, na.rm),
+      SESOI_upper = func_num(SESOI_upper, train_predictors, train_outcome, na.rm),
+      na.rm = na.rm
+    )
+
+    # Test model
+    test_predicted <- predict_func(
+      model = train_model,
+      predictors = test_predictors,
+      SESOI_lower = func_num(SESOI_lower, train_predictors, train_outcome, na.rm),
+      SESOI_upper = func_num(SESOI_upper, train_predictors, train_outcome, na.rm),
+      na.rm = na.rm
+    )
+
+    test_residual <- test_predicted - test_outcome
+
+    test_residual_magnitude <- get_magnitude(
+      test_residual,
+      SESOI_lower = func_num(SESOI_lower, train_predictors, train_outcome, na.rm),
+      SESOI_upper = func_num(SESOI_upper, train_predictors, train_outcome, na.rm),
+    )
+
+    test_performance <- perf_func(
+      observed = test_outcome,
+      predicted = test_predicted,
+      SESOI_lower = func_num(SESOI_lower, train_predictors, train_outcome, na.rm),
+      SESOI_upper = func_num(SESOI_upper, train_predictors, train_outcome, na.rm),
+      na.rm = na.rm
+    )
+
+    # Save everything in a list
+    list(
+      training = list(
+        predictors = train_predictors,
+        outcome = train_outcome,
+        index = train_index,
+        predicted = train_predicted,
+        residual = train_residual,
+        residual_magnitude = train_residual_magnitude,
+        performance = train_performance
+        # Don't save the model
+        #model = model
+      ),
+      testing = list(
+        predictors = test_predictors,
+        outcome = test_outcome,
+        index = test_index,
+        predicted = test_predicted,
+        residual = test_residual,
+        residual_magnitude = test_residual_magnitude,
+        performance = test_performance
+      )
+    )
+  })
+
+  # ------------------------------------------
+  # Create CV summaries
+
+  # Pooled training data
+  training_data <- purrr::map2_df(cv_results, names(cv_results), function(cv_folds, fold_name) {
+    data.frame(
+      fold = fold_name,
+      index = cv_folds$training$index,
+      outcome = cv_folds$training$outcome,
+      predicted = cv_folds$training$predicted,
+      residual = cv_folds$training$residual,
+      residual_magnitude = cv_folds$training$residual_magnitude,
+      stringsAsFactors = FALSE
+    )
+  })
+
+  # Pooled training data performance
+  training_performance <- perf_func(
+      observed = training_data$outcome,
+      predicted = training_data$predicted,
+      SESOI_lower = func_num(SESOI_lower, predictors[training_data$index, ], training_data$outcome, na.rm),
+      SESOI_upper = func_num(SESOI_upper, predictors[training_data$index, ], training_data$outcome, na.rm),
+      na.rm = na.rm
+  )
+
+  # Pooled testing data
+  testing_data <- purrr::map2_df(cv_results, names(cv_results), function(cv_folds, fold_name) {
+    data.frame(
+      fold = fold_name,
+      index = cv_folds$testing$index,
+      outcome = cv_folds$testing$outcome,
+      predicted = cv_folds$testing$predicted,
+      residual = cv_folds$testing$residual,
+      residual_magnitude = cv_folds$testing$residual_magnitude,
+      stringsAsFactors = FALSE
+    )
+  })
+
+  # Pooled testing data performance
+  testing_performance <- perf_func(
+    observed = testing_data$outcome,
+    predicted = testing_data$predicted,
+    SESOI_lower = func_num(SESOI_lower, predictors[training_data$index, ], training_data$outcome, na.rm),
+    SESOI_upper = func_num(SESOI_upper, predictors[training_data$index, ], training_data$outcome, na.rm),
+    na.rm = na.rm
+  )
+
+  # Training performance across folds
+  cv_training_performance <- purrr::map2_df(cv_results, names(cv_results), function(cv_folds, fold_name) {
+    data.frame(
+      fold = fold_name,
+      metric = names(cv_folds$training$performance),
+      value = cv_folds$training$performance,
+      stringsAsFactors = FALSE
+    )
+  })
+
+  cv_training_performance$metric <- factor(
+    cv_training_performance$metric,
+    levels = names(performance)
+  )
+
+  cv_testing_performance <- purrr::map2_df(cv_results, names(cv_results), function(cv_folds, fold_name) {
+    data.frame(
+      fold = fold_name,
+      metric = names(cv_folds$testing$performance),
+      value = cv_folds$testing$performance,
+      stringsAsFactors = FALSE
+    )
+  })
+
+  cv_testing_performance$metric <- factor(
+    cv_testing_performance$metric,
+    levels = names(performance)
+  )
+
+  # Bias-Variance
+  bias_variance <- split(testing_data, testing_data$index)
+  bias_variance <- purrr::map_df(bias_variance, function(x){
+    index <- x$index[[1]]
+    outcome <- x$outcome[[1]]
+    MSE = mean(x$residual^2)
+    bias_squared = (mean(x$predicted) - outcome)^2
+    variance = mean((mean(x$predicted) - x$predicted)^2)
+
+    data.frame(
+      index = index,
+      outcome = outcome,
+      MSE = MSE,
+      bias_squared = bias_squared,
+      variance = variance
+    )
+  })
+
+  # Save CV results
+  cross_validation <- list(
+    data = list(
+      training = training_data,
+      testing = testing_data
+    ),
+    performance = list(
+      training = training_performance,
+      testing = testing_performance,
+      folds = list(
+        training = cv_training_performance,
+        testing = cv_testing_performance
+      )
+    ),
+    bias_variance = bias_variance,
+    folds = cv_results
+  )
+  # ------------------------------------
+  # Save results in the object
+
+  if (iter) message("Done!")
 
   list(
     predictors = predictors,
@@ -162,6 +443,9 @@ cv_model_impl <- function(predictors,
     model = model,
     predicted = predicted,
     performance = performance,
+    residual = residual,
+    residual_magnitude = residual_magnitude,
+    cross_validation = cross_validation,
     control = control,
     na.rm = na.rm
   )
@@ -215,7 +499,7 @@ generic_predict <- function(model,
 # ------------------------------------------------------------------------------
 #' Performance metrics
 #'
-#' Returns a list of the most common performance metrics
+#' Returns named vector of the most common performance metrics
 #' @inheritParams basic_arguments
 #' @export
 #' @examples
@@ -235,7 +519,11 @@ performance_metrics <- function(observed,
                                SESOI_lower = 0,
                                SESOI_upper = 0,
                                na.rm = FALSE) {
-  return(list(
+ c(
+    SESOI_lower = SESOI_lower,
+    SESOI_upper = SESOI_upper,
+    SESOI_range = SESOI_upper - SESOI_lower,
+
     MBE = cost_MBE(
       observed = observed,
       predicted = predicted,
@@ -307,7 +595,7 @@ performance_metrics <- function(observed,
       SESOI_upper = SESOI_upper,
       na.rm = na.rm
     )
-  ))
+  )
 }
 
 # ------------------------------------------------------------------------------

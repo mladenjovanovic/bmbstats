@@ -24,7 +24,7 @@ performance_metrics(
 \item{na.rm}{Should NAs be removed? Default is \code{FALSE}}
 }
 \description{
-Returns a list of the most common performance metrics
+Returns named vector of the most common performance metrics
 }
 \examples{
 m1 <- lm_model(

@@ -15,9 +15,9 @@ mb_proportions_dependent(
 )
 }
 \arguments{
-\item{group_a}{Numeric vector. This group represents baseline/control, Pre-test in the paired design, or "practical" measure}
+\item{group_a}{Numeric vector. This group represents baseline/control, observed variable, Pre-test in the paired design, or "practical" measure}
 
-\item{group_b}{Numeric vector. This group represents experimental, Post-test in the paired design, or "criterion" measure}
+\item{group_b}{Numeric vector. This group represents experimental, predicted variable, Post-test in the paired design, or "criterion" measure}
 
 \item{SESOI_lower}{Lower smallest effect size of interest threshold. Default is 0}
 

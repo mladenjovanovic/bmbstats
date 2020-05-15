@@ -4,9 +4,23 @@
 \alias{model_control}
 \title{Model Control Constructor}
 \usage{
-model_control(seed = round(stats::runif(1, 1, 10000)))
+model_control(
+  cv_folds = 5,
+  cv_repeats = 10,
+  cv_strata = NULL,
+  iter = TRUE,
+  seed = round(stats::runif(1, 1, 10000))
+)
 }
 \arguments{
+\item{cv_folds}{Number of cross-validation folds. Default is 5}
+
+\item{cv_repeats}{Number of cross-validation repeats. Default is 10}
+
+\item{cv_strata}{Strata to be used for cross-validation. Default is \code{NULL}}
+
+\item{iter}{Should progress bar be shown? Default is \code{TRUE}}
+
 \item{seed}{Random number seed}
 }
 \description{
