@@ -174,8 +174,6 @@ cost_RMHE(
 \item{na.rm}{Should NAs be removed? Default is \code{FALSE}}
 }
 \description{
-Variance explained
-
 This method uses algebraic method assuming normal distribution of the residuals.
 This is done by using \code{\link[stats]{sd}} rather than RSE from
 \code{\link[stats]{lm}} model.

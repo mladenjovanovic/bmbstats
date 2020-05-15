@@ -282,9 +282,7 @@ cost_MaxSqErr <- function(observed,
   max(losses, na.rm = na.rm)
 }
 
-#' R squared
-#'
-#' Variance explained
+#' R squared(Variance explained)
 #' @rdname cost_functions
 #' @export
 cost_R_squared <- function(observed,

@@ -216,6 +216,14 @@ cv_model_impl <- function(predictors,
     times = cv_repeats
   )
 
+  n_observations <- nrow(predictors)
+  # Convert fold lists into TRUE/FALSE testing index for every resample
+  cv_index <- t(sapply(cv_folds, function(x) {
+    train_observations <- rep(FALSE, n_observations)
+    train_observations[x] <- TRUE
+    return(train_observations)
+  }))
+
   # ----------------------------------------------------------------------------
   # Loop through CV folds
   cv_results <- purrr::map2(cv_folds, names(cv_folds), function(obs, fold_name) {
@@ -378,6 +386,22 @@ cv_model_impl <- function(predictors,
     levels = names(performance)
   )
 
+  cv_training_performance_summary <- split(cv_training_performance, cv_training_performance$metric)
+  cv_training_performance_summary <- purrr::map_df(cv_training_performance_summary, function(metric){
+    data.frame(
+      metric = metric$metric[[1]],
+      mean = mean(metric$value),
+      SD = stats::sd(metric$value),
+      min = min(metric$value),
+      max = max(metric$value)
+    )
+  })
+  cv_training_performance_summary$metric <- factor(
+    cv_training_performance_summary$metric,
+    levels = names(performance)
+  )
+
+  # Testing performance across folds
   cv_testing_performance <- purrr::map2_df(cv_results, names(cv_results), function(cv_folds, fold_name) {
     data.frame(
       fold = fold_name,
@@ -390,6 +414,30 @@ cv_model_impl <- function(predictors,
   cv_testing_performance$metric <- factor(
     cv_testing_performance$metric,
     levels = names(performance)
+  )
+
+  cv_testing_performance_summary <- split(cv_testing_performance, cv_testing_performance$metric)
+  cv_testing_performance_summary <- purrr::map_df(cv_testing_performance_summary, function(metric){
+    data.frame(
+      metric = metric$metric[[1]],
+      mean = mean(metric$value),
+      SD = stats::sd(metric$value),
+      min = min(metric$value),
+      max = max(metric$value)
+    )
+  })
+  cv_testing_performance_summary$metric <- factor(
+    cv_testing_performance_summary$metric,
+    levels = names(performance)
+  )
+
+  cv_overall_performance_summary <- data.frame(
+    metric = names(performance),
+    training = performance,
+    training.pooled = training_performance,
+    testing.pooled = testing_performance,
+    cv_testing_performance_summary[-1],
+    row.names = NULL
   )
 
   # Bias-Variance
@@ -412,6 +460,10 @@ cv_model_impl <- function(predictors,
 
   # Save CV results
   cross_validation <- list(
+    cv_folds = control$cv_folds,
+    cv_repeat = control$cv_repeats,
+    cv_strata = control$cv_strata,
+    cv_index = cv_index,
     data = list(
       training = training_data,
       testing = testing_data
@@ -422,6 +474,11 @@ cv_model_impl <- function(predictors,
       folds = list(
         training = cv_training_performance,
         testing = cv_testing_performance
+      ),
+      summary = list(
+        training = cv_training_performance_summary,
+        testing = cv_testing_performance_summary,
+        overall = cv_overall_performance_summary
       )
     ),
     bias_variance = bias_variance,
@@ -474,6 +531,28 @@ lm_model <- function(predictors,
   stats::lm(.outcome ~ ., data)
 }
 
+
+# ------------------------------------------------------------------------------
+#' Baseline model
+#'
+#' This model return the mean of the \code{outcome} as a prediction
+#' @inheritParams basic_arguments
+#' @returns \code{model} object
+#' @export
+#' @examples
+#' baseline_model(
+#'   predictors = iris[2:3],
+#'   outcome = iris[[1]]
+#' )
+baseline_model <- function(predictors,
+                     outcome,
+                     SESOI_lower = 0,
+                     SESOI_upper = 0,
+                     na.rm = FALSE) {
+  data <- cbind(.outcome = outcome, predictors)
+
+  stats::lm(.outcome ~ 1, data)
+}
 
 # ------------------------------------------------------------------------------
 #' Predict using generic function

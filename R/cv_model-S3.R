@@ -10,7 +10,7 @@
 #' )
 #' plot(m1, "residuals")
 plot.bmbstats_cv_model <- function(x, type = "residuals", ...) {
-  rlang::arg_match(type, c("residuals"))
+  rlang::arg_match(type, c("residuals", "training-residuals", "testing-residuals"))
   gg <- list(NULL)
 
   # Residuals plot
@@ -21,6 +21,42 @@ plot.bmbstats_cv_model <- function(x, type = "residuals", ...) {
      SESOI_lower = func_num(x$SESOI_lower, x$predictors, x$outcome, x$na.rm),
      SESOI_upper = func_num(x$SESOI_upper, x$predictors, x$outcome, x$na.rm),
      ...)
+  }
+
+  # Residuals plot using all training cross-validated data
+  if (type == "training-residuals") {
+    gg <- plot_residuals(
+      observed = x$cross_validation$data$training$outcome,
+      predicted = x$cross_validation$data$training$predicted,
+      SESOI_lower = func_num(
+        x$SESOI_lower,
+        x$predictors[x$cross_validation$data$training$index, ],
+        x$cross_validation$data$training$outcome,
+        x$na.rm),
+      SESOI_upper = func_num(
+        x$SESOI_upper,
+        x$predictors,
+        x$cross_validation$data$training$outcome,
+        x$na.rm),
+      ...)
+  }
+
+  # Residuals plot using all testing cross-validated data
+  if (type == "testing-residuals") {
+    gg <- plot_residuals(
+      observed = x$cross_validation$data$testing$outcome,
+      predicted = x$cross_validation$data$testing$predicted,
+      SESOI_lower = func_num(
+        x$SESOI_lower,
+        x$predictors[x$cross_validation$data$training$index, ],
+        x$cross_validation$data$training$outcome,
+        x$na.rm),
+      SESOI_upper = func_num(
+        x$SESOI_upper,
+        x$predictors,
+        x$cross_validation$data$training$outcome,
+        x$na.rm),
+      ...)
   }
 
   return(gg)
@@ -120,5 +156,18 @@ plot_residuals <- function(
 #' )
 #' m1
 print.bmbstats_cv_model <- function(x, ...) {
-  cat("sdfsfsdf")
+  cat("Training data consists of", ncol(x$predictors), ifelse(ncol(x$predictors) == 1, "predictor", "predictors"),
+      "and", nrow(x$predictors), "observations.")
+
+
+  if (is.list(x$cross_validation)) {
+    cat(" Cross-Validation of the model was performed using", x$control$cv_repeats,
+        ifelse(x$control$cv_repeats == 1, "repeat", "repeats"), "of",
+        x$control$cv_folds, "folds.\n")
+
+    cat("\nModel performance:\n\n")
+    print(x$cross_validation$performance$summary$overall)
+  } else {
+    cat("\nCross-Validation of the model was not performed.")
+  }
 }
