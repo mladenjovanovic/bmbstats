@@ -18,7 +18,7 @@
 #'
 #' practical <- criterion * 1.2 + rnorm(n = 100, mean = -12, sd = 5)
 #'
-#' plot_pair_OLP(practical,
+#' plot_pair_lm(practical,
 #'   criterion,
 #'   SESOI_lower = -10,
 #'   SESOI_upper = 10,
