@@ -36,7 +36,7 @@ plot_control(
   SESOI_alpha = 0.2,
   font_size = 8,
   legend_position = "none",
-  smooth_method = "loess",
+  smooth_method = "lm",
   smooth_se = FALSE,
   smooth_color = "#5DA5DA",
   smooth_fill = "#4D4D4D6A",
