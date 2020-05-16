@@ -128,8 +128,8 @@ plot_prediction_index <- function(x, control = plot_control()) {
     cowplot::theme_cowplot(control$font_size) +
     ggplot2::geom_hline(yintercept = 0, color = "grey", linetype = "dashed") +
     ggplot2::geom_crossbar(
-      ggplot2::aes(y = mean, ymin = min, ymax = max),
-      fill = "light grey"
+      ggplot2::aes(y = mean, ymin = min, ymax = max)
+      #fill = "light grey"
     ) +
     ggplot2::ylab("Residual")
 
@@ -162,8 +162,8 @@ plot_prediction_observed <- function(x, control = plot_control()) {
     cowplot::theme_cowplot(control$font_size) +
     ggplot2::geom_abline(slope = 1, intercept = 0, color = "grey", linetype = "dashed") +
     ggplot2::geom_crossbar(
-      ggplot2::aes(y = mean, ymin = min, ymax = max),
-      fill = "light grey"
+      ggplot2::aes(y = mean, ymin = min, ymax = max)
+      #fill = "light grey"
     ) +
     ggplot2::ylab("Predicted") +
     ggplot2::xlab("Observed")
