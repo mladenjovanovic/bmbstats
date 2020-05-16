@@ -23,7 +23,8 @@ Imports:
     hardhat,
     progress,
     caret,
-    purrr
+    purrr,
+    tidyr
 RoxygenNote: 7.1.0
 Suggests: 
     testthat,

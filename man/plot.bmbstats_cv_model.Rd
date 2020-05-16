@@ -18,7 +18,7 @@ S3 method for plotting \code{\link{cv_model}} results
 }
 \examples{
 m1 <- cv_model(
-  Sepal.Length~. -Species,
+  Sepal.Length ~ . - Species,
   iris
 )
 plot(m1, "residuals")

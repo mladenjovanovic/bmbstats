@@ -16,7 +16,7 @@ S3 method for printing \code{\link{cv_model}} results
 }
 \examples{
 m1 <- cv_model(
-  Sepal.Length~. -Species,
+  Sepal.Length ~ . - Species,
   iris
 )
 m1
