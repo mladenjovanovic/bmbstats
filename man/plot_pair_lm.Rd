@@ -12,6 +12,8 @@ plot_pair_lm(
   confidence = 0.95,
   group_a_label = "Group A",
   group_b_label = "Group B",
+  fitted_label = "Fitted",
+  residuals_label = "Residuals",
   control = plot_control(),
   na.rm = FALSE
 )
@@ -30,6 +32,10 @@ plot_pair_lm(
 \item{group_a_label}{Character vector. The name of the \code{group_a}. Default is "Group A"}
 
 \item{group_b_label}{Character vector. The name of the \code{group_b}. Default is "Group B"}
+
+\item{fitted_label}{Character vector. The label to be used for fitted. Default is "Fitted"}
+
+\item{residuals_label}{Character vector. The label to be used for residuals. Default is "Residuals"}
 
 \item{control}{Plotting control object returned from \code{\link{plot_control}}}
 

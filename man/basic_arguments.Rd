@@ -24,6 +24,10 @@
 
 \item{group_b_label}{Character vector. The name of the \code{group_b}. Default is "Group B"}
 
+\item{fitted_label}{Character vector. The label to be used for fitted. Default is "Fitted"}
+
+\item{residuals_label}{Character vector. The label to be used for residuals. Default is "Residuals"}
+
 \item{paired}{Paired groups? Default is \code{FALSE}}
 
 \item{na.rm}{Should NAs be removed? Default is \code{FALSE}}

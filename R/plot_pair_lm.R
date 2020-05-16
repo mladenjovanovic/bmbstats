@@ -32,6 +32,8 @@ plot_pair_lm <- function(group_a,
                           confidence = 0.95,
                           group_a_label = "Group A",
                           group_b_label = "Group B",
+                          fitted_label = "Fitted",
+                          residuals_label = "Residuals",
                           control = plot_control(),
                           na.rm = FALSE) {
 
@@ -151,7 +153,18 @@ plot_pair_lm <- function(group_a,
       color = control$points_color,
       fill = control$points_fill
     ) +
-    ggplot2::labs(x = "Fitted", y = "Residuals")
+    # Regression line
+    ggplot2::geom_smooth(
+      formula = y ~ x,
+      method = control$smooth_method,
+      level = confidence,
+      se = control$smooth_se,
+      size = control$smooth_size,
+      alpha = control$smooth_alpha,
+      color = control$smooth_color,
+      fill = control$smooth_fill
+    ) +
+    ggplot2::labs(x = fitted_label, y = residuals_label)
 
   cowplot::plot_grid(
     gg_scatter,
