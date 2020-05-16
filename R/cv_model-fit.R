@@ -599,9 +599,9 @@ performance_metrics <- function(observed,
                                SESOI_upper = 0,
                                na.rm = FALSE) {
  c(
-    SESOI_lower = SESOI_lower,
-    SESOI_upper = SESOI_upper,
-    SESOI_range = SESOI_upper - SESOI_lower,
+    #SESOI_lower = SESOI_lower,
+    #SESOI_upper = SESOI_upper,
+    #SESOI_range = SESOI_upper - SESOI_lower,
 
     MBE = cost_MBE(
       observed = observed,
