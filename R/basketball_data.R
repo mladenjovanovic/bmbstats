@@ -1,0 +1,19 @@
+#' Basketball data
+#'
+#' Example of counterfactual data, where we have two groups of athletes,
+#'      those who played basketball and control. Besides observed \code{Height},
+#'      this data set provides potential-outcomes \code{Height_0} and \code{Height_1},
+#'      which represent counterfactuals. This data set was used to demonstrate
+#'      causal inference, average treatment effects and individual treatment effects
+#'
+#' @format A data frame with 30 rows and 6 variables:
+#' \describe{
+#'   \item{Athlete}{Name of the athlete}
+#'   \item{Treatment}{Either Basketball or Control}
+#'   \item{Height_0}{Potential outcome (Height) if basketball was not played}
+#'   \item{Height_1}{Potential outcome (Height) if basketball was played}
+#'   \item{Height}{Observed Height}
+#'   \item{Causal Effect}{Difference between \code{Height_1} and {Height_0}}
+#' }
+#' @usage data(basketball_data)
+"basketball_data"
