@@ -99,3 +99,17 @@ func_num <- function(x, ...) {
     x
   }
 }
+
+
+#' Perfect Normal Distribution
+#' Generates perfect normally distributed numbers (used for plotting)
+#' @param n Number of samples
+#' @param mean Mean of the distribution. Default is 0
+#' @param sd SD of the distribution. Default is 1
+#' @return Numeric vector, length of \code{n}
+#' @export
+#' @examples
+#' perfect_rnorm(10)
+perfect_rnorm <- function(n, mean = 0, sd = 1) {
+  stats::qnorm(seq(1 / n, 1 - 1 / n, length.out = n), mean, sd)
+}

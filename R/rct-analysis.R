@@ -343,6 +343,40 @@ RCT_analysis <- function(data,
     control = control,
     na.rm = na.rm
   )
+  class(results) <- "bmbstats_RCT_analysis"
+
+  # Save extra details
+  # This is used for plotting
+  results$extra <- list(
+    data = rct_df,
+    SESOI_lower = func_num(
+      SESOI_lower,
+      control_pre_test = control_pre_test,
+      control_post_test = control_post_test,
+      treatment_pre_test = treatment_pre_test,
+      treatment_post_test = treatment_post_test,
+      na.rm = na.rm
+    ),
+    SESOI_upper = func_num(
+      SESOI_upper,
+      control_pre_test = control_pre_test,
+      control_post_test = control_post_test,
+      treatment_pre_test = treatment_pre_test,
+      treatment_post_test = treatment_post_test,
+      na.rm = na.rm
+    ),
+
+    control_pre_test = control_pre_test,
+    control_post_test = control_post_test,
+    control_change = control_post_test - control_pre_test,
+    treatment_pre_test = treatment_pre_test,
+    treatment_post_test = treatment_post_test,
+    treatment_change = treatment_post_test - treatment_pre_test,
+    control_label = control_label,
+    treatment_label = treatment_label,
+    pre_test_label = pre_test,
+    post_test_label = post_test
+)
   return(results)
 
 }

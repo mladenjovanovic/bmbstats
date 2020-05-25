@@ -3,6 +3,7 @@ new_bmbstats <- function(estimators,
                          SESOI_lower_function,
                          SESOI_upper_function,
                          boot,
+                         extra = NULL,
                          control,
                          na.rm) {
   bmbstats_object <- list(
@@ -11,6 +12,7 @@ new_bmbstats <- function(estimators,
     SESOI_lower_function = SESOI_lower_function,
     SESOI_upper_function = SESOI_upper_function,
     boot = boot,
+    extra = extra,
     control = control,
     na.rm = na.rm
   )

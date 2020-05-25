@@ -9,7 +9,9 @@
 \arguments{
 \item{x}{Object of class \code{bmbstats_cv_model}}
 
-\item{type}{Type of plot. Options are "residuals",  being default}
+\item{type}{Type of plot. Options are "residuals", "training-residuals",
+"testing-residuals", "bias-variance-index", "bias-variance-observed",
+"prediction-index", "prediction-observed", and "estimators".  Default is "residuals"}
 
 \item{...}{Extra arguments. Use \code{\link{plot_control}} to control plotting style}
 }
