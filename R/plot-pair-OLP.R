@@ -57,7 +57,8 @@ plot_pair_OLP <- function(group_a,
   olp_model <- OLP_regression(
     group_a = plot_data$x,
     group_b = plot_data$y,
-    na.rm = na.rm)
+    na.rm = na.rm
+  )
 
   y_fitted <- olp_model$intercept + olp_model$slope * plot_data$x
   y_resid <- y_fitted - plot_data$y

@@ -18,7 +18,7 @@
 #'
 #' @examples
 #' m1 <- cv_model(
-#'   Sepal.Length~. -Species,
+#'   Sepal.Length ~ . - Species,
 #'   iris
 #' )
 #' predict(m1, new_data = iris)
@@ -56,7 +56,6 @@ get_predict_function <- function(type) {
 # Implementation
 
 predict_cv_model_numeric <- function(model, predictors) {
-
   predictions <- model$predict_func(
     model = model$model,
     predictors = predictors,

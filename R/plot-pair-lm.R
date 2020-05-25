@@ -26,16 +26,16 @@
 #'   group_b_label = "Criterion"
 #' )
 plot_pair_lm <- function(group_a,
-                          group_b,
-                          SESOI_lower = 0,
-                          SESOI_upper = 0,
-                          confidence = 0.95,
-                          group_a_label = "Group A",
-                          group_b_label = "Group B",
-                          fitted_label = "Fitted",
-                          residuals_label = "Residuals",
-                          control = plot_control(),
-                          na.rm = FALSE) {
+                         group_b,
+                         SESOI_lower = 0,
+                         SESOI_upper = 0,
+                         confidence = 0.95,
+                         group_a_label = "Group A",
+                         group_b_label = "Group B",
+                         fitted_label = "Fitted",
+                         residuals_label = "Residuals",
+                         control = plot_control(),
+                         na.rm = FALSE) {
 
   # +++++++++++++++++++++++++++++++++++++++++++
   # Code chunk for dealing with R CMD check note
@@ -57,9 +57,9 @@ plot_pair_lm <- function(group_a,
   n_observations <- nrow(plot_data)
 
   lm_model <- stats::lm(
-    y~x,
+    y ~ x,
     plot_data
-    )
+  )
 
   lm_model_rse <- summary(lm_model)$sigma
   y_fitted <- stats::fitted(lm_model)
@@ -110,7 +110,8 @@ plot_pair_lm <- function(group_a,
 
     ggplot2::geom_abline(
       intercept = stats::coef(lm_model)[[1]],
-      slope = stats::coef(lm_model)[[2]]) +
+      slope = stats::coef(lm_model)[[2]]
+    ) +
     ggplot2::labs(x = group_a_label, y = group_b_label)
 
   # Residuals plot

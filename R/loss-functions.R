@@ -69,18 +69,17 @@ loss_quadratic <- function(observed,
                            negative_weight = 1,
                            positive_weight = 1,
                            na.rm = FALSE) {
-
   difference <- predicted - observed
 
   # Remove NAs
-  if(na.rm) difference <- stats::na.omit(difference)
+  if (na.rm) difference <- stats::na.omit(difference)
 
   # Add weight to positive or negative
   difference <- ifelse(
     difference < 0,
     difference * negative_weight,
     difference * positive_weight
-    )
+  )
 
   return(difference^2)
 }
@@ -95,11 +94,10 @@ loss_absolute <- function(observed,
                           negative_weight = 1,
                           positive_weight = 1,
                           na.rm = FALSE) {
-
   difference <- predicted - observed
 
   # Remove NAs
-  if(na.rm)  difference <- stats::na.omit(difference)
+  if (na.rm) difference <- stats::na.omit(difference)
 
   # Add weight to positive or negative
   difference <- ifelse(
@@ -115,17 +113,16 @@ loss_absolute <- function(observed,
 #' @rdname loss_functions
 #' @export
 loss_difference <- function(observed,
-                          predicted,
-                          SESOI_lower = 0,
-                          SESOI_upper = 0,
-                          negative_weight = 1,
-                          positive_weight = 1,
-                          na.rm = FALSE) {
-
+                            predicted,
+                            SESOI_lower = 0,
+                            SESOI_upper = 0,
+                            negative_weight = 1,
+                            positive_weight = 1,
+                            na.rm = FALSE) {
   difference <- predicted - observed
 
   # Remove NAs
-  if(na.rm)  difference <- stats::na.omit(difference)
+  if (na.rm) difference <- stats::na.omit(difference)
 
   # Add weight to positive or negative
   difference <- ifelse(
@@ -147,11 +144,10 @@ loss_huber <- function(observed,
                        negative_weight = 1,
                        positive_weight = 1,
                        na.rm = FALSE) {
-
   difference <- predicted - observed
 
   # Remove NAs
-  if(na.rm) difference <- stats::na.omit(difference)
+  if (na.rm) difference <- stats::na.omit(difference)
 
   ifelse(
     # Below SESOI_lower
@@ -187,7 +183,7 @@ loss_hinge <- function(observed,
   difference <- predicted - observed
 
   # Remove NAs
-  if(na.rm) difference <- stats::na.omit(difference)
+  if (na.rm) difference <- stats::na.omit(difference)
 
   ifelse(
     # Below SESOI_lower

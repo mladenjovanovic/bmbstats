@@ -46,7 +46,6 @@ mean_sd_v <- function(x) {
 #' @examples
 #' density_mode(rnorm(100))
 density_mode <- function(x, na.rm = FALSE) {
-
   if (na.rm) {
     x <- stats::na.omit(x)
   }

@@ -44,7 +44,7 @@ bmbstats <- function(data,
                      control = model_control(),
                      na.rm = FALSE) {
 
-    # Progress bar
+  # Progress bar
   # Show progress bar
   if (control$iter) {
     pb <- progress::progress_bar$new(
@@ -139,7 +139,7 @@ bmbstats <- function(data,
     boot = results,
     control = control,
     na.rm = na.rm
-    )
+  )
 }
 
 
@@ -153,7 +153,6 @@ bmbstats <- function(data,
 #' @return Data frame
 get_bootstrap_ci <- function(boot_object,
                              control = model_control()) {
-
   estimator_names <- names(boot_object$t0)
   n_estimators <- length(estimator_names)
 
@@ -173,19 +172,21 @@ get_bootstrap_ci <- function(boot_object,
         warning(
           paste0(
             "boot::boot.ci returned error or NULL when estimating CIs for ", estimator_names[[i]], " estimator. ",
-            "Returning NAs for upper and lower CIs"),
+            "Returning NAs for upper and lower CIs"
+          ),
           call. = FALSE
         )
         return(NULL)
       },
       {
-      boot_ci_return <- boot::boot.ci(
-        boot_object,
-        type = control$boot_type,
-        index = i,
-        conf = control$confidence)
+        boot_ci_return <- boot::boot.ci(
+          boot_object,
+          type = control$boot_type,
+          index = i,
+          conf = control$confidence
+        )
 
-      if(is.null(boot_ci_return)) stop()
+        if (is.null(boot_ci_return)) stop()
         boot_ci_return
       }
     )
@@ -193,7 +194,7 @@ get_bootstrap_ci <- function(boot_object,
       # This works only for 'perc' and 'bca' methods of calculating CIs
       boot_ci$lower[i] <- boot_parameter_ci[[4]][4]
       boot_ci$upper[i] <- boot_parameter_ci[[4]][5]
-      }
+    }
   }
 
   rownames(boot_ci) <- NULL

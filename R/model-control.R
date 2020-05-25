@@ -17,9 +17,7 @@ model_control <- function(cv_folds = 5,
                           boot_strata = NULL,
                           confidence = 0.9,
                           iter = TRUE,
-                          seed = round(stats::runif(1, 1, 10000))){
-
-
+                          seed = round(stats::runif(1, 1, 10000))) {
   rlang::arg_match(boot_type, c(
     "bca",
     "perc"

@@ -6,9 +6,7 @@
 #' @export
 #' @examples
 #' sd_pooled(rnorm(10), rnorm(10))
-
 sd_pooled <- function(group_a, group_b, na.rm = FALSE) {
-
   if (na.rm) {
     group_a <- stats::na.omit(group_a)
     group_b <- stats::na.omit(group_b)

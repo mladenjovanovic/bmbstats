@@ -23,8 +23,10 @@
 #' plot(rct_model)
 print.bmbstats_RCT_analysis <- function(x, ...) {
   cat(
-    paste0("Bootstrap with ", x$control$boot_samples, " resamples and ", x$control$confidence * 100, "% ",
-           x$control$boot_type, " confidence intervals.\n\n")
+    paste0(
+      "Bootstrap with ", x$control$boot_samples, " resamples and ", x$control$confidence * 100, "% ",
+      x$control$boot_type, " confidence intervals.\n\n"
+    )
   )
 
   print(x$estimators)
@@ -57,7 +59,6 @@ print.bmbstats_RCT_analysis <- function(x, ...) {
 #'
 #' plot(rct_model)
 plot.bmbstats_RCT_analysis <- function(x, type = "boot", ...) {
-
   rlang::arg_match(type, c(
     "boot",
     "control-pre-post",
@@ -75,13 +76,13 @@ plot.bmbstats_RCT_analysis <- function(x, type = "boot", ...) {
 
   # Bootstrap distribution
   if (type == "boot") {
-     class(x) <- "bmbstats"
-     gg <- plot(x, ...)
+    class(x) <- "bmbstats"
+    gg <- plot(x, ...)
   }
 
   # Pre-Post graph
   if (type == "control-pre-post") {
-     gg <- RCT_plot_control_pre_post(x, ...)
+    gg <- RCT_plot_control_pre_post(x, ...)
   }
 
   # Pre-Post graph
@@ -125,14 +126,14 @@ plot.bmbstats_RCT_analysis <- function(x, type = "boot", ...) {
   }
 
   return(gg)
-
 }
 
 # ---------------------------------------------------------
 RCT_plot_control_pre_post <- function(x, control = plot_control()) {
   plot_data <- dplyr::tibble(
     `Pre-test` = x$extra$control_pre_test,
-    `Post-test` = x$extra$control_post_test)
+    `Post-test` = x$extra$control_post_test
+  )
 
   plot_data <- tidyr::gather(plot_data)
 
@@ -147,14 +148,16 @@ RCT_plot_control_pre_post <- function(x, control = plot_control()) {
     value = "value",
     value_label = NULL,
     groups = "key",
-    control = control)
+    control = control
+  )
 }
 
 # ---------------------------------------------------------
 RCT_plot_treatment_pre_post <- function(x, control = plot_control()) {
   plot_data <- dplyr::tibble(
     `Pre-test` = x$extra$treatment_pre_test,
-    `Post-test` = x$extra$treatment_post_test)
+    `Post-test` = x$extra$treatment_post_test
+  )
 
   plot_data <- tidyr::gather(plot_data)
 
@@ -169,12 +172,12 @@ RCT_plot_treatment_pre_post <- function(x, control = plot_control()) {
     value = "value",
     value_label = NULL,
     groups = "key",
-    control = control)
+    control = control
+  )
 }
 
 # ---------------------------------------------------------
 RCT_plot_control_change <- function(x, control = plot_control()) {
-
   plot_data <- data.frame(
     change = x$extra$control_change
   )
@@ -185,12 +188,12 @@ RCT_plot_control_change <- function(x, control = plot_control()) {
     value_label = NULL,
     SESOI_lower = x$extra$SESOI_lower,
     SESOI_upper = x$extra$SESOI_upper,
-    control = control)
+    control = control
+  )
 }
 
 # ---------------------------------------------------------
 RCT_plot_treatment_change <- function(x, control = plot_control()) {
-
   plot_data <- data.frame(
     change = x$extra$treatment_change
   )
@@ -201,13 +204,13 @@ RCT_plot_treatment_change <- function(x, control = plot_control()) {
     value_label = NULL,
     SESOI_lower = x$extra$SESOI_lower,
     SESOI_upper = x$extra$SESOI_upper,
-    control = control)
+    control = control
+  )
 }
 
 
 # ---------------------------------------------------------
 RCT_plot_change <- function(x, control = plot_control()) {
-
   plot_data <- data.frame(
     control = x$extra$control_change,
     treatment = x$extra$treatment_change
@@ -228,16 +231,17 @@ RCT_plot_change <- function(x, control = plot_control()) {
     groups = "key",
     SESOI_lower = x$extra$SESOI_lower,
     SESOI_upper = x$extra$SESOI_upper,
-    control = control)
+    control = control
+  )
 }
 
 
 # ---------------------------------------------------------
 RCT_plot_control_paired_change <- function(x, control = plot_control()) {
-
   plot_data <- dplyr::tibble(
     `Pre-test` = x$extra$control_pre_test,
-    `Post-test` = x$extra$control_post_test)
+    `Post-test` = x$extra$control_post_test
+  )
 
   plot_pair_changes(
     group_a = plot_data$`Pre-test`,
@@ -249,15 +253,14 @@ RCT_plot_control_paired_change <- function(x, control = plot_control()) {
     SESOI_upper = x$extra$SESOI_upper,
     control = control
   )
-
 }
 
 # ---------------------------------------------------------
 RCT_plot_treatment_paired_change <- function(x, control = plot_control()) {
-
   plot_data <- dplyr::tibble(
     `Pre-test` = x$extra$treatment_pre_test,
-    `Post-test` = x$extra$treatment_post_test)
+    `Post-test` = x$extra$treatment_post_test
+  )
 
   plot_pair_changes(
     group_a = plot_data$`Pre-test`,
@@ -269,7 +272,6 @@ RCT_plot_treatment_paired_change <- function(x, control = plot_control()) {
     SESOI_upper = x$extra$SESOI_upper,
     control = control
   )
-
 }
 
 # ---------------------------------------------------------
@@ -301,11 +303,13 @@ RCT_plot_change_distribution <- function(x, control = plot_control()) {
 
   ggplot2::ggplot(
     plot_data,
-    ggplot2::aes(x = value, fill = key)) +
+    ggplot2::aes(x = value, fill = key)
+  ) +
     cowplot::theme_cowplot(control$font_size) +
     ggplot2::geom_density(
       color = control$cloud_color,
-      alpha = control$cloud_alpha, trim = FALSE) +
+      alpha = control$cloud_alpha, trim = FALSE
+    ) +
     ggplot2::annotate(
       "rect",
       xmin = x$extra$SESOI_lower,
@@ -313,7 +317,8 @@ RCT_plot_change_distribution <- function(x, control = plot_control()) {
       ymin = -Inf,
       ymax = Inf,
       alpha = control$SESOI_alpha,
-      fill = control$SESOI_color) +
+      fill = control$SESOI_color
+    ) +
     ggplot2::geom_vline(xintercept = 0, color = control$SESOI_color) +
     ggplot2::ylab(NULL) +
     ggplot2::xlab(NULL) +
@@ -326,7 +331,8 @@ RCT_plot_change_distribution <- function(x, control = plot_control()) {
     ) +
     ggplot2::xlim(c(
       min_change - 0.25 * range_change,
-      max_change + 0.25 * range_change))
+      max_change + 0.25 * range_change
+    ))
 }
 
 # ---------------------------------------------------------
@@ -336,7 +342,6 @@ RCT_plot_effect_distribution <- function(x, control = plot_control()) {
   # Code chunk for dealing with R CMD check note
   ..ndensity.. <- NULL
   ..x.. <- NULL
-  x <- NULL
   # +++++++++++++++++++++++++++++++++++++++++++
 
   # Treatment effects
@@ -345,10 +350,11 @@ RCT_plot_effect_distribution <- function(x, control = plot_control()) {
 
   plot_data <- data.frame(
     x = perfect_rnorm(
-    n = 1000,
-    mean = systematic_effect,
-    sd = random_effect
-  ))
+      n = 1000,
+      mean = systematic_effect,
+      sd = random_effect
+    )
+  )
 
   SESOI_lower <- x$extra$SESOI_lower
   SESOI_upper <- x$extra$SESOI_upper
@@ -410,6 +416,10 @@ RCT_plot_effect_distribution <- function(x, control = plot_control()) {
     ggplot2::theme(
       legend.position = control$legend_position,
       legend.title = ggplot2::element_blank()
+    ) +
+    ggplot2::theme(
+      axis.line.y = ggplot2::element_blank(),
+      axis.ticks.y = ggplot2::element_blank(),
+      axis.text.y = ggplot2::element_blank()
     )
-
 }

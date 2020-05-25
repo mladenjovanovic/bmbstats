@@ -19,8 +19,10 @@
 #' x
 print.bmbstats <- function(x, ...) {
   cat(
-    paste0("Bootstrap with ", x$control$boot_samples, " resamples and ", x$control$confidence * 100, "% ",
-    x$control$boot_type, " confidence intervals.\n\n")
+    paste0(
+      "Bootstrap with ", x$control$boot_samples, " resamples and ", x$control$confidence * 100, "% ",
+      x$control$boot_type, " confidence intervals.\n\n"
+    )
   )
 
   print(x$estimators)
@@ -48,7 +50,6 @@ print.bmbstats <- function(x, ...) {
 #' )
 #' plot(x)
 plot.bmbstats <- function(x, ...) {
-
   plot_bootstrap_distribution(x, ...)
 }
 

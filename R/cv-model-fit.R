@@ -33,7 +33,7 @@
 #'
 #' @examples
 #' m1 <- cv_model(
-#'   Sepal.Length~. -Species,
+#'   Sepal.Length ~ . - Species,
 #'   iris
 #' )
 #' predict(m1, new_data = iris)
@@ -99,7 +99,7 @@ cv_model_bridge <- function(processed, ...) {
   fit <- cv_model_impl(predictors, outcome, ...)
 
   new_cv_model(
-    predictors =  fit$predictors,
+    predictors = fit$predictors,
     outcome = fit$outcome,
     model_func = fit$model_func,
     predict_func = fit$predict_func,
@@ -198,11 +198,11 @@ cv_model_impl <- function(predictors,
     pb$tick(0)
     message(
       paste("Cross-validating: ",
-            cv_folds,
-            " folds, ",
-            cv_repeats,
-            " repeats",
-            sep = ""
+        cv_folds,
+        " folds, ",
+        cv_repeats,
+        " repeats",
+        sep = ""
       )
     )
   }
@@ -311,7 +311,7 @@ cv_model_impl <- function(predictors,
         residual_magnitude = train_residual_magnitude,
         performance = train_performance
         # Don't save the model
-        #model = model
+        # model = model
       ),
       testing = list(
         predictors = test_predictors,
@@ -343,11 +343,11 @@ cv_model_impl <- function(predictors,
 
   # Pooled training data performance
   training_performance <- perf_func(
-      observed = training_data$outcome,
-      predicted = training_data$predicted,
-      SESOI_lower = func_num(SESOI_lower, predictors[training_data$index, ], training_data$outcome, na.rm),
-      SESOI_upper = func_num(SESOI_upper, predictors[training_data$index, ], training_data$outcome, na.rm),
-      na.rm = na.rm
+    observed = training_data$outcome,
+    predicted = training_data$predicted,
+    SESOI_lower = func_num(SESOI_lower, predictors[training_data$index, ], training_data$outcome, na.rm),
+    SESOI_upper = func_num(SESOI_upper, predictors[training_data$index, ], training_data$outcome, na.rm),
+    na.rm = na.rm
   )
 
   # Pooled testing data
@@ -388,7 +388,7 @@ cv_model_impl <- function(predictors,
   )
 
   cv_training_performance_summary <- split(cv_training_performance, cv_training_performance$metric)
-  cv_training_performance_summary <- purrr::map_df(cv_training_performance_summary, function(metric){
+  cv_training_performance_summary <- purrr::map_df(cv_training_performance_summary, function(metric) {
     data.frame(
       metric = metric$metric[[1]],
       mean = mean(metric$value),
@@ -418,7 +418,7 @@ cv_model_impl <- function(predictors,
   )
 
   cv_testing_performance_summary <- split(cv_testing_performance, cv_testing_performance$metric)
-  cv_testing_performance_summary <- purrr::map_df(cv_testing_performance_summary, function(metric){
+  cv_testing_performance_summary <- purrr::map_df(cv_testing_performance_summary, function(metric) {
     data.frame(
       metric = metric$metric[[1]],
       mean = mean(metric$value),
@@ -443,12 +443,12 @@ cv_model_impl <- function(predictors,
 
   # Bias-Variance
   bias_variance <- split(testing_data, testing_data$index)
-  bias_variance <- purrr::map_df(bias_variance, function(x){
+  bias_variance <- purrr::map_df(bias_variance, function(x) {
     index <- x$index[[1]]
     outcome <- x$outcome[[1]]
-    MSE = mean(x$residual^2)
-    bias_squared = (mean(x$predicted) - outcome)^2
-    variance = mean((mean(x$predicted) - x$predicted)^2)
+    MSE <- mean(x$residual^2)
+    bias_squared <- (mean(x$predicted) - outcome)^2
+    variance <- mean((mean(x$predicted) - x$predicted)^2)
 
     data.frame(
       index = index,
@@ -546,10 +546,10 @@ lm_model <- function(predictors,
 #'   outcome = iris[[1]]
 #' )
 baseline_model <- function(predictors,
-                     outcome,
-                     SESOI_lower = 0,
-                     SESOI_upper = 0,
-                     na.rm = FALSE) {
+                           outcome,
+                           SESOI_lower = 0,
+                           SESOI_upper = 0,
+                           na.rm = FALSE) {
   data <- cbind(.outcome = outcome, predictors)
 
   stats::lm(.outcome ~ 1, data)
@@ -569,10 +569,10 @@ baseline_model <- function(predictors,
 #'
 #' generic_predict(m1)
 generic_predict <- function(model,
-                       predictors,
-                       SESOI_lower = 0,
-                       SESOI_upper = 0,
-                       na.rm = FALSE) {
+                            predictors,
+                            SESOI_lower = 0,
+                            SESOI_upper = 0,
+                            na.rm = FALSE) {
   stats::predict(model, newdata = predictors)
 }
 
@@ -595,15 +595,14 @@ generic_predict <- function(model,
 #'   predicted = predicted
 #' )
 performance_metrics <- function(observed,
-                               predicted,
-                               SESOI_lower = 0,
-                               SESOI_upper = 0,
-                               na.rm = FALSE) {
- c(
-    #SESOI_lower = SESOI_lower,
-    #SESOI_upper = SESOI_upper,
-    #SESOI_range = SESOI_upper - SESOI_lower,
-
+                                predicted,
+                                SESOI_lower = 0,
+                                SESOI_upper = 0,
+                                na.rm = FALSE) {
+  c(
+    # SESOI_lower = SESOI_lower,
+    # SESOI_upper = SESOI_upper,
+    # SESOI_range = SESOI_upper - SESOI_lower,
     MBE = cost_MBE(
       observed = observed,
       predicted = predicted,

@@ -69,37 +69,35 @@ NULL
 #' @rdname cost_functions
 #' @export
 cost_MBE <- function(observed,
-                predicted,
-                SESOI_lower = 0,
-                SESOI_upper = 0,
-                negative_weight = 1,
-                positive_weight = 1,
-                na.rm = FALSE) {
+                     predicted,
+                     SESOI_lower = 0,
+                     SESOI_upper = 0,
+                     negative_weight = 1,
+                     positive_weight = 1,
+                     na.rm = FALSE) {
+  losses <- loss_difference(
+    observed = observed,
+    predicted = predicted,
+    SESOI_lower = SESOI_lower,
+    SESOI_upper = SESOI_upper,
+    negative_weight = negative_weight,
+    positive_weight = positive_weight,
+    na.rm = na.rm
+  )
 
- losses <- loss_difference(
-   observed = observed,
-   predicted = predicted,
-   SESOI_lower = SESOI_lower,
-   SESOI_upper = SESOI_upper,
-   negative_weight = negative_weight,
-   positive_weight = positive_weight,
-   na.rm = na.rm
- )
-
- mean(losses, na.rm = na.rm)
- }
+  mean(losses, na.rm = na.rm)
+}
 
 #' Mean Absolute Error
 #' @rdname cost_functions
 #' @export
 cost_MAE <- function(observed,
-                predicted,
-                SESOI_lower = 0,
-                SESOI_upper = 0,
-                negative_weight = 1,
-                positive_weight = 1,
-                na.rm = FALSE) {
-
+                     predicted,
+                     SESOI_lower = 0,
+                     SESOI_upper = 0,
+                     negative_weight = 1,
+                     positive_weight = 1,
+                     na.rm = FALSE) {
   losses <- loss_absolute(
     observed = observed,
     predicted = predicted,
@@ -118,13 +116,12 @@ cost_MAE <- function(observed,
 #' @rdname cost_functions
 #' @export
 cost_MSE <- function(observed,
-                predicted,
-                SESOI_lower = 0,
-                SESOI_upper = 0,
-                negative_weight = 1,
-                positive_weight = 1,
-                na.rm = FALSE) {
-
+                     predicted,
+                     SESOI_lower = 0,
+                     SESOI_upper = 0,
+                     negative_weight = 1,
+                     positive_weight = 1,
+                     na.rm = FALSE) {
   losses <- loss_quadratic(
     observed = observed,
     predicted = predicted,
@@ -142,13 +139,12 @@ cost_MSE <- function(observed,
 #' @rdname cost_functions
 #' @export
 cost_RMSE <- function(observed,
-                predicted,
-                SESOI_lower = 0,
-                SESOI_upper = 0,
-                negative_weight = 1,
-                positive_weight = 1,
-                na.rm = FALSE) {
-
+                      predicted,
+                      SESOI_lower = 0,
+                      SESOI_upper = 0,
+                      negative_weight = 1,
+                      positive_weight = 1,
+                      na.rm = FALSE) {
   losses <- loss_quadratic(
     observed = observed,
     predicted = predicted,
@@ -166,13 +162,12 @@ cost_RMSE <- function(observed,
 #' @rdname cost_functions
 #' @export
 cost_SSE <- function(observed,
-                 predicted,
-                 SESOI_lower = 0,
-                 SESOI_upper = 0,
-                 negative_weight = 1,
-                 positive_weight = 1,
-                 na.rm = FALSE) {
-
+                     predicted,
+                     SESOI_lower = 0,
+                     SESOI_upper = 0,
+                     negative_weight = 1,
+                     positive_weight = 1,
+                     na.rm = FALSE) {
   losses <- loss_quadratic(
     observed = observed,
     predicted = predicted,
@@ -190,13 +185,12 @@ cost_SSE <- function(observed,
 #' @rdname cost_functions
 #' @export
 cost_MinErr <- function(observed,
-                predicted,
-                SESOI_lower = 0,
-                SESOI_upper = 0,
-                negative_weight = 1,
-                positive_weight = 1,
-                na.rm = FALSE) {
-
+                        predicted,
+                        SESOI_lower = 0,
+                        SESOI_upper = 0,
+                        negative_weight = 1,
+                        positive_weight = 1,
+                        na.rm = FALSE) {
   losses <- loss_difference(
     observed = observed,
     predicted = predicted,
@@ -214,13 +208,12 @@ cost_MinErr <- function(observed,
 #' @rdname cost_functions
 #' @export
 cost_MaxErr <- function(observed,
-                   predicted,
-                   SESOI_lower = 0,
-                   SESOI_upper = 0,
-                   negative_weight = 1,
-                   positive_weight = 1,
-                   na.rm = FALSE) {
-
+                        predicted,
+                        SESOI_lower = 0,
+                        SESOI_upper = 0,
+                        negative_weight = 1,
+                        positive_weight = 1,
+                        na.rm = FALSE) {
   losses <- loss_difference(
     observed = observed,
     predicted = predicted,
@@ -238,13 +231,12 @@ cost_MaxErr <- function(observed,
 #' @rdname cost_functions
 #' @export
 cost_MaxAbsErr <- function(observed,
-                   predicted,
-                   SESOI_lower = 0,
-                   SESOI_upper = 0,
-                   negative_weight = 1,
-                   positive_weight = 1,
-                   na.rm = FALSE) {
-
+                           predicted,
+                           SESOI_lower = 0,
+                           SESOI_upper = 0,
+                           negative_weight = 1,
+                           positive_weight = 1,
+                           na.rm = FALSE) {
   losses <- loss_absolute(
     observed = observed,
     predicted = predicted,
@@ -262,13 +254,12 @@ cost_MaxAbsErr <- function(observed,
 #' @rdname cost_functions
 #' @export
 cost_MaxSqErr <- function(observed,
-                     predicted,
-                     SESOI_lower = 0,
-                     SESOI_upper = 0,
-                     negative_weight = 1,
-                     positive_weight = 1,
-                     na.rm = FALSE) {
-
+                          predicted,
+                          SESOI_lower = 0,
+                          SESOI_upper = 0,
+                          negative_weight = 1,
+                          positive_weight = 1,
+                          na.rm = FALSE) {
   losses <- loss_quadratic(
     observed = observed,
     predicted = predicted,
@@ -286,13 +277,12 @@ cost_MaxSqErr <- function(observed,
 #' @rdname cost_functions
 #' @export
 cost_R_squared <- function(observed,
-                     predicted,
-                     SESOI_lower = 0,
-                     SESOI_upper = 0,
-                     negative_weight = 1,
-                     positive_weight = 1,
-                     na.rm = FALSE) {
-
+                           predicted,
+                           SESOI_lower = 0,
+                           SESOI_upper = 0,
+                           negative_weight = 1,
+                           positive_weight = 1,
+                           na.rm = FALSE) {
   total_MSE <- stats::var(observed, na.rm = na.rm)
   predicted_MSE <- stats::var(predicted - observed, na.rm = na.rm)
 
@@ -303,13 +293,12 @@ cost_R_squared <- function(observed,
 #' @rdname cost_functions
 #' @export
 cost_SESOItoRMSE <- function(observed,
-                     predicted,
-                     SESOI_lower = 0,
-                     SESOI_upper = 0,
-                     negative_weight = 1,
-                     positive_weight = 1,
-                     na.rm = FALSE) {
-
+                             predicted,
+                             SESOI_lower = 0,
+                             SESOI_upper = 0,
+                             negative_weight = 1,
+                             positive_weight = 1,
+                             na.rm = FALSE) {
   rmse <- cost_RMSE(
     observed = observed,
     predicted = predicted,
@@ -331,17 +320,16 @@ cost_SESOItoRMSE <- function(observed,
 #' @rdname cost_functions
 #' @export
 cost_PPER <- function(observed,
-                        predicted,
-                        SESOI_lower = 0,
-                        SESOI_upper = 0,
-                        negative_weight = 1,
-                        positive_weight = 1,
-                        na.rm = FALSE) {
-
+                      predicted,
+                      SESOI_lower = 0,
+                      SESOI_upper = 0,
+                      negative_weight = 1,
+                      positive_weight = 1,
+                      na.rm = FALSE) {
   difference <- predicted - observed
 
   # Remove NAs
-  if(na.rm) difference <- stats::na.omit(difference)
+  if (na.rm) difference <- stats::na.omit(difference)
 
   mean_diff <- mean(difference)
   sd_diff <- stats::sd(difference)
@@ -354,13 +342,12 @@ cost_PPER <- function(observed,
 #' @rdname cost_functions
 #' @export
 cost_MHE <- function(observed,
-                predicted,
-                SESOI_lower = 0,
-                SESOI_upper = 0,
-                negative_weight = 1,
-                positive_weight = 1,
-                na.rm = FALSE) {
-
+                     predicted,
+                     SESOI_lower = 0,
+                     SESOI_upper = 0,
+                     negative_weight = 1,
+                     positive_weight = 1,
+                     na.rm = FALSE) {
   losses <- loss_huber(
     observed = observed,
     predicted = predicted,
@@ -378,13 +365,12 @@ cost_MHE <- function(observed,
 #' @rdname cost_functions
 #' @export
 cost_RMHE <- function(observed,
-                predicted,
-                SESOI_lower = 0,
-                SESOI_upper = 0,
-                negative_weight = 1,
-                positive_weight = 1,
-                na.rm = FALSE) {
-
+                      predicted,
+                      SESOI_lower = 0,
+                      SESOI_upper = 0,
+                      negative_weight = 1,
+                      positive_weight = 1,
+                      na.rm = FALSE) {
   losses <- loss_huber(
     observed = observed,
     predicted = predicted,

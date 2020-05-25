@@ -17,12 +17,12 @@
 #' set.seed(1666)
 #'
 #' RCT_estimators(
-#' control_pre_test = rnorm(20, 100, 10),
-#' control_post_test = rnorm(20, 105, 10),
-#' treatment_pre_test = rnorm(20, 100, 10),
-#' treatment_post_test = rnorm(20, 120, 10),
-#' SESOI_lower = -5,
-#' SESOI_upper = 5
+#'   control_pre_test = rnorm(20, 100, 10),
+#'   control_post_test = rnorm(20, 105, 10),
+#'   treatment_pre_test = rnorm(20, 100, 10),
+#'   treatment_post_test = rnorm(20, 120, 10),
+#'   SESOI_lower = -5,
+#'   SESOI_upper = 5
 #' )
 RCT_estimators <- function(control_pre_test,
                            control_post_test,
@@ -31,7 +31,6 @@ RCT_estimators <- function(control_pre_test,
                            SESOI_lower = 0,
                            SESOI_upper = 0,
                            na.rm = FALSE) {
-
   SESOI_range <- SESOI_upper - SESOI_lower
 
   control_change <- control_post_test - control_pre_test
@@ -59,30 +58,32 @@ RCT_estimators <- function(control_pre_test,
     `Pre-test pooled SD` = sd_pooled(treatment_pre_test, control_pre_test, na.rm = na.rm),
     `Pre-test Group difference` = mean(treatment_pre_test, na.rm = na.rm) - mean(control_pre_test, na.rm = na.rm),
     `Post-test Group difference` = mean(treatment_post_test, na.rm = na.rm) - mean(control_post_test, na.rm = na.rm)
-    )
+  )
 
   # Change summary
 
-  control_proportions = mb_proportions(
+  control_proportions <- mb_proportions(
     control_pre_test,
     control_post_test,
     paired = TRUE,
     SESOI_lower = SESOI_lower,
     SESOI_upper = SESOI_upper,
-    na.rm = na.rm)
+    na.rm = na.rm
+  )
 
-  treatment_proportions = mb_proportions(
+  treatment_proportions <- mb_proportions(
     treatment_pre_test,
     treatment_post_test,
     paired = TRUE,
     SESOI_lower = SESOI_lower,
     SESOI_upper = SESOI_upper,
-    na.rm = na.rm)
+    na.rm = na.rm
+  )
 
   change_summary <- c(
     `Control Group Change mean` = mean(control_change, na.rm = na.rm),
     `Control Group Change SD` = stats::sd(control_change, na.rm = na.rm),
-    `Control Group Cohen's d` =  mean(control_change, na.rm = na.rm) /
+    `Control Group Cohen's d` = mean(control_change, na.rm = na.rm) /
       sd_pooled(treatment_pre_test, control_pre_test, na.rm = na.rm),
     `Control Group Change to SESOI` = mean(control_change, na.rm = na.rm) / SESOI_range,
     `Control Group Change SD to SESOI` = stats::sd(control_change, na.rm = na.rm) / SESOI_range,
@@ -114,9 +115,8 @@ RCT_estimators <- function(control_pre_test,
     `SESOI to Random effect` = SESOI_range / random_effect,
     pLower = stats::pnorm(SESOI_lower, mean = systematic_effect, sd = random_effect),
     pEquivalent = 1 - (stats::pnorm(SESOI_lower, mean = systematic_effect, sd = random_effect) +
-                         (1 - stats::pnorm(SESOI_upper, mean = systematic_effect, sd = random_effect))),
-    pHigher = 1 - stats::pnorm(SESOI_upper,mean = systematic_effect, sd = random_effect)
-
+      (1 - stats::pnorm(SESOI_upper, mean = systematic_effect, sd = random_effect))),
+    pHigher = 1 - stats::pnorm(SESOI_upper, mean = systematic_effect, sd = random_effect)
   )
 
   return(c(
@@ -125,7 +125,7 @@ RCT_estimators <- function(control_pre_test,
     change_summary,
     treatment_summary
   ))
-  }
+}
 
 
 #' RCT Estimators - Simple
@@ -141,21 +141,20 @@ RCT_estimators <- function(control_pre_test,
 #' set.seed(1666)
 #'
 #' RCT_estimators_simple(
-#' control_pre_test = rnorm(20, 100, 10),
-#' control_post_test = rnorm(20, 105, 10),
-#' treatment_pre_test = rnorm(20, 100, 10),
-#' treatment_post_test = rnorm(20, 120, 10),
-#' SESOI_lower = -5,
-#' SESOI_upper = 5
+#'   control_pre_test = rnorm(20, 100, 10),
+#'   control_post_test = rnorm(20, 105, 10),
+#'   treatment_pre_test = rnorm(20, 100, 10),
+#'   treatment_post_test = rnorm(20, 120, 10),
+#'   SESOI_lower = -5,
+#'   SESOI_upper = 5
 #' )
 RCT_estimators_simple <- function(control_pre_test,
-                           control_post_test,
-                           treatment_pre_test,
-                           treatment_post_test,
-                           SESOI_lower = 0,
-                           SESOI_upper = 0,
-                           na.rm = FALSE) {
-
+                                  control_post_test,
+                                  treatment_pre_test,
+                                  treatment_post_test,
+                                  SESOI_lower = 0,
+                                  SESOI_upper = 0,
+                                  na.rm = FALSE) {
   SESOI_range <- SESOI_upper - SESOI_lower
 
   control_change <- control_post_test - control_pre_test
@@ -179,16 +178,14 @@ RCT_estimators_simple <- function(control_pre_test,
     `SESOI to Random effect` = SESOI_range / random_effect,
     pLower = stats::pnorm(SESOI_lower, mean = systematic_effect, sd = random_effect),
     pEquivalent = 1 - (stats::pnorm(SESOI_lower, mean = systematic_effect, sd = random_effect) +
-                         (1 - stats::pnorm(SESOI_upper, mean = systematic_effect, sd = random_effect))),
+      (1 - stats::pnorm(SESOI_upper, mean = systematic_effect, sd = random_effect))),
     pHigher = 1 - stats::pnorm(SESOI_upper, mean = systematic_effect, sd = random_effect)
-
   )
 
   return(c(
     SESOI_summary,
     treatment_summary
-  )
-  )
+  ))
 }
 
 
@@ -243,8 +240,8 @@ RCT_analysis <- function(data,
                          na.rm = FALSE) {
 
   # Filter out control and treatment data
-  control_data <- data[data[, group] == control_label,]
-  treatment_data <- data[data[, group] == treatment_label,]
+  control_data <- data[data[, group] == control_label, ]
+  treatment_data <- data[data[, group] == treatment_label, ]
 
   # Remove na's
   if (na.rm) {
@@ -269,12 +266,12 @@ RCT_analysis <- function(data,
       group = "Control",
       pre_test = control_pre_test,
       post_test = control_post_test
-      ),
+    ),
     data.frame(
       group = "Treatment",
       pre_test = treatment_pre_test,
       post_test = treatment_post_test
-      )
+    )
   )
 
   # ----------------------------------------------------
@@ -376,9 +373,8 @@ RCT_analysis <- function(data,
     treatment_label = treatment_label,
     pre_test_label = pre_test,
     post_test_label = post_test
-)
+  )
   return(results)
-
 }
 
 
