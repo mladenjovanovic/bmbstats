@@ -23,7 +23,8 @@ Default functions is \code{function(data, na.rm, init_boot) {return(0)}}}
 \item{SESOI_upper_function}{Function to estimate SESOI_upper within bootstrap loop.
 Default functions is \code{function(data, na.rm, init_boot) {return(0)}}}
 
-\item{estimator_function}{Function to be used within the bootstrap loop to provide a list of parameters.
+\item{estimator_function}{Function to be used within the bootstrap loop to provide a list
+or named numeric vector of parameters.
 Default is \code{function(data, SESOI_lower, SESOI_upper, na.rm, init_boot){return(0)}}}
 
 \item{control}{Control object returned from \code{\link{model_control}} function.

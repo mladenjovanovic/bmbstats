@@ -19,3 +19,6 @@ Pooled SD
 \description{
 \code{sd_pooled} calculates pooled standard deviation from vectors \code{group_a} and \code{group_b}
 }
+\examples{
+sd_pooled(rnorm(10), rnorm(10))
+}

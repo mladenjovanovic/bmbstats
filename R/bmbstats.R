@@ -9,7 +9,8 @@
 #'     Default functions is \code{function(data, na.rm, init_boot) {return(0)}}
 #' @param SESOI_upper_function Function to estimate SESOI_upper within bootstrap loop.
 #'     Default functions is \code{function(data, na.rm, init_boot) {return(0)}}
-#' @param estimator_function Function to be used within the bootstrap loop to provide a list of parameters.
+#' @param estimator_function Function to be used within the bootstrap loop to provide a list
+#'     or named numeric vector of parameters.
 #'     Default is \code{function(data, SESOI_lower, SESOI_upper, na.rm, init_boot){return(0)}}
 #' @param control Control object returned from \code{\link{model_control}} function.
 #'     Use \code{boot_type}, \code{boot_samples}, \code{boot_strata} to setup bootstrap.

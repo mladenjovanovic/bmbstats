@@ -40,11 +40,17 @@ mean_sd_v <- function(x) {
 #'
 #' @source Website page \url{https://rmflight.github.io/post/finding-modes-using-kernel-density-estimates/}
 #' @param x Numeric vector
+#' @param na.rm Should NAs be removed? Default is \code{FALSE}
 #' @return Mode estimate
 #' @export
 #' @examples
 #' density_mode(rnorm(100))
-density_mode <- function(x) {
+density_mode <- function(x, na.rm = FALSE) {
+
+  if (na.rm) {
+    x <- stats::na.omit(x)
+  }
+
   density_estimate <- stats::density(x)
 
   mode_value <- density_estimate$x[which.max(density_estimate$y)]

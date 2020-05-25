@@ -7,10 +7,12 @@
 Website page \url{https://rmflight.github.io/post/finding-modes-using-kernel-density-estimates/}
 }
 \usage{
-density_mode(x)
+density_mode(x, na.rm = FALSE)
 }
 \arguments{
 \item{x}{Numeric vector}
+
+\item{na.rm}{Should NAs be removed? Default is \code{FALSE}}
 }
 \value{
 Mode estimate
