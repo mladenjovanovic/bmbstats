@@ -40,11 +40,11 @@ estimators for RCT analysis
 set.seed(1666)
 
 RCT_estimators(
-control_pre_test = rnorm(20, 100, 10),
-control_post_test = rnorm(20, 105, 10),
-treatment_pre_test = rnorm(20, 100, 10),
-treatment_post_test = rnorm(20, 120, 10),
-SESOI_lower = -5,
-SESOI_upper = 5
+  control_pre_test = rnorm(20, 100, 10),
+  control_post_test = rnorm(20, 105, 10),
+  treatment_pre_test = rnorm(20, 100, 10),
+  treatment_post_test = rnorm(20, 120, 10),
+  SESOI_lower = -5,
+  SESOI_upper = 5
 )
 }

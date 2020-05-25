@@ -28,7 +28,7 @@ Predict from a \code{cv_model}
 }
 \examples{
 m1 <- cv_model(
-  Sepal.Length~. -Species,
+  Sepal.Length ~ . - Species,
   iris
 )
 predict(m1, new_data = iris)
