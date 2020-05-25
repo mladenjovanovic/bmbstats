@@ -24,7 +24,8 @@ Imports:
     progress,
     caret,
     purrr,
-    tidyr
+    tidyr,
+    boot
 RoxygenNote: 7.1.0
 Suggests: 
     testthat,

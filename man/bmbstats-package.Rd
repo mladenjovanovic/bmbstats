@@ -2,8 +2,8 @@
 % Please edit documentation in R/bmbstats-package.R
 \docType{package}
 \name{bmbstats-package}
-\alias{bmbstats}
 \alias{bmbstats-package}
+\alias{_PACKAGE}
 \title{bmbstats: Bootstrap Magnitude-based Statistics}
 \description{
 Set of functions for analysis and graphing of common sport science problems.

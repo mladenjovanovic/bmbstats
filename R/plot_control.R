@@ -41,6 +41,7 @@
 #' @param smooth_fill Color of the smooth confidence area
 #' @param smooth_alpha Transparency for the smooth line
 #' @param smooth_size  Size of the smooth line
+#' @param bins Number of bins in histogram. Default is 30
 #' @param panel_labels Labels for panels
 #' @param panel_labels_size Size of panel labels. Default is 10
 #' @param coord_flip Should figure be flipped?
@@ -104,6 +105,7 @@ plot_control <- function(group_colors = c(
                          smooth_fill = "#4D4D4D6A",
                          smooth_alpha = 0.8,
                          smooth_size = 1,
+                         bins = 30,
                          panel_labels = c("A", "B", "C", "D", "E", "F"),
                          panel_labels_size = 10,
                          coord_flip = TRUE) {
@@ -143,6 +145,7 @@ plot_control <- function(group_colors = c(
     smooth_fill = smooth_fill,
     smooth_alpha = smooth_alpha,
     smooth_size = smooth_size,
+    bins = bins,
     panel_labels = panel_labels,
     panel_labels_size = panel_labels_size,
     coord_flip = coord_flip

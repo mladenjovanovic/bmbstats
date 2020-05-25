@@ -1,7 +1,7 @@
 #' S3 method for plotting \code{\link{cv_model}} results
 #' @param x Object of class \code{bmbstats_cv_model}
 #' @param type Type of plot. Options are "residuals",  being default
-#' @param ... Extra arguments
+#' @param ... Extra arguments. Use \code{\link{plot_control}} to control plotting style
 #' @export
 #' @examples
 #' m1 <- cv_model(

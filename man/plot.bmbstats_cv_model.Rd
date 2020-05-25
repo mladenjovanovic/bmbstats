@@ -11,7 +11,7 @@
 
 \item{type}{Type of plot. Options are "residuals",  being default}
 
-\item{...}{Extra arguments}
+\item{...}{Extra arguments. Use \code{\link{plot_control}} to control plotting style}
 }
 \description{
 S3 method for plotting \code{\link{cv_model}} results

@@ -8,6 +8,10 @@ model_control(
   cv_folds = 5,
   cv_repeats = 10,
   cv_strata = NULL,
+  boot_type = "bca",
+  boot_samples = 2000,
+  boot_strata = NULL,
+  confidence = 0.9,
   iter = TRUE,
   seed = round(stats::runif(1, 1, 10000))
 )
@@ -18,6 +22,14 @@ model_control(
 \item{cv_repeats}{Number of cross-validation repeats. Default is 10}
 
 \item{cv_strata}{Strata to be used for cross-validation. Default is \code{NULL}}
+
+\item{boot_type}{Type of bootstrap confidence interval ("bca" and "perc"). Default is "bca"}
+
+\item{boot_samples}{Number of bootstrap resamples. Default is 2000}
+
+\item{boot_strata}{Strata to be used for bootstrap. Default is \code{NULL}}
+
+\item{confidence}{Confidence to be used for calculating bootstrap CIs. Default is 0.9}
 
 \item{iter}{Should progress bar be shown? Default is \code{TRUE}}
 

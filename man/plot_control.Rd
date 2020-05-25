@@ -42,6 +42,7 @@ plot_control(
   smooth_fill = "#4D4D4D6A",
   smooth_alpha = 0.8,
   smooth_size = 1,
+  bins = 30,
   panel_labels = c("A", "B", "C", "D", "E", "F"),
   panel_labels_size = 10,
   coord_flip = TRUE
@@ -120,6 +121,8 @@ or stats::loess. Default is "loess". See \code{\link[ggplot2]{geom_smooth}} for 
 \item{smooth_alpha}{Transparency for the smooth line}
 
 \item{smooth_size}{Size of the smooth line}
+
+\item{bins}{Number of bins in histogram. Default is 30}
 
 \item{panel_labels}{Labels for panels}
 

@@ -91,6 +91,7 @@ cv_model_bridge <- function(processed, ...) {
   predictors <- processed$predictors
   outcome <- processed$outcomes
 
+
   # Validate
   hardhat::validate_outcomes_are_univariate(outcome)
   outcome <- outcome[[1]]
