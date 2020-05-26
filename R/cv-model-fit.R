@@ -25,7 +25,24 @@
 #'
 #' @param ... See Details
 #' @details
-#' Will be expanded
+#' Extra parameters using \code{...} are forwarded to \code{\link{bmbstats_impl}}
+#'    implementation function. These parameters are the following:
+#' \describe{
+#'   \item{model_func}{Model function. Default is \code{\link{lm_model}}. See also
+#'   \code{\link{baseline_model}}}
+#'   \item{predict_func}{Predict function. Default is \code{\link{generic_predict}}}
+#'   \item{perf_func}{Model performance function. Default is \code{\link{performance_metrics}}}
+#'   \item{SESOI_lower}{Function or numeric scalar. Default is \code{\link{SESOI_lower_func}}}
+#'   \item{SESOI_upper}{Function or numeric scalar. Default is \code{\link{SESOI_upper_func}}}
+#'   \item{control}{Control structure using \code{\link{model_control}}. The parameters
+#'   used in \code{cv_model} are \code{cv_folds}, and \code{cv_strata}}
+#'   \item{na.rm}{Should NAs be removed? Default is FALSE. This is forwarded  to
+#'   \code{model_func}, \code{predict_func}, \code{perfr_func}, \code{SESOI_lower},
+#'   and \code{SESOI_upper}}
+#' }
+#'
+#' In summary, \code{cv_model} represents a wrapper function, that performs \code{model_func} within
+#'  the cross-validation loop and provide it's predictive performance metrics using \code{perf_func}
 #'
 #' @return
 #'
@@ -90,7 +107,6 @@ cv_model.recipe <- function(x, data, ...) {
 cv_model_bridge <- function(processed, ...) {
   predictors <- processed$predictors
   outcome <- processed$outcomes
-
 
   # Validate
   hardhat::validate_outcomes_are_univariate(outcome)
