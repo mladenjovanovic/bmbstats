@@ -6,10 +6,17 @@
 #' @param ... Extra arguments. Use \code{\link{plot_control}} to control plotting style
 #' @export
 #' @examples
+#' data("vertical_jump_data")
+#'
 #' m1 <- cv_model(
-#'   Sepal.Length ~ . - Species,
-#'   iris
+#'  `Post-test`~`Pre-test` * Group * `Squat 1RM`,
+#'  vertical_jump_data,
+#'  control = model_control(
+#'    cv_repeats = 10,
+#'    cv_folds = 3,
+#'    cv_strata = vertical_jump_data$Group)
 #' )
+#'
 #' plot(m1, "residuals")
 plot.bmbstats_cv_model <- function(x, type = "residuals", ...) {
   rlang::arg_match(type, c(

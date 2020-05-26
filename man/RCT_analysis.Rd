@@ -7,8 +7,8 @@
 RCT_analysis(
   data,
   group,
-  treatment_label = "Treatment",
-  control_label = "Control",
+  treatment_label,
+  control_label,
   pre_test,
   post_test,
   SESOI_lower = SESOI_lower_RCT_func,

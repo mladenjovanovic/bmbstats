@@ -27,7 +27,7 @@ vertical_jump_data <- tibble(
 
 vertical_jump_data <- vertical_jump_data %>%
   arrange(Group, desc(`Change`)) %>%
-  mutate(Group = factor(Group, levels = c("Treatment", "Control"))) %>%
+  mutate(Group = factor(Group, levels = c("Control", "Treatment"))) %>%
   select(Athlete, `Squat 1RM`, Group, `Pre-test`, `Post-test`, `Change`, Magnitude)
 
 usethis::use_data(vertical_jump_data, overwrite = TRUE)

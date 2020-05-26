@@ -9,7 +9,9 @@
 \arguments{
 \item{x}{Object of class \code{bmbstats_RCT_analysis}}
 
-\item{type}{Type of plot. Options are "boot",.  Default is "boot"}
+\item{type}{Type of plot. Options are "boot", "control-pre-post", "treatment-pre-post",
+"control-change", "treatment-change", "change", "control-paired-change",
+"treatment-paired-change", "change-distribution", "effect-distribution".  Default is "boot"}
 
 \item{...}{Extra arguments. Use \code{\link{plot_control}} to control plotting style}
 }

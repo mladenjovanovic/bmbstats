@@ -13,13 +13,13 @@ cv_model(x, ...)
 
 \method{cv_model}{default}(x, ...)
 
-\method{cv_model}{data.frame}(x, y, ...)
+\method{cv_model}{data.frame}(x, y, intercept = TRUE, ...)
 
-\method{cv_model}{matrix}(x, y, ...)
+\method{cv_model}{matrix}(x, y, intercept = TRUE, ...)
 
-\method{cv_model}{formula}(formula, data, ...)
+\method{cv_model}{formula}(formula, data, intercept = TRUE, ...)
 
-\method{cv_model}{recipe}(x, data, ...)
+\method{cv_model}{recipe}(x, data, intercept = TRUE, ...)
 }
 \arguments{
 \item{x}{Depending on the context:
@@ -40,6 +40,8 @@ specified as:
 \item A numeric \strong{vector}.
 }}
 
+\item{intercept}{Should intercept column be created? Default is \code{TRUE}.}
+
 \item{formula}{A formula specifying the outcome terms on the left-hand side,
 and the predictor terms on the right-hand side.}
 
@@ -55,8 +57,8 @@ A \code{bmbstats_cv_model} object.
 \code{cv_model()} fits a model.
 }
 \details{
-Extra parameters using \code{...} are forwarded to \code{\link{bmbstats_impl}}
-implementation function. These parameters are the following:
+Extra parameters using \code{...} are forwarded to implementation function.
+These parameters are the following:
 \describe{
 \item{model_func}{Model function. Default is \code{\link{lm_model}}. See also
 \code{\link{baseline_model}}}

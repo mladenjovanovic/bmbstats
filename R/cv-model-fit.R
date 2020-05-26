@@ -23,10 +23,12 @@
 #' @param formula A formula specifying the outcome terms on the left-hand side,
 #' and the predictor terms on the right-hand side.
 #'
+#' @param intercept Should intercept column be created? Default is \code{TRUE}.
+#'
 #' @param ... See Details
 #' @details
-#' Extra parameters using \code{...} are forwarded to \code{\link{bmbstats_impl}}
-#'    implementation function. These parameters are the following:
+#' Extra parameters using \code{...} are forwarded to implementation function.
+#'   These parameters are the following:
 #' \describe{
 #'   \item{model_func}{Model function. Default is \code{\link{lm_model}}. See also
 #'   \code{\link{baseline_model}}}
@@ -69,8 +71,10 @@ cv_model.default <- function(x, ...) {
 
 #' @export
 #' @rdname cv_model
-cv_model.data.frame <- function(x, y, ...) {
-  processed <- hardhat::mold(x, y)
+cv_model.data.frame <- function(x, y, intercept = TRUE, ...) {
+  bp <- hardhat::default_xy_blueprint(intercept = intercept)
+
+  processed <- hardhat::mold(x, y, blueprint = bp)
   cv_model_bridge(processed, ...)
 }
 
@@ -78,8 +82,10 @@ cv_model.data.frame <- function(x, y, ...) {
 
 #' @export
 #' @rdname cv_model
-cv_model.matrix <- function(x, y, ...) {
-  processed <- hardhat::mold(x, y)
+cv_model.matrix <- function(x, y, intercept = TRUE, ...) {
+  bp <- hardhat::default_xy_blueprint(intercept = intercept)
+
+  processed <- hardhat::mold(x, y, blueprint = bp)
   cv_model_bridge(processed, ...)
 }
 
@@ -87,8 +93,10 @@ cv_model.matrix <- function(x, y, ...) {
 
 #' @export
 #' @rdname cv_model
-cv_model.formula <- function(formula, data, ...) {
-  processed <- hardhat::mold(formula, data)
+cv_model.formula <- function(formula, data, intercept = TRUE, ...) {
+  bp <- hardhat::default_formula_blueprint(intercept = intercept)
+
+  processed <- hardhat::mold(formula, data, blueprint = bp)
   cv_model_bridge(processed, ...)
 }
 
@@ -96,8 +104,10 @@ cv_model.formula <- function(formula, data, ...) {
 
 #' @export
 #' @rdname cv_model
-cv_model.recipe <- function(x, data, ...) {
-  processed <- hardhat::mold(x, data)
+cv_model.recipe <- function(x, data, intercept = TRUE, ...) {
+  bp <- hardhat::default_recipe_blueprint(intercept = intercept)
+
+  processed <- hardhat::mold(x, data, blueprint = bp)
   cv_model_bridge(processed, ...)
 }
 
@@ -105,6 +115,7 @@ cv_model.recipe <- function(x, data, ...) {
 # Bridge
 
 cv_model_bridge <- function(processed, ...) {
+
   predictors <- processed$predictors
   outcome <- processed$outcomes
 
@@ -149,7 +160,6 @@ cv_model_impl <- function(predictors,
 
   # Set-up seed for reproducibility
   set.seed(control$seed)
-
   # ------------------------------------
   # Training models
   model <- model_func(
@@ -543,9 +553,10 @@ lm_model <- function(predictors,
                      SESOI_lower = 0,
                      SESOI_upper = 0,
                      na.rm = FALSE) {
+
   data <- cbind(.outcome = outcome, predictors)
 
-  stats::lm(.outcome ~ ., data)
+  stats::lm(.outcome ~ . -1, data)
 }
 
 

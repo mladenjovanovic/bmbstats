@@ -37,7 +37,9 @@ print.bmbstats_RCT_analysis <- function(x, ...) {
 #'
 #'
 #' @param x Object of class \code{bmbstats_RCT_analysis}
-#' @param type Type of plot. Options are "boot",.  Default is "boot"
+#' @param type Type of plot. Options are "boot", "control-pre-post", "treatment-pre-post",
+#'     "control-change", "treatment-change", "change", "control-paired-change",
+#'     "treatment-paired-change", "change-distribution", "effect-distribution".  Default is "boot"
 #' @param ... Extra arguments. Use \code{\link{plot_control}} to control plotting style
 #' @export
 #' @examples
