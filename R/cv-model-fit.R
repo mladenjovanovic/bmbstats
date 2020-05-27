@@ -51,11 +51,19 @@
 #' A `bmbstats_cv_model` object.
 #'
 #' @examples
+#' data("vertical_jump_data")
+#'
 #' m1 <- cv_model(
-#'   Sepal.Length ~ . - Species,
-#'   iris
+#'  `Post-test`~`Pre-test` * Group * `Squat 1RM`,
+#'  vertical_jump_data,
+#'  control = model_control(
+#'    cv_repeats = 10,
+#'    cv_folds = 3,
+#'    cv_strata = vertical_jump_data$Group)
 #' )
-#' predict(m1, new_data = iris)
+#'
+#' m1
+#' plot(m1, "residuals")
 #' @export
 cv_model <- function(x, ...) {
   UseMethod("cv_model")

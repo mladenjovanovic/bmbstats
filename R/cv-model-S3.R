@@ -393,11 +393,19 @@ plot_estimators <- function(x, control = plot_control()) {
 #' @param ... Extra arguments
 #' @export
 #' @examples
+#' data("vertical_jump_data")
+#'
 #' m1 <- cv_model(
-#'   Sepal.Length ~ . - Species,
-#'   iris
+#'  `Post-test`~`Pre-test` * Group * `Squat 1RM`,
+#'  vertical_jump_data,
+#'  control = model_control(
+#'    cv_repeats = 10,
+#'    cv_folds = 3,
+#'    cv_strata = vertical_jump_data$Group)
 #' )
+#'
 #' m1
+#' plot(m1, "residuals")
 print.bmbstats_cv_model <- function(x, ...) {
   cat(
     "Training data consists of", ncol(x$predictors), ifelse(ncol(x$predictors) == 1, "predictor", "predictors"),

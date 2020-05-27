@@ -15,9 +15,17 @@
 S3 method for printing \code{\link{cv_model}} results
 }
 \examples{
+data("vertical_jump_data")
+
 m1 <- cv_model(
-  Sepal.Length ~ . - Species,
-  iris
+ `Post-test`~`Pre-test` * Group * `Squat 1RM`,
+ vertical_jump_data,
+ control = model_control(
+   cv_repeats = 10,
+   cv_folds = 3,
+   cv_strata = vertical_jump_data$Group)
 )
+
 m1
+plot(m1, "residuals")
 }
