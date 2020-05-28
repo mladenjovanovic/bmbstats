@@ -11,9 +11,11 @@
 
 \item{type}{Type of plot. Options are "boot", "control-pre-post", "treatment-pre-post",
 "control-change", "treatment-change", "change", "control-paired-change",
-"treatment-paired-change", "change-distribution", "effect-distribution".  Default is "boot"}
+"treatment-paired-change", "change-distribution", "effect-distribution", and "treatment-responses".
+Default is "boot"}
 
-\item{...}{Extra arguments. Use \code{\link{plot_control}} to control plotting style}
+\item{...}{Extra arguments. Use \code{\link{plot_control}} to control plotting style and
+\code{confidence} to set confidence level for "treatment-responses" plot. Default is 0.95}
 }
 \description{
 S3 method for plotting \code{\link{RCT_analysis}} results

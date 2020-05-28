@@ -9,9 +9,11 @@
 \arguments{
 \item{x}{Object of class \code{bmbstats_RCT_predict}}
 
-\item{type}{Type of plot.}
+\item{type}{Type of plot. Options are "residuals", "prediction". Default is "residuals"}
 
-\item{...}{Extra arguments. Use \code{\link{plot_control}} to control plotting style}
+\item{...}{Extra arguments. Use \code{control} argument and \code{\link{plot_control}} function to control plotting style.
+\code{confidence} for setting confidence level, \code{metric} for selecting performance metric (default
+is "RMSE") and \code{metric_CV} for selecting source of CV metrics (defaults is "testing.pooled").}
 }
 \description{
 S3 method for plotting \code{\link{RCT_predict}} results

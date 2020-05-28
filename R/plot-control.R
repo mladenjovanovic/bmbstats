@@ -23,6 +23,9 @@
 #' @param summary_bar_nudge Gap between summary bar and cloud
 #' @param summary_bar_size Size of the summary bar
 #' @param summary_bar_color Color of the summary bar
+#' @param summary_bar_alpha Transparency of the summary bar
+#' @param bar_size Size of the bar
+#' @param bar_alpha Transparency of the bar
 #' @param line_size Line size
 #' @param line_color Line color. Default is "black"
 #' @param line_alpha Line transparency. Default is 0.5
@@ -45,6 +48,7 @@
 #' @param panel_labels Labels for panels
 #' @param panel_labels_size Size of panel labels. Default is 10
 #' @param coord_flip Should figure be flipped?
+#' @param sort Should items be sorted? Default is TRUE
 #'
 #' @return List with plot control elements
 #' @export
@@ -90,6 +94,9 @@ plot_control <- function(group_colors = c(
                          summary_bar_nudge = 0.075,
                          summary_bar_size = 1,
                          summary_bar_color = "black",
+                         summary_bar_alpha = 0.8,
+                         bar_size = 3,
+                         bar_alpha = 0.5,
                          line_size = 1,
                          line_color = "black",
                          line_alpha = 0.5,
@@ -108,7 +115,8 @@ plot_control <- function(group_colors = c(
                          bins = 30,
                          panel_labels = c("A", "B", "C", "D", "E", "F"),
                          panel_labels_size = 10,
-                         coord_flip = TRUE) {
+                         coord_flip = TRUE,
+                         sort = TRUE) {
   list(
     group_colors = group_colors,
     effect_colors = effect_colors,
@@ -130,6 +138,9 @@ plot_control <- function(group_colors = c(
     summary_bar_nudge = summary_bar_nudge,
     summary_bar_size = summary_bar_size,
     summary_bar_color = summary_bar_color,
+    summary_bar_alpha = summary_bar_alpha,
+    bar_size = bar_size,
+    bar_alpha = bar_alpha,
     line_size = line_size,
     line_color = line_color,
     line_alpha = line_alpha,
@@ -148,6 +159,7 @@ plot_control <- function(group_colors = c(
     bins = bins,
     panel_labels = panel_labels,
     panel_labels_size = panel_labels_size,
-    coord_flip = coord_flip
+    coord_flip = coord_flip,
+    sort = sort
   )
 }

@@ -27,6 +27,9 @@ plot_control(
   summary_bar_nudge = 0.075,
   summary_bar_size = 1,
   summary_bar_color = "black",
+  summary_bar_alpha = 0.8,
+  bar_size = 3,
+  bar_alpha = 0.5,
   line_size = 1,
   line_color = "black",
   line_alpha = 0.5,
@@ -45,7 +48,8 @@ plot_control(
   bins = 30,
   panel_labels = c("A", "B", "C", "D", "E", "F"),
   panel_labels_size = 10,
-  coord_flip = TRUE
+  coord_flip = TRUE,
+  sort = TRUE
 )
 }
 \arguments{
@@ -89,6 +93,12 @@ plot_control(
 
 \item{summary_bar_color}{Color of the summary bar}
 
+\item{summary_bar_alpha}{Transparency of the summary bar}
+
+\item{bar_size}{Size of the bar}
+
+\item{bar_alpha}{Transparency of the bar}
+
 \item{line_size}{Line size}
 
 \item{line_color}{Line color. Default is "black"}
@@ -129,6 +139,8 @@ or stats::loess. Default is "loess". See \code{\link[ggplot2]{geom_smooth}} for 
 \item{panel_labels_size}{Size of panel labels. Default is 10}
 
 \item{coord_flip}{Should figure be flipped?}
+
+\item{sort}{Should items be sorted? Default is TRUE}
 }
 \value{
 List with plot control elements

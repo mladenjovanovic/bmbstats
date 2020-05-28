@@ -37,8 +37,10 @@ print.bmbstats_RCT_predict <- function(x, ...) {
 #'
 #'
 #' @param x Object of class \code{bmbstats_RCT_predict}
-#' @param type Type of plot.
-#' @param ... Extra arguments. Use \code{\link{plot_control}} to control plotting style
+#' @param type Type of plot. Options are "residuals", "prediction". Default is "residuals"
+#' @param ... Extra arguments. Use \code{control} argument and \code{\link{plot_control}} function to control plotting style.
+#'    \code{confidence} for setting confidence level, \code{metric} for selecting performance metric (default
+#'    is "RMSE") and \code{metric_CV} for selecting source of CV metrics (defaults is "testing.pooled").
 #' @export
 #' @examples
 #' data("vertical_jump_data")
@@ -66,13 +68,19 @@ print.bmbstats_RCT_predict <- function(x, ...) {
 #' plot(m1_rct)
 plot.bmbstats_RCT_predict <- function(x, type = "residuals", ...) {
   rlang::arg_match(type, c(
-    "residuals"))
+    "residuals",
+    "prediction"))
 
   gg <- list(NULL)
 
   # Residuals
   if (type == "residuals") {
     gg <- RCT_predict_plot_residuals(x, ...)
+  }
+
+  # Residuals
+  if (type == "prediction") {
+    gg <- RCT_predict_plot_prediction(x, ...)
   }
 
   return(gg)
@@ -156,4 +164,73 @@ RCT_predict_plot_residuals <- function(x, confidence = 0.95, control = plot_cont
     ggplot2::scale_fill_manual(values = control$group_colors) +
     ggplot2::theme(
       legend.position = control$legend_position)
+}
+
+# -------------------------------------------------------------------
+RCT_predict_plot_prediction <- function(x, metric = "RMSE", metric_cv = "testing.pooled", control = plot_control()) {
+
+  # +++++++++++++++++++++++++++++++++++++++++++
+  # Code chunk for dealing with R CMD check note
+  subject <- NULL
+  predicted <- NULL
+  observed <- NULL
+  magnitude <- NULL
+  predicted_upper <- NULL
+  predicted_lower <- NULL
+  # +++++++++++++++++++++++++++++++++++++++++++
+
+  plot_data <- x$extra$residual_df
+
+  if (control$sort) {
+    plot_data$subject <- factor(
+      plot_data$subject,
+      levels = plot_data$subject[order(plot_data$observed)])
+  }
+
+  # Get metrics
+  df_metrics <- x$cross_validation$performance$summary$overall
+  plot_data$prediction_metric <- df_metrics[df_metrics$metric == metric, metric_cv]
+
+  plot_data$predicted_lower <- plot_data$predicted - plot_data$prediction_metric
+  plot_data$predicted_upper <- plot_data$predicted + plot_data$prediction_metric
+
+  ggplot2::ggplot(plot_data, ggplot2::aes(y = subject)) +
+    cowplot::theme_cowplot(control$font_size) +
+    ggstance::geom_linerangeh(ggplot2::aes(
+      xmax = predicted,
+      xmin = observed,
+      color = magnitude
+    ),
+    size = control$bar_size, alpha = control$bar_alpha
+    ) +
+    ggstance::geom_linerangeh(ggplot2::aes(
+      xmax = predicted_upper,
+      xmin = predicted_lower
+    ),
+    size = control$summary_bar_size,
+    color = control$summary_bar_color,
+    alpha = control$summary_bar_alpha
+    ) +
+    ggplot2::geom_point(
+      ggplot2::aes(x = predicted),
+      shape = "|",
+      size = control$points_size,
+      alpha = control$points_alpha
+    ) +
+    ggplot2::geom_point(
+      ggplot2::aes(x = observed),
+      shape = control$points_shape,
+      size = control$points_size,
+      alpha = control$points_alpha) +
+    ggplot2::ylab(NULL) +
+    ggplot2::xlab(x$extra$outcome) +
+    ggplot2::facet_wrap(group ~ ., scales = "free_y") +
+    ggplot2::scale_discrete_manual(
+      aesthetics = c("color", "fill"),
+      values = control$effect_colors,
+      drop = FALSE,
+      limits = levels(plot_data$magnitude)
+      ) +
+    ggplot2::labs(color = "Residual") +
+    ggplot2::theme(legend.position = control$legend_position)
 }

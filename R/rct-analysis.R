@@ -202,6 +202,7 @@ RCT_estimators_simple <- function(control_pre_test,
 #' @param SESOI_lower Function or numeric scalar. Default is \code{\link{SESOI_lower_RCT_func}}
 #' @param SESOI_upper Function or numeric scalar. Default is \code{\link{SESOI_upper_RCT_func}}
 #' @param estimator_function Function for providing RCT estimators. Default is \code{\link{RCT_estimators}}
+#' @param confidence Confidence level. Default is 0.95
 #' @param control Control object returned from \code{\link{model_control}} function.
 #'     Use \code{boot_type}, \code{boot_samples}, \code{boot_strata} to setup bootstrap.
 #' @param na.rm Should NAs be removed? Default is \code{FALSE}
@@ -236,6 +237,7 @@ RCT_analysis <- function(data,
                          SESOI_lower = SESOI_lower_RCT_func,
                          SESOI_upper = SESOI_upper_RCT_func,
                          estimator_function = RCT_estimators,
+                         confidence = 0.95,
                          control = model_control(),
                          na.rm = FALSE) {
 
@@ -246,32 +248,40 @@ RCT_analysis <- function(data,
   # filter out pre-test and post-test
   control_pre_test <- control_data[[pre_test]]
   control_post_test <- control_data[[post_test]]
+  control_change <- control_post_test - control_pre_test
+  control_id <- rownames(control_data)
 
   treatment_pre_test <- treatment_data[[pre_test]]
   treatment_post_test <- treatment_data[[post_test]]
+  treatment_change <- treatment_post_test - treatment_pre_test
+  treatment_id <- rownames(treatment_data)
 
   # create df
   rct_df <- rbind(
     data.frame(
-      group = "Control",
+      id = control_id,
+      group = control_label,
       pre_test = control_pre_test,
-      post_test = control_post_test
+      post_test = control_post_test,
+      change = control_change
     ),
     data.frame(
-      group = "Treatment",
+      id =  treatment_id,
+      group = treatment_label,
       pre_test = treatment_pre_test,
-      post_test = treatment_post_test
+      post_test = treatment_post_test,
+      change = treatment_change
     )
   )
 
   # ----------------------------------------------------
   # Wrapper functions
   bmbstats_SESOI_lower_function <- function(data, na.rm, init_boot) {
-    control_pre_test <- data$pre_test[data$group == "Control"]
-    control_post_test <- data$post_test[data$group == "Control"]
+    control_pre_test <- data$pre_test[data$group == control_label]
+    control_post_test <- data$post_test[data$group == control_label]
 
-    treatment_pre_test <- data$pre_test[data$group == "Treatment"]
-    treatment_post_test <- data$post_test[data$group == "Treatment"]
+    treatment_pre_test <- data$pre_test[data$group == treatment_label]
+    treatment_post_test <- data$post_test[data$group == treatment_label]
 
     func_num(
       SESOI_lower,
@@ -284,11 +294,11 @@ RCT_analysis <- function(data,
   }
 
   bmbstats_SESOI_upper_function <- function(data, na.rm, init_boot) {
-    control_pre_test <- data$pre_test[data$group == "Control"]
-    control_post_test <- data$post_test[data$group == "Control"]
+    control_pre_test <- data$pre_test[data$group == control_label]
+    control_post_test <- data$post_test[data$group == control_label]
 
-    treatment_pre_test <- data$pre_test[data$group == "Treatment"]
-    treatment_post_test <- data$post_test[data$group == "Treatment"]
+    treatment_pre_test <- data$pre_test[data$group == treatment_label]
+    treatment_post_test <- data$post_test[data$group == treatment_label]
 
     func_num(
       SESOI_upper,
@@ -301,11 +311,11 @@ RCT_analysis <- function(data,
   }
 
   bmbstats_estimator_function <- function(data, SESOI_lower, SESOI_upper, na.rm, init_boot) {
-    control_pre_test <- data$pre_test[data$group == "Control"]
-    control_post_test <- data$post_test[data$group == "Control"]
+    control_pre_test <- data$pre_test[data$group == control_label]
+    control_post_test <- data$post_test[data$group == control_label]
 
-    treatment_pre_test <- data$pre_test[data$group == "Treatment"]
-    treatment_post_test <- data$post_test[data$group == "Treatment"]
+    treatment_pre_test <- data$pre_test[data$group == treatment_label]
+    treatment_post_test <- data$post_test[data$group == treatment_label]
 
     estimators_list <- estimator_function(
       control_pre_test = control_pre_test,
@@ -332,10 +342,33 @@ RCT_analysis <- function(data,
   )
   class(results) <- "bmbstats_RCT_analysis"
 
+  # --------------------------------------------
+  # Response analysis for the treatment group
+  treatment_responses <- rct_df
+  treatment_responses <- treatment_responses[treatment_responses$group == treatment_label,]
+
+  control_mean_change <- mean(control_change, na.rm = na.rm)
+  control_SD_change <- stats::sd(control_change, na.rm = na.rm)
+  n_observations <- length(control_change)
+
+  # Smallest detectable change
+  SDC <- control_SD_change * stats::qt(
+    1 - ((1 - confidence) / 2),
+    df = n_observations - 1
+  )
+
+  treatment_responses$SDC <- SDC
+  treatment_responses$change_lower <- treatment_responses$change - SDC
+  treatment_responses$change_upper <- treatment_responses$change + SDC
+  treatment_responses$adjusted_change <- treatment_responses$change - control_mean_change
+  treatment_responses$adjusted_change_lower <- treatment_responses$adjusted_change - SDC
+  treatment_responses$adjusted_change_upper <- treatment_responses$adjusted_change + SDC
+
   # Save extra details
   # This is used for plotting
   results$extra <- list(
     data = rct_df,
+    treatment_responses = treatment_responses,
     SESOI_lower = func_num(
       SESOI_lower,
       control_pre_test = control_pre_test,

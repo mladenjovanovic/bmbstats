@@ -39,8 +39,10 @@ print.bmbstats_RCT_analysis <- function(x, ...) {
 #' @param x Object of class \code{bmbstats_RCT_analysis}
 #' @param type Type of plot. Options are "boot", "control-pre-post", "treatment-pre-post",
 #'     "control-change", "treatment-change", "change", "control-paired-change",
-#'     "treatment-paired-change", "change-distribution", "effect-distribution".  Default is "boot"
-#' @param ... Extra arguments. Use \code{\link{plot_control}} to control plotting style
+#'     "treatment-paired-change", "change-distribution", "effect-distribution", and "treatment-responses".
+#'     Default is "boot"
+#' @param ... Extra arguments. Use \code{\link{plot_control}} to control plotting style and
+#'    \code{confidence} to set confidence level for "treatment-responses" plot. Default is 0.95
 #' @export
 #' @examples
 #' set.seed(1666)
@@ -71,7 +73,8 @@ plot.bmbstats_RCT_analysis <- function(x, type = "boot", ...) {
     "control-paired-change",
     "treatment-paired-change",
     "change-distribution",
-    "effect-distribution"
+    "effect-distribution",
+    "treatment-responses"
   ))
 
   gg <- list(NULL)
@@ -127,6 +130,11 @@ plot.bmbstats_RCT_analysis <- function(x, type = "boot", ...) {
     gg <- RCT_plot_effect_distribution(x, ...)
   }
 
+
+  # Treatment response
+  if (type == "treatment-responses") {
+    gg <- RCT_plot_treatment_responses(x, ...)
+  }
   return(gg)
 }
 
@@ -347,8 +355,10 @@ RCT_plot_effect_distribution <- function(x, control = plot_control()) {
   # +++++++++++++++++++++++++++++++++++++++++++
 
   # Treatment effects
-  systematic_effect <- (mean(x$extra$treatment_change) - mean(x$extra$control_change))
-  random_effect <- sqrt(stats::var(x$extra$treatment_change) - stats::var(x$extra$control_change))
+  na.rm <- x$na.rm
+
+  systematic_effect <- (mean(x$extra$treatment_change, na.rm = na.rm) - mean(x$extra$control_change, na.rm = na.rm))
+  random_effect <- sqrt(stats::var(x$extra$treatment_change, na.rm = na.rm) - stats::var(x$extra$control_change, na.rm = na.rm))
 
   plot_data <- data.frame(
     x = perfect_rnorm(
@@ -425,3 +435,59 @@ RCT_plot_effect_distribution <- function(x, control = plot_control()) {
       axis.text.y = ggplot2::element_blank()
     )
 }
+
+
+
+# ---------------------------------------------------------
+RCT_plot_treatment_responses <- function(x, confidence = 0.95, control = plot_control()) {
+
+  # +++++++++++++++++++++++++++++++++++++++++++
+  # Code chunk for dealing with R CMD check note
+  adjusted_change <- NULL
+  id <- NULL
+  adjusted_change_upper <- NULL
+  adjusted_change_lower <- NULL
+  # +++++++++++++++++++++++++++++++++++++++++++
+
+  responses_data <- x$extra$treatment_responses
+
+  SESOI_lower <- x$extra$SESOI_lower
+  SESOI_upper <- x$extra$SESOI_upper
+
+  if (control$sort) {
+    responses_data$id <- factor(
+      responses_data$id,
+      levels = responses_data$id[order(responses_data$adjusted_change)])
+  }
+
+  # Plot
+  ggplot2::ggplot(
+    responses_data,
+    ggplot2::aes(x = adjusted_change, y = id)) +
+    cowplot::theme_cowplot(control$font_size) +
+    ggplot2::annotate(
+      "rect",
+      xmin = SESOI_lower,
+      xmax = SESOI_upper,
+      ymin = -Inf,
+      ymax = Inf,
+      alpha = control$SESOI_alpha,
+      fill = control$SESOI_color
+    ) +
+    ggplot2::geom_vline(xintercept = 0, color = control$SESOI_color) +
+    ggstance::geom_linerangeh(ggplot2::aes(
+      xmax = adjusted_change_upper,
+      xmin = adjusted_change_lower
+    ),
+    size = control$summary_bar_size,
+    color = control$summary_bar_color,
+    alpha = control$summary_bar_alpha
+    ) +
+    ggplot2::geom_point(
+      shape = control$points_shape,
+      size = control$points_size,
+      alpha = control$points_alpha
+    ) +
+    ggplot2::xlab("Adjusted change") +
+    ggplot2::ylab(NULL)
+  }

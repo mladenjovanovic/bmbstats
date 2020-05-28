@@ -66,7 +66,8 @@ RCT_predict <- function(model,
    group = new_data[[group]],
    observed = observed,
    predicted = predicted,
-   residual = residual
+   residual = residual,
+   magnitude = get_magnitude(residual, SESOI_lower, SESOI_upper)
  )
 
  residual_list <- split(residual_df, residual_df$group)
@@ -80,6 +81,10 @@ RCT_predict <- function(model,
  })
 
  model$extra <- list(
+   group = group,
+   outcome = outcome,
+   control_label = control_label,
+   treatment_label = treatment_label,
    SESOI_lower = SESOI_lower,
    SESOI_upper = SESOI_upper,
    residual_df = residual_df,
