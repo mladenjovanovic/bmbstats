@@ -9,8 +9,8 @@
 \arguments{
 \item{x}{Object of class \code{bmbstats_RCT_predict}}
 
-\item{type}{Type of plot. Options are "residuals", "prediction", "bias-variance", "pdp+ice".
-Default is "residuals"}
+\item{type}{Type of plot. Options are "residuals", "prediction", "bias-variance", "pdp+ice", "counterfactual", and
+"ice". Default is "residuals"}
 
 \item{...}{Extra arguments. Use \code{control} argument and \code{\link{plot_control}} function to control plotting style.
 \code{confidence} for setting confidence level, \code{metric} for selecting performance metric (default
@@ -33,7 +33,7 @@ m1 <- cv_model(
   )
 )
 
-m1_rct  <- RCT_predict(
+m1_rct <- RCT_predict(
   m1,
   new_data = vertical_jump_data,
   outcome = "Post-test",

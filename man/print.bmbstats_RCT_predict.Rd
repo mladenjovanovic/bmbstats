@@ -27,7 +27,7 @@ m1 <- cv_model(
   )
 )
 
-m1_rct  <- RCT_predict(
+m1_rct <- RCT_predict(
   m1,
   new_data = vertical_jump_data,
   outcome = "Post-test",

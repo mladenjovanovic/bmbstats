@@ -46,54 +46,102 @@ RCT_predict <- function(model,
                         treatment_label,
                         subject_label = rownames(new_data),
                         na.rm = FALSE) {
+  if (class(model)[[1]] != "bmbstats_cv_model") {
+    stop("Model parameter must be object returned by cv_model function.", call. = FALSE)
+  }
 
- if(class(model)[[1]] != "bmbstats_cv_model") {
-   stop("Model parameter must be object returned by cv_model function.", call. = FALSE)
- }
- # SESOI
+  # SESOI
   SESOI_lower <- func_num(model$SESOI_lower, model$predictors, model$outcome, model$na.rm)
   SESOI_upper <- func_num(model$SESOI_upper, model$predictors, model$outcome, model$na.rm)
 
   # ----------------------------
- # Residuals analysis per group
- observed <- new_data[[outcome]]
- predicted <- stats::predict(model, new_data)[[1]]
- residual <- predicted - observed
+  # Residuals analysis per group
+  observed <- new_data[[outcome]]
+  predicted <- stats::predict(model, new_data)
+  residual <- predicted - observed
 
- # Save to DF
- residual_df <- data.frame(
-   subject = subject_label,
-   group = new_data[[group]],
-   observed = observed,
-   predicted = predicted,
-   residual = residual,
-   magnitude = get_magnitude(residual, SESOI_lower, SESOI_upper)
- )
+  # Save to DF
+  results <- data.frame(
+    subject = subject_label,
+    group = new_data[[group]],
+    observed = observed,
+    predicted = predicted,
+    residual = residual,
+    magnitude = get_magnitude(residual, SESOI_lower, SESOI_upper)
+  )
 
- residual_list <- split(residual_df, residual_df$group)
+  residual_list <- split(results, results$group)
 
- residual_summary <- purrr::map2_df(residual_list, names(residual_list), function(group, group_name){
-   data.frame(
-     group = group_name,
-     mean = mean(group$residual, na.rm = na.rm),
-     SD = stats::sd(group$residual, na.rm = na.rm)
-   )
- })
+  residual_summary <- purrr::map2_df(residual_list, names(residual_list), function(group, group_name) {
+    data.frame(
+      group = group_name,
+      mean = mean(group$residual, na.rm = na.rm),
+      SD = stats::sd(group$residual, na.rm = na.rm)
+    )
+  })
 
- model$extra <- list(
-   new_data = new_data,
-   group = group,
-   outcome = outcome,
-   control_label = control_label,
-   treatment_label = treatment_label,
-   SESOI_lower = SESOI_lower,
-   SESOI_upper = SESOI_upper,
-   residual_df = residual_df,
-   residual_summary = residual_summary
- )
+  # Counterfactuals
+  new_data_counterfactual <- new_data
 
- class(model) <- "bmbstats_RCT_predict"
+  new_data_counterfactual[[group]] <- ifelse(
+    new_data_counterfactual[[group]] == control_label,
+    treatment_label,
+    ifelse(new_data_counterfactual[[group]] == treatment_label,
+      control_label,
+      new_data_counterfactual[[group]]
+    )
+  )
 
- return(model)
+  predicted_counterfactual <- stats::predict(model, new_data_counterfactual)
 
+  new_data_counterfactual[[outcome]] <- predicted_counterfactual
+  results$counterfactual <- predicted_counterfactual
+
+  # Calculate pATE
+  # average treatment effect
+  predicted_effect <- predicted_counterfactual - predicted
+  predicted_effect_magnitude <- get_magnitude(
+    predicted_effect,
+    SESOI_lower,
+    SESOI_upper
+  )
+
+  results$pITE <- predicted_effect
+  results$pITE_magnitude <- predicted_effect_magnitude
+
+  pATE_control <- mean(predicted_effect[new_data[[group]] == control_label], na.rm = na.rm)
+  pATE_treatment <- mean(-predicted_effect[new_data[[group]] == treatment_label], na.rm = na.rm)
+  pATE_overall <- mean(abs(predicted_effect))
+
+
+  # Effect heterogeneity - Variable treatment effect
+  # Expressed used SD
+  pVTE_control <- stats::sd(predicted_effect[new_data[[group]] == control_label], na.rm = na.rm)
+  pVTE_treatment <- stats::sd(-predicted_effect[new_data[[group]] == treatment_label], na.rm = na.rm)
+  pVTE_overall <- stats::sd(abs(predicted_effect))
+
+  counterfactual_summary <- data.frame(
+    group = c(treatment_label, control_label, "pooled"),
+    `pATE` = c(pATE_treatment, pATE_control, pATE_overall),
+    `pVTE` = c(pVTE_treatment, pVTE_control, pVTE_overall)
+  )
+
+  # ------------------------------------
+  model$extra <- list(
+    new_data = new_data,
+    group = group,
+    outcome = outcome,
+    control_label = control_label,
+    treatment_label = treatment_label,
+    SESOI_lower = SESOI_lower,
+    SESOI_upper = SESOI_upper,
+    results = results,
+    residual_summary = residual_summary,
+    counterfactual_df = new_data_counterfactual,
+    counterfactual_summary = counterfactual_summary
+  )
+
+  class(model) <- "bmbstats_RCT_predict"
+
+  return(model)
 }
