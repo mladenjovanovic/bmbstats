@@ -23,7 +23,7 @@
 #' )
 #' predict(m1, new_data = iris)
 #' @export
-predict.bmbstats_cv_model <- function(object, new_data, type = "numeric", ...) {
+predict.bmbstats_cv_model <- function(object, new_data = NULL, type = "numeric", ...) {
   forged <- hardhat::forge(new_data, object$blueprint)
   rlang::arg_match(type, valid_predict_types())
   predict_cv_model_bridge(type, object, forged$predictors)
@@ -56,6 +56,7 @@ get_predict_function <- function(type) {
 # Implementation
 
 predict_cv_model_numeric <- function(model, predictors) {
+
   predictions <- model$predict_func(
     model = model$model,
     predictors = predictors,
@@ -63,5 +64,5 @@ predict_cv_model_numeric <- function(model, predictors) {
     SESOI_upper = func_num(model$SESOI_upper, predictors, model$outcome, model$na.rm),
     na.rm = model$na.rm
   )
-  hardhat::spruce_numeric(predictions)
+  # hardhat::spruce_numeric(predictions)
 }
