@@ -37,7 +37,8 @@ print.bmbstats_RCT_predict <- function(x, ...) {
 #'
 #'
 #' @param x Object of class \code{bmbstats_RCT_predict}
-#' @param type Type of plot. Options are "residuals", "prediction". Default is "residuals"
+#' @param type Type of plot. Options are "residuals", "prediction", "bias-variance".
+#'    Default is "residuals"
 #' @param ... Extra arguments. Use \code{control} argument and \code{\link{plot_control}} function to control plotting style.
 #'    \code{confidence} for setting confidence level, \code{metric} for selecting performance metric (default
 #'    is "RMSE") and \code{metric_CV} for selecting source of CV metrics (defaults is "testing.pooled").
@@ -69,7 +70,8 @@ print.bmbstats_RCT_predict <- function(x, ...) {
 plot.bmbstats_RCT_predict <- function(x, type = "residuals", ...) {
   rlang::arg_match(type, c(
     "residuals",
-    "prediction"))
+    "prediction",
+    "bias-variance"))
 
   gg <- list(NULL)
 
@@ -81,6 +83,11 @@ plot.bmbstats_RCT_predict <- function(x, type = "residuals", ...) {
   # Residuals
   if (type == "prediction") {
     gg <- RCT_predict_plot_prediction(x, ...)
+  }
+
+
+  if (type == "bias-variance") {
+    gg <- RCT_predict_plot_bias_variance(x, ...)
   }
 
   return(gg)
@@ -234,3 +241,50 @@ RCT_predict_plot_prediction <- function(x, metric = "RMSE", metric_cv = "testing
     ggplot2::labs(color = "Residual") +
     ggplot2::theme(legend.position = control$legend_position)
 }
+
+
+# -------------------------------------------------------------------
+RCT_predict_plot_bias_variance <- function(x, control = plot_control()) {
+
+  # +++++++++++++++++++++++++++++++++++++++++++
+  # Code chunk for dealing with R CMD check note
+  id <- NULL
+  group <- NULL
+  value <- NULL
+  key <- NULL
+  # +++++++++++++++++++++++++++++++++++++++++++
+
+  bias_variance_df <- x$cross_validation$bias_variance
+  bias_variance_df$id <- x$extra$residual_df$subject[bias_variance_df$index]
+  bias_variance_df$group <- x$extra$residual_df$group
+
+  if (control$sort) {
+    bias_variance_df$id <- factor(
+      bias_variance_df$id,
+      levels = bias_variance_df$id[order(bias_variance_df$MSE)])
+  }
+  bias_variance_df <- bias_variance_df[,c("id", "group", "bias_squared", "variance")]
+
+  bias_variance_df <- tidyr::gather(bias_variance_df, "key", "value", -id, -group)
+
+  bias_variance_df$key <- factor(
+    bias_variance_df$key,
+    levels = c("bias_squared", "variance"),
+    labels = c("Bias.Squared", "Variance")
+  )
+
+  ggplot2::ggplot(
+    bias_variance_df,
+    ggplot2::aes(x = id, y = value, fill = key)) +
+    cowplot::theme_cowplot(control$font_size) +
+    ggplot2::geom_bar(stat = "identity") +
+    ggplot2::coord_flip() +
+    ggplot2::scale_fill_manual(values = control$group_colors) +
+    ggplot2::xlab(NULL) +
+    ggplot2::ylab(NULL) +
+    ggplot2::theme(
+      legend.title = ggplot2::element_blank(),
+      legend.position = control$legend_position) +
+    ggplot2::facet_wrap(group ~ ., scales = "free_y")
+}
+

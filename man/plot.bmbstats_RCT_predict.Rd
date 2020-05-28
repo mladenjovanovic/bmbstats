@@ -9,7 +9,8 @@
 \arguments{
 \item{x}{Object of class \code{bmbstats_RCT_predict}}
 
-\item{type}{Type of plot. Options are "residuals", "prediction". Default is "residuals"}
+\item{type}{Type of plot. Options are "residuals", "prediction", "bias-variance".
+Default is "residuals"}
 
 \item{...}{Extra arguments. Use \code{control} argument and \code{\link{plot_control}} function to control plotting style.
 \code{confidence} for setting confidence level, \code{metric} for selecting performance metric (default
