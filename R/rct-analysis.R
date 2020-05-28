@@ -243,22 +243,12 @@ RCT_analysis <- function(data,
   control_data <- data[data[, group] == control_label, ]
   treatment_data <- data[data[, group] == treatment_label, ]
 
-  # Remove na's
-  if (na.rm) {
-    control_data <- control_data[c(pre_test, post_test)]
-    treatment_data <- treatment_data[c(pre_test, post_test)]
-
-    control_data <- stats::na.omit(control_data)
-    treatment_data <- stats::na.omit(treatment_data)
-  }
-
   # filter out pre-test and post-test
   control_pre_test <- control_data[[pre_test]]
   control_post_test <- control_data[[post_test]]
 
   treatment_pre_test <- treatment_data[[pre_test]]
   treatment_post_test <- treatment_data[[post_test]]
-
 
   # create df
   rct_df <- rbind(
