@@ -204,42 +204,29 @@ cv_model_impl <- function(predictors,
   # ------------------------------------
   # Cross-validation
   iter <- control$iter
-  cv_folds <- control$cv_folds
-  cv_repeats <- control$cv_repeats
+  cv_folds_n <- control$cv_folds
+  cv_repeats_n <- control$cv_repeats
   cv_strata <- control$cv_strata
 
-  if (!is.null(cv_folds)) {
-    # If there is no repeats defined then assume 1
-    if (is.null(cv_repeats)) {
-      cv_repeats <- 1
-      control$cv_repeats <- 1
-    }
+  if (is.null(cv_folds_n)) {
+    # If there is no folds defined then assume 1
+    cv_folds_n <- 1
+  }
+
+  if (is.null(cv_repeats_n)) {
+    # If there is no repeat defined then assume 1
+    cv_repeats_n <- 1
   }
 
   # Check if strata is NULL
   if (is.null(cv_strata)) {
     cv_strata <- seq(1, nrow(predictors))
-    control$cv_strata <- cv_strata
   }
 
-  # Progress bar
-  # Show progress bar
-  if (iter) {
-    pb <- progress::progress_bar$new(
-      total = cv_folds * cv_repeats,
-      format = "(:spin) [:bar] :percent eta: :eta"
-    )
-    pb$tick(0)
-    message(
-      paste("Cross-validating: ",
-        cv_folds,
-        " folds, ",
-        cv_repeats,
-        " repeats",
-        sep = ""
-      )
-    )
-  }
+  # Save back to control
+  control$cv_folds <- cv_folds_n
+  control$cv_repeats <- cv_repeats_n
+  control$cv_strata <- cv_strata
 
   # Create CV folds
   # Set-up seed for reproducibility
@@ -247,9 +234,29 @@ cv_model_impl <- function(predictors,
 
   cv_folds <- caret::createMultiFolds(
     y = cv_strata,
-    k = cv_folds,
-    times = cv_repeats
+    k = cv_folds_n,
+    times = cv_repeats_n
   )
+
+  # Progress bar
+  # Show progress bar
+  if (iter) {
+    pb <- progress::progress_bar$new(
+      total = length(cv_folds),
+      format = "(:spin) [:bar] :percent eta: :eta"
+    )
+    pb$tick(0)
+    message(
+      paste("Cross-validating: ",
+            cv_folds_n,
+            " folds, ",
+            cv_repeats_n,
+            " repeats",
+            sep = ""
+      )
+    )
+  }
+
 
   n_observations <- nrow(predictors)
   # Convert fold lists into TRUE/FALSE testing index for every resample
@@ -563,7 +570,6 @@ lm_model <- function(predictors,
                      na.rm = FALSE) {
 
   data <- cbind(.outcome = outcome, predictors)
-
   stats::lm(.outcome ~ . -1, data)
 }
 
