@@ -9,12 +9,13 @@
 \arguments{
 \item{x}{Object of class \code{bmbstats_RCT_predict}}
 
-\item{type}{Type of plot. Options are "residuals", "prediction", "bias-variance".
+\item{type}{Type of plot. Options are "residuals", "prediction", "bias-variance", "pdp+ice".
 Default is "residuals"}
 
 \item{...}{Extra arguments. Use \code{control} argument and \code{\link{plot_control}} function to control plotting style.
 \code{confidence} for setting confidence level, \code{metric} for selecting performance metric (default
-is "RMSE") and \code{metric_CV} for selecting source of CV metrics (defaults is "testing.pooled").}
+is "RMSE") and \code{metric_CV} for selecting source of CV metrics (defaults is "testing.pooled"). For "pdp+ice",
+use \code{predictor} to select predictor for plotting (default is \code{group} parameter from \code{\link{RCT_predict}}).}
 }
 \description{
 S3 method for plotting \code{\link{RCT_predict}} results

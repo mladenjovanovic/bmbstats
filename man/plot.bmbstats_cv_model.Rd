@@ -13,7 +13,7 @@
 "testing-residuals", "bias-variance-index", "bias-variance-observed",
 "prediction-index", "prediction-observed", and "estimators".  Default is "residuals"}
 
-\item{...}{Extra arguments. Use \code{\link{plot_control}} to control plotting style}
+\item{...}{Extra arguments. Use \code{\link{plot_control}} to control plotting style.}
 }
 \description{
 S3 method for plotting \code{\link{cv_model}} results

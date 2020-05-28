@@ -614,6 +614,7 @@ generic_predict <- function(model,
                             SESOI_lower = 0,
                             SESOI_upper = 0,
                             na.rm = FALSE) {
+
   stats::predict(model, newdata = predictors)
 }
 
@@ -640,6 +641,7 @@ performance_metrics <- function(observed,
                                 SESOI_lower = 0,
                                 SESOI_upper = 0,
                                 na.rm = FALSE) {
+
   c(
     # SESOI_lower = SESOI_lower,
     # SESOI_upper = SESOI_upper,

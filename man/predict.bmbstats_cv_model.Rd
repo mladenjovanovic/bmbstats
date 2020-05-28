@@ -4,7 +4,7 @@
 \alias{predict.bmbstats_cv_model}
 \title{Predict from a \code{cv_model}}
 \usage{
-\method{predict}{bmbstats_cv_model}(object, new_data, type = "numeric", ...)
+\method{predict}{bmbstats_cv_model}(object, new_data = NULL, type = "numeric", ...)
 }
 \arguments{
 \item{object}{A \code{cv_model} object.}

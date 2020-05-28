@@ -81,6 +81,7 @@ RCT_predict <- function(model,
  })
 
  model$extra <- list(
+   new_data = new_data,
    group = group,
    outcome = outcome,
    control_label = control_label,

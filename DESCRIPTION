@@ -25,7 +25,8 @@ Imports:
     caret,
     purrr,
     tidyr,
-    boot
+    boot,
+    pdp
 RoxygenNote: 7.1.0
 Suggests: 
     testthat,
