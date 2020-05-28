@@ -131,6 +131,8 @@ bmbstats <- function(data,
     control = control
   )
 
+  if (control$iter) message("Done!")
+
   new_bmbstats(
     estimators = bootrap_confidence_intervals,
     estimator_function = estimator_function,
