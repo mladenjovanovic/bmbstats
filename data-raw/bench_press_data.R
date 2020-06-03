@@ -8,6 +8,8 @@ n_subjects <- 20
 SESOI_lower <- -5 # kg
 SESOI_upper <- 5 # kg
 
+measurement_error <- 2.5
+
 bench_press_data <- tibble(
   Athlete = paste(
     "Athlete",
@@ -21,8 +23,17 @@ bench_press_data <- tibble(
     n = n_subjects,
     mean = 100,
     sd = 7.5
+  ) +
+    rnorm(
+      n = n_subjects,
+      mean = 0,
+      sd = measurement_error
+    ),
+  `Post-test` = `Pre-test` + rnorm(n = n_subjects, mean = 5, sd = 10) + rnorm(
+    n = n_subjects,
+    mean = 0,
+    sd = measurement_error
   ),
-  `Post-test` = `Pre-test` + rnorm(n = n_subjects, mean = 5, sd = 10),
   `Change` = `Post-test` - `Pre-test`,
   Magnitude = ifelse(
     `Change` > SESOI_upper,
