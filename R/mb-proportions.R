@@ -5,7 +5,7 @@
 #' @inheritParams basic_arguments
 #' @param method Select "brute-force" or "algebraic" method to calculate proportions. Default is "algebraic"
 #' @param use_normal_distribution When estimating proportions algebraically, should normal or t-distribution
-#'    be used. Default is TRUE (normal distribution)
+#'    be used. Default is \code{FALSE} (normal t-distribution)
 #' @return Data frame with lower, equivalent and higher columns
 mb_proportions_independent <- function(group_a,
                                        group_b,
@@ -13,7 +13,7 @@ mb_proportions_independent <- function(group_a,
                                        SESOI_upper = 0,
                                        method = "algebraic",
                                        na.rm = FALSE,
-                                       use_normal_distribution = TRUE) {
+                                       use_normal_distribution = FALSE) {
 
   # Check method
   rlang::arg_match(method, c("algebraic", "brute-force"))
@@ -86,7 +86,7 @@ mb_proportions_dependent <- function(group_a,
                                      SESOI_upper = 0,
                                      method = "algebraic",
                                      na.rm = FALSE,
-                                     use_normal_distribution = TRUE) {
+                                     use_normal_distribution = FALSE) {
   # Check method
   rlang::arg_match(method, c("algebraic", "brute-force"))
 
@@ -167,7 +167,7 @@ mb_proportions <- function(group_a,
                            SESOI_upper = 0,
                            method = "algebraic",
                            na.rm = FALSE,
-                           use_normal_distribution = TRUE) {
+                           use_normal_distribution = FALSE) {
 
   # Check method
   rlang::arg_match(method, c("algebraic", "brute-force"))

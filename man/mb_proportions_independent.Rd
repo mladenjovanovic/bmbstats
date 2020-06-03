@@ -11,7 +11,7 @@ mb_proportions_independent(
   SESOI_upper = 0,
   method = "algebraic",
   na.rm = FALSE,
-  use_normal_distribution = TRUE
+  use_normal_distribution = FALSE
 )
 }
 \arguments{
@@ -28,7 +28,7 @@ mb_proportions_independent(
 \item{na.rm}{Should NAs be removed? Default is \code{FALSE}}
 
 \item{use_normal_distribution}{When estimating proportions algebraically, should normal or t-distribution
-be used. Default is TRUE (normal distribution)}
+be used. Default is \code{FALSE} (normal t-distribution)}
 }
 \value{
 Data frame with lower, equivalent and higher columns

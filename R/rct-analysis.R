@@ -107,16 +107,27 @@ RCT_estimators <- function(control_pre_test,
   systematic_effect <- (mean(treatment_change, na.rm = na.rm) - mean(control_change, na.rm = na.rm))
   random_effect <- sqrt(stats::var(treatment_change, na.rm = na.rm) - stats::var(control_change, na.rm = na.rm))
 
+  # For n observations use mean between treatment group and control group
+  n_obs <- (length(treatment_change) + length(control_change)) / 2
+
   treatment_summary <- c(
     `Effect Cohen's d` = systematic_effect / stats::sd(control_change, na.rm = na.rm),
     `Systematic effect` = systematic_effect,
     `Random effect` = random_effect,
     `Systematic effect to SESOI` = systematic_effect / SESOI_range,
     `SESOI to Random effect` = SESOI_range / random_effect,
-    pLower = stats::pnorm(SESOI_lower, mean = systematic_effect, sd = random_effect),
-    pEquivalent = 1 - (stats::pnorm(SESOI_lower, mean = systematic_effect, sd = random_effect) +
-      (1 - stats::pnorm(SESOI_upper, mean = systematic_effect, sd = random_effect))),
-    pHigher = 1 - stats::pnorm(SESOI_upper, mean = systematic_effect, sd = random_effect)
+
+    # These use normal distribution
+    # pLower = stats::pnorm(SESOI_lower, mean = systematic_effect, sd = random_effect),
+    # pEquivalent = 1 - (stats::pnorm(SESOI_lower, mean = systematic_effect, sd = random_effect) +
+    #   (1 - stats::pnorm(SESOI_upper, mean = systematic_effect, sd = random_effect))),
+    # pHigher = 1 - stats::pnorm(SESOI_upper, mean = systematic_effect, sd = random_effect),
+
+    # These use t-distribution
+    pLower = stats::pt((SESOI_lower - systematic_effect) / random_effect, df = n_obs - 1),
+    pEquivalent = 1 - (stats::pt((SESOI_lower - systematic_effect) /random_effect, df = n_obs - 1 ) +
+                         (1 - stats::pt((SESOI_upper - systematic_effect) / random_effect, df = n_obs - 1))),
+    pHigher = 1 - stats::pt((SESOI_upper - systematic_effect) / random_effect, df = n_obs - 1)
   )
 
   return(c(
@@ -171,15 +182,26 @@ RCT_estimators_simple <- function(control_pre_test,
   systematic_effect <- (mean(treatment_change, na.rm = na.rm) - mean(control_change, na.rm = na.rm))
   random_effect <- sqrt(stats::var(treatment_change, na.rm = na.rm) - stats::var(control_change, na.rm = na.rm))
 
+  # For n observations use mean between treatment group and control group
+  n_obs <- (length(treatment_change) + length(control_change)) / 2
+
   treatment_summary <- c(
     `Systematic effect` = systematic_effect,
     `Random effect` = random_effect,
     `Systematic effect to SESOI` = systematic_effect / SESOI_range,
     `SESOI to Random effect` = SESOI_range / random_effect,
-    pLower = stats::pnorm(SESOI_lower, mean = systematic_effect, sd = random_effect),
-    pEquivalent = 1 - (stats::pnorm(SESOI_lower, mean = systematic_effect, sd = random_effect) +
-      (1 - stats::pnorm(SESOI_upper, mean = systematic_effect, sd = random_effect))),
-    pHigher = 1 - stats::pnorm(SESOI_upper, mean = systematic_effect, sd = random_effect)
+
+    # These use normal distribution
+    # pLower = stats::pnorm(SESOI_lower, mean = systematic_effect, sd = random_effect),
+    # pEquivalent = 1 - (stats::pnorm(SESOI_lower, mean = systematic_effect, sd = random_effect) +
+    #   (1 - stats::pnorm(SESOI_upper, mean = systematic_effect, sd = random_effect))),
+    # pHigher = 1 - stats::pnorm(SESOI_upper, mean = systematic_effect, sd = random_effect),
+
+    # These use t-distribution
+    pLower = stats::pt((SESOI_lower - systematic_effect) / random_effect, df = n_obs - 1),
+    pEquivalent = 1 - (stats::pt((SESOI_lower - systematic_effect) /random_effect, df = n_obs - 1 ) +
+                         (1 - stats::pt((SESOI_upper - systematic_effect) / random_effect, df = n_obs - 1))),
+    pHigher = 1 - stats::pt((SESOI_upper - systematic_effect) / random_effect, df = n_obs - 1)
   )
 
   return(c(

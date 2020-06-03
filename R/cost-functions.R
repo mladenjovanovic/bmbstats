@@ -326,16 +326,20 @@ cost_PPER <- function(observed,
                       negative_weight = 1,
                       positive_weight = 1,
                       na.rm = FALSE) {
+
   difference <- predicted - observed
 
-  # Remove NAs
-  if (na.rm) difference <- stats::na.omit(difference)
+  mean_diff <- mean(difference, na.rm = na.rm)
+  sd_diff <- stats::sd(difference, na.rm = na.rm)
 
-  mean_diff <- mean(difference)
-  sd_diff <- stats::sd(difference)
+  # This use normal distribution
+  # stats::pnorm(SESOI_upper, mean_diff, sd_diff) -
+  #   stats::pnorm(SESOI_lower, mean_diff, sd_diff)
 
-  stats::pnorm(SESOI_upper, mean_diff, sd_diff) -
-    stats::pnorm(SESOI_lower, mean_diff, sd_diff)
+  # This uses t-distribution
+  n_obs <- length(difference)
+  stats::pt((SESOI_upper - mean_diff) / sd_diff, df = n_obs - 1) -
+     stats::pt((SESOI_lower - mean_diff) / sd_diff, df = n_obs - 1)
 }
 
 #' Mean Huber Error
