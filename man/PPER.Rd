@@ -13,7 +13,8 @@ PPER(sigma, SESOI_lower = 0, SESOI_upper = 0, df = Inf)
 
 \item{SESOI_upper}{Upper smallest effect size of interest threshold.  Default is 0}
 
-\item{df}{Degrees of freedom. Used for t-distribution. Default is \code{Inf}}
+\item{df}{Degrees of freedom. Used for t-distribution. Default is \code{Inf}
+which gives normal distribution by default}
 }
 \value{
 Numeric

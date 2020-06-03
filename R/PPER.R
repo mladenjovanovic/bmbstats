@@ -3,6 +3,7 @@
 #' @inheritParams basic_arguments
 #' @param sigma Numeric
 #' @param df Degrees of freedom. Used for t-distribution. Default is \code{Inf}
+#'    which gives normal distribution by default
 #'
 #' @return Numeric
 #' @export
