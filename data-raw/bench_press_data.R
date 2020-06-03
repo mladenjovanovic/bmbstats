@@ -29,7 +29,7 @@ bench_press_data <- tibble(
       mean = 0,
       sd = measurement_error
     ),
-  `Post-test` = `Pre-test` + rnorm(n = n_subjects, mean = 5, sd = 10) + rnorm(
+  `Post-test` = `Pre-test` + rnorm(n = n_subjects, mean = 10, sd = 10) + rnorm(
     n = n_subjects,
     mean = 0,
     sd = measurement_error
