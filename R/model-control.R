@@ -5,7 +5,7 @@
 #' @param boot_type Type of bootstrap confidence interval ("bca" and "perc"). Default is "bca"
 #' @param boot_samples Number of bootstrap resamples. Default is 2000
 #' @param boot_strata Strata to be used for bootstrap. Default is \code{NULL}
-#' @param confidence Confidence to be used for calculating bootstrap CIs. Default is 0.9
+#' @param confidence Confidence to be used for calculating bootstrap CIs. Default is 0.95
 #' @param iter Should progress bar be shown? Default is \code{TRUE}
 #' @param seed Random number seed
 #' @export
@@ -15,7 +15,7 @@ model_control <- function(cv_folds = 5,
                           boot_type = "bca",
                           boot_samples = 2000,
                           boot_strata = NULL,
-                          confidence = 0.9,
+                          confidence = 0.95,
                           iter = TRUE,
                           seed = round(stats::runif(1, 1, 10000))) {
   rlang::arg_match(boot_type, c(

@@ -41,8 +41,7 @@ print.bmbstats_RCT_analysis <- function(x, ...) {
 #'     "control-change", "treatment-change", "change", "control-paired-change",
 #'     "treatment-paired-change", "change-distribution", "effect-distribution", and "treatment-responses".
 #'     Default is "boot"
-#' @param ... Extra arguments. Use \code{\link{plot_control}} to control plotting style and
-#'    \code{confidence} to set confidence level for "treatment-responses" plot. Default is 0.95
+#' @param ... Extra arguments. Use \code{\link{plot_control}} to control plotting style
 #' @export
 #' @examples
 #' set.seed(1666)
@@ -439,7 +438,7 @@ RCT_plot_effect_distribution <- function(x, control = plot_control()) {
 
 
 # ---------------------------------------------------------
-RCT_plot_treatment_responses <- function(x, confidence = 0.95, control = plot_control()) {
+RCT_plot_treatment_responses <- function(x, control = plot_control()) {
 
   # +++++++++++++++++++++++++++++++++++++++++++
   # Code chunk for dealing with R CMD check note

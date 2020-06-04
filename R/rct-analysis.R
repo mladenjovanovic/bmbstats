@@ -224,9 +224,8 @@ RCT_estimators_simple <- function(control_pre_test,
 #' @param SESOI_lower Function or numeric scalar. Default is \code{\link{SESOI_lower_RCT_func}}
 #' @param SESOI_upper Function or numeric scalar. Default is \code{\link{SESOI_upper_RCT_func}}
 #' @param estimator_function Function for providing RCT estimators. Default is \code{\link{RCT_estimators}}
-#' @param confidence Confidence level. Default is 0.95
 #' @param control Control object returned from \code{\link{model_control}} function.
-#'     Use \code{boot_type}, \code{boot_samples}, \code{boot_strata} to setup bootstrap.
+#'     Use \code{boot_type}, \code{boot_samples}, \code{boot_strata}, and \code{confidence} to setup bootstrap.
 #' @param na.rm Should NAs be removed? Default is \code{FALSE}
 #'
 #' @return Object of class `bmbstats_RCT_analysis`
@@ -259,7 +258,6 @@ RCT_analysis <- function(data,
                          SESOI_lower = SESOI_lower_RCT_func,
                          SESOI_upper = SESOI_upper_RCT_func,
                          estimator_function = RCT_estimators,
-                         confidence = 0.95,
                          control = model_control(),
                          na.rm = FALSE) {
 
@@ -375,7 +373,7 @@ RCT_analysis <- function(data,
 
   # Smallest detectable change
   SDC <- control_SD_change * stats::qt(
-    1 - ((1 - confidence) / 2),
+    1 - ((1 - control$confidence) / 2),
     df = n_observations - 1
   )
 

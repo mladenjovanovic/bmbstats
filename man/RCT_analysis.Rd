@@ -14,7 +14,6 @@ RCT_analysis(
   SESOI_lower = SESOI_lower_RCT_func,
   SESOI_upper = SESOI_upper_RCT_func,
   estimator_function = RCT_estimators,
-  confidence = 0.95,
   control = model_control(),
   na.rm = FALSE
 )
@@ -38,10 +37,8 @@ RCT_analysis(
 
 \item{estimator_function}{Function for providing RCT estimators. Default is \code{\link{RCT_estimators}}}
 
-\item{confidence}{Confidence level. Default is 0.95}
-
 \item{control}{Control object returned from \code{\link{model_control}} function.
-Use \code{boot_type}, \code{boot_samples}, \code{boot_strata} to setup bootstrap.}
+Use \code{boot_type}, \code{boot_samples}, \code{boot_strata}, and \code{confidence} to setup bootstrap.}
 
 \item{na.rm}{Should NAs be removed? Default is \code{FALSE}}
 }

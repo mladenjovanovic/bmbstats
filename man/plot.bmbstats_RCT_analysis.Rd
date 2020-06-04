@@ -14,8 +14,7 @@
 "treatment-paired-change", "change-distribution", "effect-distribution", and "treatment-responses".
 Default is "boot"}
 
-\item{...}{Extra arguments. Use \code{\link{plot_control}} to control plotting style and
-\code{confidence} to set confidence level for "treatment-responses" plot. Default is 0.95}
+\item{...}{Extra arguments. Use \code{\link{plot_control}} to control plotting style}
 }
 \description{
 S3 method for plotting \code{\link{RCT_analysis}} results
