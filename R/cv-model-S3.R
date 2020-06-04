@@ -422,7 +422,7 @@ print.bmbstats_cv_model <- function(x, ...) {
     )
 
     cat("\nModel performance:\n\n")
-    print(x$cross_validation$performance$summary$overall)
+    print(x$cross_validation$performance$summary$overall, row.names = FALSE)
   } else {
     cat("\nCross-Validation of the model was not performed.")
   }

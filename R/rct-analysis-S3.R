@@ -29,7 +29,7 @@ print.bmbstats_RCT_analysis <- function(x, ...) {
     )
   )
 
-  print(x$estimators)
+  print(x$estimators, row.names = FALSE)
 }
 
 

@@ -78,19 +78,19 @@ print.bmbstats_RCT_predict <- function(x, ...) {
     )
 
     cat("\nModel performance:\n\n")
-    print(x$cross_validation$performance$summary$overall)
+    print(x$cross_validation$performance$summary$overall, row.names = FALSE)
   } else {
     cat("\nCross-Validation of the model was not performed.")
   }
 
   cat("\nIndividual model results:\n\n")
-  print(x$extra$results)
+  print(x$extra$results, row.names = FALSE)
 
   cat("\nSummary of residuals per RCT group:\n\n")
-  print(x$extra$residual_summary)
+  print(x$extra$residual_summary, row.names = FALSE)
 
   cat("\nSummary of counterfactual effects of RCT group:\n\n")
-  print(x$extra$counterfactual_summary)
+  print(x$extra$counterfactual_summary, row.names = FALSE)
 
 }
 

@@ -25,7 +25,7 @@ print.bmbstats <- function(x, ...) {
     )
   )
 
-  print(x$estimators)
+  print(x$estimators, row.names = FALSE)
 }
 
 #' S3 method for plotting \code{\link{bmbstats}} results
