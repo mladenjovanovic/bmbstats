@@ -447,7 +447,7 @@ plot_MET_CI <- function(x, control = plot_control()) {
         round(confidence * 100, 0),
         "% CI [",
         round(estimator_lower, 2),
-        "; ",
+        ", ",
         round(estimator_upper, 2),
         "]",
         sep = ""
