@@ -40,6 +40,7 @@ plot.bmbstats_NHST <- function(x, ...) {
 
 # ----------------------------------------------------------------------------
 plot_NHST_null_distribution <- function(x, control = plot_control()) {
+
   # +++++++++++++++++++++++++++++++++++++++++++
   # Code chunk for dealing with R CMD check note
   ..x.. <- NULL

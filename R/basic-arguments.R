@@ -16,5 +16,6 @@
 #' @param SESOI_lower Lower smallest effect size of interest threshold. Default is 0
 #' @param SESOI_upper Upper smallest effect size of interest threshold.  Default is 0
 #' @param confidence Default is 0.95
+#' @param alpha Numeric value for the alpha (Type I error). Default is 0.05
 #' @name basic_arguments
 NULL

@@ -37,6 +37,8 @@
 \item{SESOI_upper}{Upper smallest effect size of interest threshold.  Default is 0}
 
 \item{confidence}{Default is 0.95}
+
+\item{alpha}{Numeric value for the alpha (Type I error). Default is 0.05}
 }
 \description{
 Basic arguments
