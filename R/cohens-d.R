@@ -7,16 +7,12 @@
 #' @examples
 #' sd_pooled(rnorm(10), rnorm(10))
 sd_pooled <- function(group_a, group_b, na.rm = FALSE) {
-  if (na.rm) {
-    group_a <- stats::na.omit(group_a)
-    group_b <- stats::na.omit(group_b)
-  }
 
   a_n <- length(group_a) - 1
   b_n <- length(group_b) - 1
 
-  a_var <- stats::var(group_a)
-  b_var <- stats::var(group_b)
+  a_var <- stats::var(group_a, na.rm = na.rm)
+  b_var <- stats::var(group_b, na.rm = na.rm)
 
   return(sqrt(((a_var * a_n) + (b_var * b_n)) / (a_n + b_n)))
 }
