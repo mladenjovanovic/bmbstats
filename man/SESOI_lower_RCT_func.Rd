@@ -25,7 +25,7 @@ SESOI_lower_RCT_func(
 }
 \value{
 Pooled SD of \code{control_pre_test} and \code{treatment_pre_test}
-multiplied by 0.2 (Cohen's trivial)
+multiplied by -0.2 (Cohen's trivial)
 }
 \description{
 \code{SESOI_lower_RCT_func} is used in \code{\link{RCT_analysis}} function
