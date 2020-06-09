@@ -428,7 +428,7 @@ RCT_analysis <- function(data,
 #' @inheritParams RCT_estimators
 #'
 #' @return Pooled SD of \code{control_pre_test} and \code{treatment_pre_test}
-#'     multiplied by 0.2 (Cohen's trivial)
+#'     multiplied by -0.2 (Cohen's trivial)
 #' @export
 #'
 #' @examples
