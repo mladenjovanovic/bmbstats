@@ -39,7 +39,7 @@ CLES <- function(group_a,
     lower <- stats::pnorm(SESOI_lower, group_difference, sd = difference_SD)
     equivalent <- 1 - (higher + lower)
 
-    # Estiamte proabilities of the higher score depending on how to treat equivalent score
+    # Estimate probabilities of the higher score depending on how to treat equivalent score
     if (count_equivalent == "ignore") {
       algebraic <- (higher / (higher + lower))
     }
