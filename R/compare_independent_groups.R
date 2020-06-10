@@ -121,6 +121,11 @@ compare_independent_groups <- function(group_a,
   )
 
   # Set strata
+
+  if(!is.null(control$boot_strata)) {
+    warning("Strata cannot be used in this function. Using group strata", immediate. = TRUE, call. = FALSE)
+  }
+
   control$boot_strata <- factor(data$group)
 
   # ----------------------------------------------------
