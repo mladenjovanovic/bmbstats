@@ -17,9 +17,9 @@ independent_groups_estimators(
 
 \item{group_b}{Numeric vector. This group represents experimental, predicted variable, Post-test in the paired design, or "criterion" measure}
 
-\item{SESOI_lower}{Lower smallest effect size of interest threshold. Default is 0}
+\item{SESOI_lower}{Lower smallest effect size of interest threshold}
 
-\item{SESOI_upper}{Upper smallest effect size of interest threshold.  Default is 0}
+\item{SESOI_upper}{Upper smallest effect size of interest threshold}
 
 \item{na.rm}{Should NAs be removed? Default is \code{FALSE}}
 }

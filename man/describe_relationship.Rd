@@ -19,9 +19,9 @@ describe_relationship(
 
 \item{outcome}{Vector}
 
-\item{SESOI_lower}{Lower smallest effect size of interest threshold. Default is 0}
+\item{SESOI_lower}{Lower smallest effect size of interest threshold}
 
-\item{SESOI_upper}{Upper smallest effect size of interest threshold.  Default is 0}
+\item{SESOI_upper}{Upper smallest effect size of interest threshold}
 
 \item{estimator_function}{Function that takes \code{predictor}, \code{outcome}, and \code{na.rm} parameters
 and return named numeric vector with parameter estimates. Default is \code{\link{relationship_lm_estimators}}.

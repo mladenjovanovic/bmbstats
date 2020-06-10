@@ -11,9 +11,9 @@ bootstrap_MBI(bmbstats_object, estimator, SESOI_lower = 0, SESOI_upper = 0)
 
 \item{estimator}{Name of the estimator from the \code{bmbstats_object}}
 
-\item{SESOI_lower}{Lower smallest effect size of interest threshold. Default is 0}
+\item{SESOI_lower}{Lower smallest effect size of interest threshold}
 
-\item{SESOI_upper}{Upper smallest effect size of interest threshold.  Default is 0}
+\item{SESOI_upper}{Upper smallest effect size of interest threshold}
 }
 \value{
 \code{bmbstats_MBI} object

@@ -29,9 +29,9 @@ plot_spaghetti(
 
 \item{value_label}{Character string. Label to be used. Default is \code{value}}
 
-\item{SESOI_lower}{Lower smallest effect size of interest threshold. Default is 0}
+\item{SESOI_lower}{Lower smallest effect size of interest threshold}
 
-\item{SESOI_upper}{Upper smallest effect size of interest threshold.  Default is 0}
+\item{SESOI_upper}{Upper smallest effect size of interest threshold}
 
 \item{control}{Plotting control object returned from \code{\link{plot_control}}}
 }

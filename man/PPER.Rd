@@ -9,9 +9,9 @@ PPER(sigma, SESOI_lower = 0, SESOI_upper = 0, df = Inf)
 \arguments{
 \item{sigma}{Numeric}
 
-\item{SESOI_lower}{Lower smallest effect size of interest threshold. Default is 0}
+\item{SESOI_lower}{Lower smallest effect size of interest threshold}
 
-\item{SESOI_upper}{Upper smallest effect size of interest threshold.  Default is 0}
+\item{SESOI_upper}{Upper smallest effect size of interest threshold}
 
 \item{df}{Degrees of freedom. Used for t-distribution. Default is \code{Inf}
 which gives normal distribution by default}

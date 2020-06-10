@@ -22,9 +22,9 @@ mb_proportions(
 
 \item{paired}{Paired groups? Default is \code{FALSE}}
 
-\item{SESOI_lower}{Lower smallest effect size of interest threshold. Default is 0}
+\item{SESOI_lower}{Lower smallest effect size of interest threshold}
 
-\item{SESOI_upper}{Upper smallest effect size of interest threshold.  Default is 0}
+\item{SESOI_upper}{Upper smallest effect size of interest threshold}
 
 \item{method}{Select "brute-force" or "algebraic" method to calculate proportions. Default is "algebraic"}
 

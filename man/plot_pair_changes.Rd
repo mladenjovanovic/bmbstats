@@ -25,9 +25,9 @@ plot_pair_changes(
 
 \item{group_label}{Character string. Label to be used for x-axis. Default is \code{NULL}}
 
-\item{SESOI_lower}{Lower smallest effect size of interest threshold. Default is 0}
+\item{SESOI_lower}{Lower smallest effect size of interest threshold}
 
-\item{SESOI_upper}{Upper smallest effect size of interest threshold.  Default is 0}
+\item{SESOI_upper}{Upper smallest effect size of interest threshold}
 
 \item{group_a_label}{Character vector. The name of the \code{group_a}. Default is "Group A"}
 

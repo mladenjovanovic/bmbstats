@@ -16,8 +16,8 @@
 #' @param residuals_label Character vector. The label to be used for residuals. Default is "Residuals"
 #' @param paired Paired groups? Default is \code{FALSE}
 #' @param na.rm Should NAs be removed? Default is \code{FALSE}
-#' @param SESOI_lower Lower smallest effect size of interest threshold. Default is 0
-#' @param SESOI_upper Upper smallest effect size of interest threshold.  Default is 0
+#' @param SESOI_lower Lower smallest effect size of interest threshold
+#' @param SESOI_upper Upper smallest effect size of interest threshold
 #' @param confidence Default is 0.95
 #' @param alpha Numeric value for the alpha (Type I error). Default is 0.05
 #' @name basic_arguments

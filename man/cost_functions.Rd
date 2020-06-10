@@ -163,9 +163,9 @@ cost_RMHE(
 
 \item{predicted}{Numeric vector}
 
-\item{SESOI_lower}{Lower smallest effect size of interest threshold. Default is 0}
+\item{SESOI_lower}{Lower smallest effect size of interest threshold}
 
-\item{SESOI_upper}{Upper smallest effect size of interest threshold.  Default is 0}
+\item{SESOI_upper}{Upper smallest effect size of interest threshold}
 
 \item{negative_weight}{How should negative residuals be weighted? Default is 1}
 
