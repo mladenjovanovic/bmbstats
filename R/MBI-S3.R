@@ -53,7 +53,8 @@ plot.bmbstats_MBI <- function(x, ...) {
 
 
 # ----------------------------------------------------------------------------
-plot_MBI_null_distribution <- function(x, control = plot_control()) {
+plot_MBI_null_distribution <- function(x, control = plot_control(points_jitter = FALSE,
+                                                                 cloud_quantile_lines = FALSE)) {
 
   # +++++++++++++++++++++++++++++++++++++++++++
   # Code chunk for dealing with R CMD check note
