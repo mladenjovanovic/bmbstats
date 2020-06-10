@@ -2,7 +2,10 @@
 #' @param x Numeric vector
 #' @param model Model object
 #' @param predictors Data frame
+#' @param predictor Numeric vector
 #' @param outcome Vector
+#' @param pre Numeric vector
+#' @param post Numeric vector
 #' @param observed Numeric vector
 #' @param predicted Numeric vector
 #' @param group_a Numeric vector. This group represents baseline/control, observed variable, Pre-test in the paired design, or "practical" measure

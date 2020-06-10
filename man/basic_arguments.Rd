@@ -10,7 +10,13 @@
 
 \item{predictors}{Data frame}
 
+\item{predictor}{Numeric vector}
+
 \item{outcome}{Vector}
+
+\item{pre}{Numeric vector}
+
+\item{post}{Numeric vector}
 
 \item{observed}{Numeric vector}
 
