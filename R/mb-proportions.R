@@ -91,7 +91,7 @@ mb_proportions_dependent <- function(group_a,
   rlang::arg_match(method, c("algebraic", "brute-force"))
 
   if (length(group_a) != length(group_b)) {
-    stop("group_a and group_b differ in size. Unable to proceed")
+    stop("group_a and group_b differ in size. Unable to proceed", call. = FALSE)
   }
 
   difference <- group_b - group_a
