@@ -26,7 +26,8 @@ print.bmbstats_observations_MBI <- function(x, ...) {
 # =======================================================
 #' S3 method for plotting \code{\link{observations_MBI}} results
 #' @param x Object of class \code{bmbstats_observations_MBI}
-#' @param ... Extra arguments. Use \code{plot_control} for plotting options
+#' @param ... Extra arguments. Use \code{plot_control} for plotting options and
+#'     \code{true_observations} for plotting true or supplementary observations
 #' @export
 #' @examples
 #' data("bench_press_data")

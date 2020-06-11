@@ -9,7 +9,8 @@
 \arguments{
 \item{x}{Object of class \code{bmbstats_observations_MBI}}
 
-\item{...}{Extra arguments. Use \code{plot_control} for plotting options}
+\item{...}{Extra arguments. Use \code{plot_control} for plotting options and
+\code{true_observations} for plotting true or supplementary observations}
 }
 \description{
 S3 method for plotting \code{\link{observations_MBI}} results

@@ -26,7 +26,8 @@ print.bmbstats_observations_MET <- function(x, ...) {
 # =======================================================
 #' S3 method for plotting \code{\link{observations_MET}} results
 #' @param x Object of class \code{bmbstats_observations_MET}
-#' @param ... Extra arguments. Use \code{plot_control} for plotting options
+#' @param ... Extra arguments. Use \code{plot_control} for plotting options and
+#'     \code{true_observations} for plotting true or supplementary observations
 #' @export
 #' @examples
 #' data("bench_press_data")
@@ -46,7 +47,7 @@ plot.bmbstats_observations_MET <- function(x, ...) {
 
 
 # --------------------------------------------------------
-plot_bmbstats_observations_MET <- function(x, control = plot_control()) {
+plot_bmbstats_observations_MET <- function(x, true_observations = NULL, control = plot_control()) {
 
   # +++++++++++++++++++++++++++++++++++++++++++
   # Code chunk for dealing with R CMD check note
@@ -61,6 +62,12 @@ plot_bmbstats_observations_MET <- function(x, control = plot_control()) {
 
   plot_data <- do.call(data.frame, x)
 
+  if (is.null(true_observations)) {
+    plot_data$true_observations <- observations
+  } else {
+    plot_data$true_observations <- true_observations
+  }
+
   # Sort data
   if (control$sort) {
     plot_data$observations_label <- factor(
@@ -69,7 +76,7 @@ plot_bmbstats_observations_MET <- function(x, control = plot_control()) {
     )
   }
 
-  ggplot2::ggplot(plot_data, ggplot2::aes(y = observations_label, x = observations)) +
+  gg <- ggplot2::ggplot(plot_data, ggplot2::aes(y = observations_label, x = observations)) +
     cowplot::theme_cowplot(control$font_size) +
     ggplot2::annotate(
       "rect",
@@ -97,4 +104,16 @@ plot_bmbstats_observations_MET <- function(x, control = plot_control()) {
     ggplot2::ylab(NULL) +
     ggplot2::xlab(NULL) +
     ggplot2::theme(legend.position = "none")
+
+    # Add true observations
+    if (!is.null(true_observations)) {
+      gg <- gg +
+        ggplot2::geom_point(
+          ggplot2::aes(x = true_observations),
+          shape = "|",
+          color = "red",
+          size = control$points_size
+        )
+    }
+  return(gg)
 }

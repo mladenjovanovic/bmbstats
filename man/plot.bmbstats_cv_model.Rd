@@ -22,12 +22,13 @@ S3 method for plotting \code{\link{cv_model}} results
 data("vertical_jump_data")
 
 m1 <- cv_model(
- `Post-test`~`Pre-test` * Group * `Squat 1RM`,
- vertical_jump_data,
- control = model_control(
-   cv_repeats = 10,
-   cv_folds = 3,
-   cv_strata = vertical_jump_data$Group)
+  `Post-test` ~ `Pre-test` * Group * `Squat 1RM`,
+  vertical_jump_data,
+  control = model_control(
+    cv_repeats = 10,
+    cv_folds = 3,
+    cv_strata = vertical_jump_data$Group
+  )
 )
 
 plot(m1, "residuals")

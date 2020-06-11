@@ -33,7 +33,8 @@ variable \code{x}. \code{describe_data} function is a "wrapper" for \code{\link{
 desc1 <- describe_data(
   iris$Sepal.Width,
   estimator_function = data_estimators_simple,
-  control = model_control(confidence = 0.90, boot_samples = 1000))
+  control = model_control(confidence = 0.90, boot_samples = 1000)
+)
 
 desc1
 plot(desc1)
