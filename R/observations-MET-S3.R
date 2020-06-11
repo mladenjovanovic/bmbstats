@@ -91,7 +91,8 @@ plot_bmbstats_observations_MET <- function(x, control = plot_control()) {
       y = observations_label,
       x = observations_upper,
       label = inference_label),
-      hjust = "left") +
+      hjust = "left",
+      size = control$text_label_size) +
     ggplot2::ylab(NULL) +
     ggplot2::xlab(NULL) +
     ggplot2::theme(legend.position = "none")

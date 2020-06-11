@@ -115,6 +115,7 @@ plot_control <- function(group_colors = c(
                          bins = 30,
                          panel_labels = c("A", "B", "C", "D", "E", "F"),
                          panel_labels_size = 10,
+                         text_label_size = 3,
                          coord_flip = TRUE,
                          sort = TRUE) {
   list(
@@ -159,6 +160,7 @@ plot_control <- function(group_colors = c(
     bins = bins,
     panel_labels = panel_labels,
     panel_labels_size = panel_labels_size,
+    text_label_size = text_label_size,
     coord_flip = coord_flip,
     sort = sort
   )
