@@ -57,10 +57,10 @@ observations_MET <- function(observations,
         "Lower",
         ifelse(
           non_superior < alpha,
-          "Not-Higher",
+          "Not higher",
           ifelse(
             non_inferior < alpha,
-            "Not-Lower",
+            "Not lower",
             "Equivocal"
           )
         )
@@ -80,9 +80,9 @@ observations_MET <- function(observations,
     levels = c(
       "Equivocal",
       "Lower",
-      "Not-Higher",
+      "Not higher",
       "Equivalent",
-      "Not-Lower",
+      "Not lower",
       "Higher"
     ),
     ordered = TRUE
