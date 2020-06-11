@@ -72,7 +72,7 @@ bootstrap_MBI <- function(bmbstats_object,
   )
 
 
-  inference <- ifelse(lower >= 0.05 && higher >= 0.05,
+  inference <- ifelse(lower >= 0.05 & higher >= 0.05,
                       "Unclear difference",
                       paste(inference_text, highest_effect)
   )
