@@ -47,6 +47,7 @@
 #' @param bins Number of bins in histogram. Default is 30
 #' @param panel_labels Labels for panels
 #' @param panel_labels_size Size of panel labels. Default is 10
+#' @param text_label_size Size of the text labels. Default is 3
 #' @param coord_flip Should figure be flipped?
 #' @param sort Should items be sorted? Default is TRUE
 #'

@@ -48,6 +48,7 @@ plot_control(
   bins = 30,
   panel_labels = c("A", "B", "C", "D", "E", "F"),
   panel_labels_size = 10,
+  text_label_size = 3,
   coord_flip = TRUE,
   sort = TRUE
 )
@@ -137,6 +138,8 @@ or stats::loess. Default is "loess". See \code{\link[ggplot2]{geom_smooth}} for 
 \item{panel_labels}{Labels for panels}
 
 \item{panel_labels_size}{Size of panel labels. Default is 10}
+
+\item{text_label_size}{Size of the text labels. Default is 3}
 
 \item{coord_flip}{Should figure be flipped?}
 
