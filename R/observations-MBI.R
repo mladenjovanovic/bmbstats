@@ -47,19 +47,37 @@ observations_MBI <- function(observations,
                                          ifelse(highest_probability < 0.75, "Possibly",
                                                 ifelse(highest_probability < 0.95, "Likely",
                                                        ifelse(highest_probability < 0.99, "Most likely",
-                                                              ifelse(highest_probability >= 0.99, "Almost certainly", "")
+                                                              "Almost certainly")
                                                        )
                                                 )
                                          )
                                   )
                            )
-  )
-
 
   inference <- ifelse(lower >= 0.05 & higher >= 0.05,
                       "Unclear difference",
                       paste(inference_text, highest_effect)
   )
+
+  inference_levels <- expand.grid(
+    inference = c(
+      "Most unlikely",
+      "Very unlikely",
+      "Unlikely",
+      "Possibly",
+      "Likely",
+      "Most likely",
+      "Almost certainly"),
+    effect = c(
+      "lower",
+      "equivalent",
+      "higher"
+    )
+  )
+
+  inference_levels <- c("Unclear difference", paste(inference_levels$inference, inference_levels$effect))
+
+  inference <- factor(inference, levels = inference_levels)
 
   SDC <- measurement_error * stats::qt(
     1 - ((1 - confidence) / 2),
