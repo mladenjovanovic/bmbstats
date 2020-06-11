@@ -16,10 +16,9 @@
 #' obs_MET
 #' plot(obs_MET)
 print.bmbstats_observations_MET <- function(x, ...) {
-
   df <- do.call(data.frame, x)
 
-  #rownames(df) <- df$observations_label
+  # rownames(df) <- df$observations_label
 
   print(df[-c(1, 3, 4, 5, 6, 12, 14, 15, 16, 17, 18)], row.names = FALSE)
 }
@@ -81,7 +80,7 @@ plot_bmbstats_observations_MET <- function(x, control = plot_control()) {
       alpha = control$SESOI_alpha,
       fill = control$SESOI_color
     ) +
-    #ggplot2::geom_vline(xintercept = 0, color = "dark grey") +
+    # ggplot2::geom_vline(xintercept = 0, color = "dark grey") +
     ggstance::geom_pointrangeh(
       ggplot2::aes(xmin = observations_lower, xmax = observations_upper),
       size = control$summary_bar_size,
@@ -90,9 +89,11 @@ plot_bmbstats_observations_MET <- function(x, control = plot_control()) {
     ggplot2::geom_text(ggplot2::aes(
       y = observations_label,
       x = observations_upper,
-      label = inference_label),
-      hjust = "left",
-      size = control$text_label_size) +
+      label = inference_label
+    ),
+    hjust = "left",
+    size = control$text_label_size
+    ) +
     ggplot2::ylab(NULL) +
     ggplot2::xlab(NULL) +
     ggplot2::theme(legend.position = "none")

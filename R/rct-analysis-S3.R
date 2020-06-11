@@ -456,13 +456,15 @@ RCT_plot_treatment_responses <- function(x, control = plot_control()) {
   if (control$sort) {
     responses_data$id <- factor(
       responses_data$id,
-      levels = responses_data$id[order(responses_data$adjusted_change)])
+      levels = responses_data$id[order(responses_data$adjusted_change)]
+    )
   }
 
   # Plot
   ggplot2::ggplot(
     responses_data,
-    ggplot2::aes(x = adjusted_change, y = id)) +
+    ggplot2::aes(x = adjusted_change, y = id)
+  ) +
     cowplot::theme_cowplot(control$font_size) +
     ggplot2::annotate(
       "rect",
@@ -489,4 +491,4 @@ RCT_plot_treatment_responses <- function(x, control = plot_control()) {
     ) +
     ggplot2::xlab("Adjusted change") +
     ggplot2::ylab(NULL)
-  }
+}

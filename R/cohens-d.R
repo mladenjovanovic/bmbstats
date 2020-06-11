@@ -7,7 +7,6 @@
 #' @examples
 #' sd_pooled(rnorm(10), rnorm(10))
 sd_pooled <- function(group_a, group_b, na.rm = FALSE) {
-
   a_n <- length(group_a) - 1
   b_n <- length(group_b) - 1
 

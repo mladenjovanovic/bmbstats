@@ -125,8 +125,8 @@ RCT_estimators <- function(control_pre_test,
 
     # These use t-distribution
     pLower = stats::pt((SESOI_lower - systematic_effect) / random_effect, df = n_obs - 1),
-    pEquivalent = 1 - (stats::pt((SESOI_lower - systematic_effect) /random_effect, df = n_obs - 1 ) +
-                         (1 - stats::pt((SESOI_upper - systematic_effect) / random_effect, df = n_obs - 1))),
+    pEquivalent = 1 - (stats::pt((SESOI_lower - systematic_effect) / random_effect, df = n_obs - 1) +
+      (1 - stats::pt((SESOI_upper - systematic_effect) / random_effect, df = n_obs - 1))),
     pHigher = 1 - stats::pt((SESOI_upper - systematic_effect) / random_effect, df = n_obs - 1)
   )
 
@@ -199,8 +199,8 @@ RCT_estimators_simple <- function(control_pre_test,
 
     # These use t-distribution
     pLower = stats::pt((SESOI_lower - systematic_effect) / random_effect, df = n_obs - 1),
-    pEquivalent = 1 - (stats::pt((SESOI_lower - systematic_effect) /random_effect, df = n_obs - 1 ) +
-                         (1 - stats::pt((SESOI_upper - systematic_effect) / random_effect, df = n_obs - 1))),
+    pEquivalent = 1 - (stats::pt((SESOI_lower - systematic_effect) / random_effect, df = n_obs - 1) +
+      (1 - stats::pt((SESOI_upper - systematic_effect) / random_effect, df = n_obs - 1))),
     pHigher = 1 - stats::pt((SESOI_upper - systematic_effect) / random_effect, df = n_obs - 1)
   )
 
@@ -286,7 +286,7 @@ RCT_analysis <- function(data,
       change = control_change
     ),
     data.frame(
-      id =  treatment_id,
+      id = treatment_id,
       group = treatment_label,
       pre_test = treatment_pre_test,
       post_test = treatment_post_test,
@@ -365,7 +365,7 @@ RCT_analysis <- function(data,
   # --------------------------------------------
   # Response analysis for the treatment group
   treatment_responses <- rct_df
-  treatment_responses <- treatment_responses[treatment_responses$group == treatment_label,]
+  treatment_responses <- treatment_responses[treatment_responses$group == treatment_label, ]
 
   control_mean_change <- mean(control_change, na.rm = na.rm)
   control_SD_change <- stats::sd(control_change, na.rm = na.rm)

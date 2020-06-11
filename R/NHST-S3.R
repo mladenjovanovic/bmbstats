@@ -11,11 +11,12 @@
 #' mean_NHST
 #' plot(mean_NHST)
 print.bmbstats_NHST <- function(x, ...) {
-
-  cat(paste0("Null-hypothesis significance test for the `", x$estimator$name,"` estimator\n"))
-  cat(paste0("Bootstrap result: ", x$estimator$name, "=", round(x$estimator$value, 3), ", ",
-             round(x$estimator$confidence * 100, 0), "% CI [", round(x$estimator$lower, 3), ", ",
-             round(x$estimator$upper, 3), "]\n"))
+  cat(paste0("Null-hypothesis significance test for the `", x$estimator$name, "` estimator\n"))
+  cat(paste0(
+    "Bootstrap result: ", x$estimator$name, "=", round(x$estimator$value, 3), ", ",
+    round(x$estimator$confidence * 100, 0), "% CI [", round(x$estimator$lower, 3), ", ",
+    round(x$estimator$upper, 3), "]\n"
+  ))
   cat(paste0("H0=", round(x$test$null_hypothesis, 3), ", test: ", x$test$test, "\n"))
   cat(paste0("p=", x$results$p_value))
 }

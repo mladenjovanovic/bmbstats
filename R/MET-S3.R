@@ -14,23 +14,24 @@
 #' mean_MET
 #' plot(mean_MET)
 print.bmbstats_MET <- function(x, ...) {
-
-  cat(paste0("Minimum effect tests for the `", x$estimator$name,"` estimator\n"))
-  cat(paste0("Bootstrap result: ", x$estimator$name, "=", round(x$estimator$value, 3), ", ",
-             round(x$estimator$confidence * 100, 0), "% CI [", round(x$estimator$lower, 3), ", ",
-             round(x$estimator$upper, 3), "]\n"))
-  cat(paste0("SESOI: [", round(x$test$SESOI_lower, 3), ", ", round(x$test$SESOI_upper, 3), "], alpha=", round(x$test$alpha,3)))
+  cat(paste0("Minimum effect tests for the `", x$estimator$name, "` estimator\n"))
+  cat(paste0(
+    "Bootstrap result: ", x$estimator$name, "=", round(x$estimator$value, 3), ", ",
+    round(x$estimator$confidence * 100, 0), "% CI [", round(x$estimator$lower, 3), ", ",
+    round(x$estimator$upper, 3), "]\n"
+  ))
+  cat(paste0("SESOI: [", round(x$test$SESOI_lower, 3), ", ", round(x$test$SESOI_upper, 3), "], alpha=", round(x$test$alpha, 3)))
   cat("\n\n")
 
   met <- data.frame(
     Test = x$test$test,
-    p.value = x$results$p_value)
+    p.value = x$results$p_value
+  )
 
   print(met, row.names = FALSE)
 
   cat("\n")
   cat(paste0("Final inference: ", x$results$inference))
-
 }
 
 # =======================================================
@@ -58,7 +59,6 @@ plot.bmbstats_MET <- function(x, type = "CI", ...) {
   } else {
     plot_MET_distribution(x, type, ...)
   }
-
 }
 
 
@@ -115,7 +115,7 @@ plot_MET_distribution <- function(x, type, control = plot_control()) {
           y = 1,
           fill = "Equivalent"
         ),
-        #fill = extreme_colors[1],
+        # fill = extreme_colors[1],
         color = NA
       ) +
       ggplot2::ggtitle("Inferiority test") +
@@ -164,21 +164,21 @@ plot_MET_distribution <- function(x, type, control = plot_control()) {
           y = 1,
           fill = "Equivalent"
         ),
-        #fill = extreme_colors[1],
+        # fill = extreme_colors[1],
         color = NA
       ) +
       ggplot2::ggtitle("Non-Superiority test") +
       ggplot2::annotate("text",
-                        x = estimator_value,
-                        y = 1,
-                        label = paste(
-                          "p=",
-                          round(MET_p_values[2], 2),
-                          " ",
-                          sep = ""
-                        ),
-                        hjust = "right",
-                        vjust = "bottom"
+        x = estimator_value,
+        y = 1,
+        label = paste(
+          "p=",
+          round(MET_p_values[2], 2),
+          " ",
+          sep = ""
+        ),
+        hjust = "right",
+        vjust = "bottom"
       )
   }
 
@@ -272,7 +272,7 @@ plot_MET_distribution <- function(x, type, control = plot_control()) {
           y = 1,
           fill = "Equivalent"
         ),
-        #fill = extreme_colors[1],
+        # fill = extreme_colors[1],
         color = NA
       ) +
       ggplot2::ggtitle("Non-Inferiority test") +
@@ -320,7 +320,7 @@ plot_MET_distribution <- function(x, type, control = plot_control()) {
           y = 1,
           fill = "Equivalent"
         ),
-        #fill = extreme_colors[1],
+        # fill = extreme_colors[1],
         color = NA
       ) +
       ggplot2::ggtitle("Superiority test") +
@@ -427,7 +427,6 @@ plot_MET_CI <- function(x, control = plot_control()) {
       size = control$summary_bar_size,
       color = control$summary_bar_color
     ) +
-
     ggplot2::theme(legend.position = "none") +
     ggplot2::theme(
       axis.title.y = ggplot2::element_blank(),

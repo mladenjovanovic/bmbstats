@@ -16,10 +16,9 @@
 #' obs_MBI
 #' plot(obs_MBI)
 print.bmbstats_observations_MBI <- function(x, ...) {
-
   df <- do.call(data.frame, x)
 
-  #rownames(df) <- df$observations_label
+  # rownames(df) <- df$observations_label
 
   print(df[c(2, 7, 8, 9, 10)], row.names = FALSE)
 }

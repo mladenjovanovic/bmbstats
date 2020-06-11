@@ -16,7 +16,6 @@ new_observations_MET <- function(observations_label,
                                  confidence,
                                  observations_lower,
                                  observations_upper) {
-
   observations_MET_object <- list(
     observations_label = observations_label,
     observations = observations,
@@ -41,5 +40,4 @@ new_observations_MET <- function(observations_label,
   class(observations_MET_object) <- "bmbstats_observations_MET"
 
   return(observations_MET_object)
-
 }

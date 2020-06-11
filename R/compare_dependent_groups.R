@@ -11,10 +11,10 @@
 #' post <- bench_press_data$`Post-test`
 #' dependent_groups_estimators(pre, post, SESOI_lower = -5, SESOI_upper = 5)
 dependent_groups_estimators <- function(pre,
-                                          post,
-                                          SESOI_lower = 0,
-                                          SESOI_upper = 0,
-                                          na.rm = FALSE) {
+                                        post,
+                                        SESOI_lower = 0,
+                                        SESOI_upper = 0,
+                                        na.rm = FALSE) {
   SESOI_range <- SESOI_upper - SESOI_lower
   change <- post - pre
 
@@ -39,7 +39,8 @@ dependent_groups_estimators <- function(pre,
     method = "algebraic"
   )
 
-  c("SESOI lower" = SESOI_lower,
+  c(
+    "SESOI lower" = SESOI_lower,
     "SESOI upper" = SESOI_upper,
     "SESOI range" = SESOI_range,
     "Mean change" = mean_change,
@@ -85,8 +86,8 @@ SESOI_lower_dependent_func <- function(pre,
 #' @examples
 #' SESOI_upper_dependent_func(rnorm(20), rnorm(10))
 SESOI_upper_dependent_func <- function(pre,
-                                         post,
-                                         na.rm = FALSE) {
+                                       post,
+                                       na.rm = FALSE) {
   stats::sd(pre, na.rm = na.rm) * 0.2
 }
 
@@ -108,14 +109,12 @@ SESOI_upper_dependent_func <- function(pre,
 #' post <- bench_press_data$`Post-test`
 #' compare_dependent_groups(pre, post, SESOI_lower = -5, SESOI_upper = 5)
 compare_dependent_groups <- function(pre,
-                                       post,
-                                       SESOI_lower = SESOI_lower_dependent_func,
-                                       SESOI_upper = SESOI_upper_dependent_func,
-                                       estimator_function = dependent_groups_estimators,
-                                       control = model_control(),
-                                       na.rm = FALSE) {
-
-
+                                     post,
+                                     SESOI_lower = SESOI_lower_dependent_func,
+                                     SESOI_upper = SESOI_upper_dependent_func,
+                                     estimator_function = dependent_groups_estimators,
+                                     control = model_control(),
+                                     na.rm = FALSE) {
   if (length(pre) != length(post)) {
     stop("pre and post differ in size. Unable to proceed", call. = FALSE)
   }
@@ -177,5 +176,4 @@ compare_dependent_groups <- function(pre,
     control = control,
     na.rm = na.rm
   )
-
 }

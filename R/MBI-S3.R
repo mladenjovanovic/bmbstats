@@ -13,17 +13,19 @@
 #' mean_MBI
 #' plot(mean_MBI, control = plot_control(points_jitter = FALSE))
 print.bmbstats_MBI <- function(x, ...) {
-
-  cat(paste0("Magnitude-based inference for the `", x$estimator$name,"` estimator\n"))
-  cat(paste0("Bootstrap result: ", x$estimator$name, "=", round(x$estimator$value, 3), ", ",
-             round(x$estimator$confidence * 100, 0), "% CI [", round(x$estimator$lower, 3), ", ",
-             round(x$estimator$upper, 3), "]\n"))
+  cat(paste0("Magnitude-based inference for the `", x$estimator$name, "` estimator\n"))
+  cat(paste0(
+    "Bootstrap result: ", x$estimator$name, "=", round(x$estimator$value, 3), ", ",
+    round(x$estimator$confidence * 100, 0), "% CI [", round(x$estimator$lower, 3), ", ",
+    round(x$estimator$upper, 3), "]\n"
+  ))
   cat(paste0("SESOI: [", round(x$test$SESOI_lower, 3), ", ", round(x$test$SESOI_upper, 3), "]"))
   cat("\n\n")
 
   met <- data.frame(
     Test = x$test$test,
-    prob = x$results$p_value)
+    prob = x$results$p_value
+  )
 
   print(met, row.names = FALSE)
 
@@ -53,8 +55,10 @@ plot.bmbstats_MBI <- function(x, ...) {
 
 
 # ----------------------------------------------------------------------------
-plot_MBI_null_distribution <- function(x, control = plot_control(points_jitter = FALSE,
-                                                                 cloud_quantile_lines = FALSE)) {
+plot_MBI_null_distribution <- function(x, control = plot_control(
+                                         points_jitter = FALSE,
+                                         cloud_quantile_lines = FALSE
+                                       )) {
 
   # +++++++++++++++++++++++++++++++++++++++++++
   # Code chunk for dealing with R CMD check note
@@ -98,7 +102,8 @@ plot_MBI_null_distribution <- function(x, control = plot_control(points_jitter =
           ..x..,
           SESOI_lower,
           SESOI_upper
-        )),
+        )
+      ),
       jittered_points = control$points_jitter,
       quantile_lines = control$cloud_quantile_lines,
       scale = control$cloud_scale,
@@ -126,7 +131,7 @@ plot_MBI_null_distribution <- function(x, control = plot_control(points_jitter =
     ggstance::geom_pointrangeh(
       data = estimator_plot_df,
       ggplot2::aes(xmin = xmin, xmax = xmax),
-      #position = ggplot2::position_nudge(y = control$summary_bar_nudge),
+      # position = ggplot2::position_nudge(y = control$summary_bar_nudge),
       size = control$summary_bar_size,
       color = control$summary_bar_color
     ) +
@@ -140,7 +145,8 @@ plot_MBI_null_distribution <- function(x, control = plot_control(points_jitter =
     ) +
     ggplot2::theme(
       legend.position = control$legend_position,
-       legend.title = ggplot2::element_blank()) +
+      legend.title = ggplot2::element_blank()
+    ) +
     ggplot2::theme(
       axis.title.y = ggplot2::element_blank(),
       axis.line.y = ggplot2::element_blank(),
@@ -178,4 +184,4 @@ plot_MBI_null_distribution <- function(x, control = plot_control(points_jitter =
     )
 
   return(gg)
-  }
+}

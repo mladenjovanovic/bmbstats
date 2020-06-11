@@ -12,11 +12,10 @@
 #'
 #' relationship_lm_estimators(predictor, outcome, SESOI_lower = -0.5, SESOI_upper = 0.5)
 relationship_lm_estimators <- function(predictor,
-                                           outcome,
-                                           SESOI_lower = 0,
-                                           SESOI_upper = 0,
-                                           na.rm = FALSE) {
-
+                                       outcome,
+                                       SESOI_lower = 0,
+                                       SESOI_upper = 0,
+                                       na.rm = FALSE) {
   if (length(predictor) != length(outcome)) {
     stop("predictor and outcome differ in size. Unable to proceed", call. = FALSE)
   }
@@ -32,12 +31,14 @@ relationship_lm_estimators <- function(predictor,
     sigma = rse,
     SESOI_lower = SESOI_lower,
     SESOI_upper = SESOI_upper,
-    df = length(predictor) - 1)
+    df = length(predictor) - 1
+  )
 
   pearson_r <- stats::cor(predictor, outcome)
   r_squared <- pearson_r^2
 
-  c("SESOI lower" = SESOI_lower,
+  c(
+    "SESOI lower" = SESOI_lower,
     "SESOI upper" = SESOI_upper,
     "SESOI range" = SESOI_range,
     "Intercept" = intercept,
@@ -46,7 +47,8 @@ relationship_lm_estimators <- function(predictor,
     "Pearson's r" = pearson_r,
     "R Squared" = r_squared,
     "SESOI to RSE" = SESOI_range / rse,
-    "PPER" = pper)
+    "PPER" = pper
+  )
 }
 
 #' SESOI lower threshold for \code{\link{compare_dependent_groups}}
@@ -59,8 +61,8 @@ relationship_lm_estimators <- function(predictor,
 #' @examples
 #' SESOI_lower_relationship_func(rnorm(20), rnorm(10))
 SESOI_lower_relationship_func <- function(predictor,
-                                       outcome,
-                                       na.rm = FALSE) {
+                                          outcome,
+                                          na.rm = FALSE) {
   -stats::sd(outcome, na.rm = na.rm) * 0.2
 }
 
@@ -74,8 +76,8 @@ SESOI_lower_relationship_func <- function(predictor,
 #' @examples
 #' SESOI_upper_relationship_func(rnorm(20), rnorm(10))
 SESOI_upper_relationship_func <- function(predictor,
-                                       outcome,
-                                       na.rm = FALSE) {
+                                          outcome,
+                                          na.rm = FALSE) {
   stats::sd(outcome, na.rm = na.rm) * 0.2
 }
 
@@ -99,14 +101,12 @@ SESOI_upper_relationship_func <- function(predictor,
 #'
 #' describe_relationship(predictor, outcome, SESOI_lower = -0.5, SESOI_upper = 0.5)
 describe_relationship <- function(predictor,
-                                     outcome,
-                                     SESOI_lower = SESOI_lower_dependent_func,
-                                     SESOI_upper = SESOI_upper_dependent_func,
-                                     estimator_function = relationship_lm_estimators,
-                                     control = model_control(),
-                                     na.rm = FALSE) {
-
-
+                                  outcome,
+                                  SESOI_lower = SESOI_lower_dependent_func,
+                                  SESOI_upper = SESOI_upper_dependent_func,
+                                  estimator_function = relationship_lm_estimators,
+                                  control = model_control(),
+                                  na.rm = FALSE) {
   if (length(predictor) != length(outcome)) {
     stop("predictor and outcome differ in size. Unable to proceed", call. = FALSE)
   }
@@ -168,5 +168,4 @@ describe_relationship <- function(predictor,
     control = control,
     na.rm = na.rm
   )
-
 }

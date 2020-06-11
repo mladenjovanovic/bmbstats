@@ -82,7 +82,8 @@ data_estimators_robust <- function(x, na.rm = FALSE) {
 #' desc1 <- describe_data(
 #'   iris$Sepal.Width,
 #'   estimator_function = data_estimators_simple,
-#'   control = model_control(confidence = 0.90, boot_samples = 1000))
+#'   control = model_control(confidence = 0.90, boot_samples = 1000)
+#' )
 #'
 #' desc1
 #' plot(desc1)

@@ -1,5 +1,4 @@
 new_bootstrap_MBI <- function(estimator, test, result, distribution) {
-
   bootstrap_MBI_object <- list(
     estimator = estimator,
     test = test,

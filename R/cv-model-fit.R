@@ -54,12 +54,13 @@
 #' data("vertical_jump_data")
 #'
 #' m1 <- cv_model(
-#'  `Post-test`~`Pre-test` * Group * `Squat 1RM`,
-#'  vertical_jump_data,
-#'  control = model_control(
-#'    cv_repeats = 10,
-#'    cv_folds = 3,
-#'    cv_strata = vertical_jump_data$Group)
+#'   `Post-test` ~ `Pre-test` * Group * `Squat 1RM`,
+#'   vertical_jump_data,
+#'   control = model_control(
+#'     cv_repeats = 10,
+#'     cv_folds = 3,
+#'     cv_strata = vertical_jump_data$Group
+#'   )
 #' )
 #'
 #' m1
@@ -123,7 +124,6 @@ cv_model.recipe <- function(x, data, intercept = TRUE, ...) {
 # Bridge
 
 cv_model_bridge <- function(processed, ...) {
-
   predictors <- processed$predictors
   outcome <- processed$outcomes
 
@@ -248,11 +248,11 @@ cv_model_impl <- function(predictors,
     pb$tick(0)
     message(
       paste("Cross-validating: ",
-            cv_folds_n,
-            " folds, ",
-            cv_repeats_n,
-            " repeats",
-            sep = ""
+        cv_folds_n,
+        " folds, ",
+        cv_repeats_n,
+        " repeats",
+        sep = ""
       )
     )
   }
@@ -568,9 +568,8 @@ lm_model <- function(predictors,
                      SESOI_lower = 0,
                      SESOI_upper = 0,
                      na.rm = FALSE) {
-
   data <- cbind(.outcome = outcome, predictors)
-  stats::lm(.outcome ~ . -1, data)
+  stats::lm(.outcome ~ . - 1, data)
 }
 
 
@@ -614,7 +613,6 @@ generic_predict <- function(model,
                             SESOI_lower = 0,
                             SESOI_upper = 0,
                             na.rm = FALSE) {
-
   stats::predict(model, newdata = predictors)
 }
 
@@ -641,7 +639,6 @@ performance_metrics <- function(observed,
                                 SESOI_lower = 0,
                                 SESOI_upper = 0,
                                 na.rm = FALSE) {
-
   c(
     # SESOI_lower = SESOI_lower,
     # SESOI_upper = SESOI_upper,

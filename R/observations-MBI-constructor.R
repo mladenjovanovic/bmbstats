@@ -13,7 +13,6 @@ new_observations_MBI <- function(observations_label,
                                  confidence,
                                  observations_lower,
                                  observations_upper) {
-
   observations_MBI_object <- list(
     observations_label = observations_label,
     observations = observations,
@@ -35,5 +34,4 @@ new_observations_MBI <- function(observations_label,
   class(observations_MBI_object) <- "bmbstats_observations_MBI"
 
   return(observations_MBI_object)
-
 }

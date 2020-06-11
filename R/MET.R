@@ -20,7 +20,6 @@ bootstrap_MET <- function(bmbstats_object,
                           SESOI_lower = 0,
                           SESOI_upper = 0,
                           alpha = 0.05) {
-
   if (class(bmbstats_object) != "bmbstats") {
     stop("Please provide bmbstats object!", call. = FALSE)
   }
@@ -97,20 +96,20 @@ bootstrap_MET <- function(bmbstats_object,
 
   # Final Inference
   final_inference <- ifelse(equivalence < alpha,
-                            "Equivalent",
-                            ifelse(superiority < alpha,
-                                   "Higher",
-                                   ifelse(inferiority < alpha,
-                                          "Lower",
-                                          ifelse(non_superiority < alpha,
-                                                 "Not-Higher",
-                                                 ifelse(non_inferiority < alpha,
-                                                        "Not-Lower",
-                                                        "Equivocal"
-                                                 )
-                                          )
-                                   )
-                            )
+    "Equivalent",
+    ifelse(superiority < alpha,
+      "Higher",
+      ifelse(inferiority < alpha,
+        "Lower",
+        ifelse(non_superiority < alpha,
+          "Not-Higher",
+          ifelse(non_inferiority < alpha,
+            "Not-Lower",
+            "Equivocal"
+          )
+        )
+      )
+    )
   )
 
   # Create return object

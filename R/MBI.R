@@ -19,8 +19,7 @@
 bootstrap_MBI <- function(bmbstats_object,
                           estimator,
                           SESOI_lower = 0,
-                          SESOI_upper = 0)
-  {
+                          SESOI_upper = 0) {
   if (class(bmbstats_object) != "bmbstats") {
     stop("Please provide bmbstats object!", call. = FALSE)
   }
@@ -37,8 +36,8 @@ bootstrap_MBI <- function(bmbstats_object,
 
   if (length(estimator_location) != 1) {
     stop("None or multiple estimators by the estimator variable name. Please use the name of the estimator contained in the bmbstats_object",
-         call. = FALSE
-      )
+      call. = FALSE
+    )
   }
 
   # Get the estimates
@@ -58,23 +57,23 @@ bootstrap_MBI <- function(bmbstats_object,
   highest_effect <- c("lower", "equivalent", "higher")[which.max(c(lower, equivalent, higher))]
 
   inference_text <- ifelse(highest_probability < 0.005, "Most unlikely",
-                           ifelse(highest_probability < 0.05, "Very unlikely",
-                                  ifelse(highest_probability < 0.25, "Unlikely",
-                                         ifelse(highest_probability < 0.75, "Possibly",
-                                                ifelse(highest_probability < 0.95, "Likely",
-                                                       ifelse(highest_probability < 0.99, "Most likely",
-                                                              ifelse(highest_probability >= 0.99, "Almost certainly")
-                                                       )
-                                                )
-                                         )
-                                  )
-                           )
+    ifelse(highest_probability < 0.05, "Very unlikely",
+      ifelse(highest_probability < 0.25, "Unlikely",
+        ifelse(highest_probability < 0.75, "Possibly",
+          ifelse(highest_probability < 0.95, "Likely",
+            ifelse(highest_probability < 0.99, "Most likely",
+              ifelse(highest_probability >= 0.99, "Almost certainly")
+            )
+          )
+        )
+      )
+    )
   )
 
 
   inference <- ifelse(lower >= 0.05 & higher >= 0.05,
-                      "Unclear difference",
-                      paste(inference_text, highest_effect)
+    "Unclear difference",
+    paste(inference_text, highest_effect)
   )
 
   # Create return objects
@@ -98,6 +97,4 @@ bootstrap_MBI <- function(bmbstats_object,
     ),
     distribution = list(estimator_distribution = data.frame(estimator = estimator_boot_values))
   )
-
-
 }

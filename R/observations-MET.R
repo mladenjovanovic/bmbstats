@@ -71,7 +71,7 @@ observations_MET <- function(observations,
   SDC <- measurement_error * stats::qt(
     1 - ((1 - confidence) / 2),
     df = df
-    )
+  )
   observations_lower <- observations - SDC
   observations_upper <- observations + SDC
 
@@ -83,24 +83,26 @@ observations_MET <- function(observations,
       "Not-Higher",
       "Equivalent",
       "Not-Lower",
-      "Higher"),
-    ordered = TRUE)
+      "Higher"
+    ),
+    ordered = TRUE
+  )
 
-  if(is.null(observations_label)) {
+  if (is.null(observations_label)) {
     observations_label <- seq(observations)
     observations_label <- factor(observations_label)
   }
 
-inference_label <- paste0(
-  final_inference,
-  " [",
-  ifelse(inferior < alpha, "*", "-"),
-  ifelse(non_superior < alpha, "*", "-"),
-  ifelse(equivalence < alpha, "*", "-"),
-  ifelse(non_inferior < alpha, "*", "-"),
-  ifelse(superior < alpha, "*", "-"),
-  "]"
-)
+  inference_label <- paste0(
+    final_inference,
+    " [",
+    ifelse(inferior < alpha, "*", "-"),
+    ifelse(non_superior < alpha, "*", "-"),
+    ifelse(equivalence < alpha, "*", "-"),
+    ifelse(non_inferior < alpha, "*", "-"),
+    ifelse(superior < alpha, "*", "-"),
+    "]"
+  )
 
   new_observations_MET(
     observations_label = observations_label,

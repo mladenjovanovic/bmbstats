@@ -1,5 +1,4 @@
 new_bootstrap_MET <- function(estimator, test, result, distribution) {
-
   bootstrap_MET_object <- list(
     estimator = estimator,
     test = test,

@@ -19,8 +19,6 @@ bootstrap_NHST <- function(bmbstats_object,
                            estimator,
                            null_hypothesis = 0,
                            test = "two.sided") {
-
-
   if (class(bmbstats_object) != "bmbstats") {
     stop("Please provide bmbstats object!", call. = FALSE)
   }
@@ -39,7 +37,8 @@ bootstrap_NHST <- function(bmbstats_object,
   if (length(estimator_location) != 1) {
     stop(
       "None or multiple estimators by the estimator variable name. Please use the name of the estimator contained in the bmbstats_object",
-      call. = FALSE)
+      call. = FALSE
+    )
   }
 
   # Get the estimates

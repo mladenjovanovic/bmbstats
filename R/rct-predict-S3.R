@@ -63,7 +63,6 @@ predict.bmbstats_RCT_predict <- function(object, newdata, ...) {
 #' m1_rct
 #' plot(m1_rct)
 print.bmbstats_RCT_predict <- function(x, ...) {
-
   cat(
     "Training data consists of", ncol(x$predictors), ifelse(ncol(x$predictors) == 1, "predictor", "predictors"),
     "and", nrow(x$predictors), "observations."
@@ -91,7 +90,6 @@ print.bmbstats_RCT_predict <- function(x, ...) {
 
   cat("\nSummary of counterfactual effects of RCT group:\n\n")
   print(x$extra$counterfactual_summary, row.names = FALSE)
-
 }
 
 #' S3 method for plotting \code{\link{RCT_predict}} results
@@ -374,7 +372,6 @@ RCT_predict_plot_bias_variance <- function(x, control = plot_control()) {
 
 # -------------------------------------------------------------------
 RCT_predict_plot_pdp_ice <- function(x, predictor = NULL, control = plot_control()) {
-
   if (is.null(predictor)) predictor <- x$extra$group
 
   pdp_plot <- pdp::partial(
@@ -491,7 +488,8 @@ RCT_predict_plot_ice <- function(x, predictor = NULL, control = plot_control()) 
 
   ggplot2::ggplot(
     pdp_df,
-    ggplot2::aes(x = predictor, y = yhat, group = subject, color = group)) +
+    ggplot2::aes(x = predictor, y = yhat, group = subject, color = group)
+  ) +
     cowplot::theme_cowplot(control$font_size) +
     ggplot2::geom_line(alpha = control$line_alpha, size = control$line_size) +
     ggplot2::ylab(paste("Predicted", x$extra$outcome)) +

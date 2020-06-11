@@ -38,7 +38,8 @@ independent_groups_estimators <- function(group_a,
     method = "algebraic"
   )
 
-  c("SESOI lower" = SESOI_lower,
+  c(
+    "SESOI lower" = SESOI_lower,
     "SESOI upper" = SESOI_upper,
     "SESOI range" = SESOI_range,
     "Mean diff" = mean_diff,
@@ -122,7 +123,7 @@ compare_independent_groups <- function(group_a,
 
   # Set strata
 
-  if(!is.null(control$boot_strata)) {
+  if (!is.null(control$boot_strata)) {
     warning("Strata cannot be used in this function. Using group strata", immediate. = TRUE, call. = FALSE)
   }
 
@@ -171,7 +172,7 @@ compare_independent_groups <- function(group_a,
 
   # ---------------------------------------------
   # Call bmbstats
- bmbstats(
+  bmbstats(
     data = data,
     SESOI_lower_function = bmbstats_SESOI_lower_function,
     SESOI_upper_function = bmbstats_SESOI_upper_function,
@@ -179,5 +180,4 @@ compare_independent_groups <- function(group_a,
     control = control,
     na.rm = na.rm
   )
-
 }

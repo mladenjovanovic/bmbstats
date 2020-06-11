@@ -42,21 +42,22 @@ observations_MBI <- function(observations,
   highest_effect <- c("lower", "equivalent", "higher")[max.col(data.frame(lower, equivalent, higher))]
 
   inference_text <- ifelse(highest_probability < 0.005, "Most unlikely",
-                           ifelse(highest_probability < 0.05, "Very unlikely",
-                                  ifelse(highest_probability < 0.25, "Unlikely",
-                                         ifelse(highest_probability < 0.75, "Possibly",
-                                                ifelse(highest_probability < 0.95, "Likely",
-                                                       ifelse(highest_probability < 0.99, "Most likely",
-                                                              "Almost certainly")
-                                                       )
-                                                )
-                                         )
-                                  )
-                           )
+    ifelse(highest_probability < 0.05, "Very unlikely",
+      ifelse(highest_probability < 0.25, "Unlikely",
+        ifelse(highest_probability < 0.75, "Possibly",
+          ifelse(highest_probability < 0.95, "Likely",
+            ifelse(highest_probability < 0.99, "Most likely",
+              "Almost certainly"
+            )
+          )
+        )
+      )
+    )
+  )
 
   inference <- ifelse(lower >= 0.05 & higher >= 0.05,
-                      "Unclear difference",
-                      paste(inference_text, highest_effect)
+    "Unclear difference",
+    paste(inference_text, highest_effect)
   )
 
   inference_levels <- expand.grid(
@@ -67,7 +68,8 @@ observations_MBI <- function(observations,
       "Possibly",
       "Likely",
       "Most likely",
-      "Almost certainly"),
+      "Almost certainly"
+    ),
     effect = c(
       "lower",
       "equivalent",
@@ -87,21 +89,21 @@ observations_MBI <- function(observations,
   observations_lower <- observations - SDC
   observations_upper <- observations + SDC
 
-  if(is.null(observations_label)) {
+  if (is.null(observations_label)) {
     observations_label <- seq(observations)
     observations_label <- factor(observations_label)
   }
 
-inference_label <- paste0(
-  inference,
-  " [",
-  round(lower * 100, 0),
-  "/",
-  round(equivalent * 100, 0),
-  "/",
-  round(higher * 100, 0),
-  "]"
-)
+  inference_label <- paste0(
+    inference,
+    " [",
+    round(lower * 100, 0),
+    "/",
+    round(equivalent * 100, 0),
+    "/",
+    round(higher * 100, 0),
+    "]"
+  )
 
   new_observations_MBI(
     observations_label = observations_label,

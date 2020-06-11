@@ -1,5 +1,4 @@
 new_bootstrap_NHST <- function(estimator, test, result, distribution) {
-
   bootstrap_NHST_object <- list(
     estimator = estimator,
     test = test,
