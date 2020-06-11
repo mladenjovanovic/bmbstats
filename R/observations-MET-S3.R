@@ -92,8 +92,20 @@ plot_bmbstats_observations_MET <- function(x, true_observations = NULL, control 
       ggplot2::aes(xmin = observations_lower, xmax = observations_upper),
       size = control$summary_bar_size,
       color = control$summary_bar_color
-    ) +
-    ggplot2::geom_text(ggplot2::aes(
+    )
+
+  # Add true observations
+  if (!is.null(true_observations)) {
+    gg <- gg +
+      ggplot2::geom_point(
+        ggplot2::aes(x = true_observations),
+        shape = "|",
+        color = "red",
+        size = control$points_size
+      )
+  }
+
+    gg <- gg + ggplot2::geom_text(ggplot2::aes(
       y = observations_label,
       x = observations_upper,
       label = inference_label
@@ -104,16 +116,5 @@ plot_bmbstats_observations_MET <- function(x, true_observations = NULL, control 
     ggplot2::ylab(NULL) +
     ggplot2::xlab(NULL) +
     ggplot2::theme(legend.position = "none")
-
-    # Add true observations
-    if (!is.null(true_observations)) {
-      gg <- gg +
-        ggplot2::geom_point(
-          ggplot2::aes(x = true_observations),
-          shape = "|",
-          color = "red",
-          size = control$points_size
-        )
-    }
   return(gg)
 }
