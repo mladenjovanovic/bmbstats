@@ -3,14 +3,10 @@
 #' \code{CLES} calculates the probability that a random observation from Group B is higher/larger
 #'     than a random observation from Group A. Groups are considered independent.
 #'
-#' @param group_a Vector of observations from Group A. This groups represents baseline/control
-#' @param group_b Vector of observations from Group B.
-#' @param SESOI_lower Smallest Effect Size Of Interest. Uses to differentiate between lower/equivalent difference. Default is 0
-#' @param SESOI_upper Smallest Effect Size Of Interest. Uses to differentiate between equivalent/higher difference. Default is 0
+#' @inheritParams basic_arguments
 #' @param method Select "brute-force" or "algebraic" method to calculate CLES. Default is "algebraic"
 #' @param count_equivalent How should equivalent differences be counted? Ignored, counted as higher or lower difference.
 #'     Default is "ignore". Other options are "higher" and "lower"
-#' @param na.rm Should NAs be removed? Default is FALSE
 #' @return Numeric
 #' @export
 #' @examples

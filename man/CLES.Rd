@@ -15,20 +15,20 @@ CLES(
 )
 }
 \arguments{
-\item{group_a}{Vector of observations from Group A. This groups represents baseline/control}
+\item{group_a}{Numeric vector. This group represents baseline/control, observed variable, Pre-test in the paired design, or "practical" measure}
 
-\item{group_b}{Vector of observations from Group B.}
+\item{group_b}{Numeric vector. This group represents experimental, predicted variable, Post-test in the paired design, or "criterion" measure}
 
-\item{SESOI_lower}{Smallest Effect Size Of Interest. Uses to differentiate between lower/equivalent difference. Default is 0}
+\item{SESOI_lower}{Lower smallest effect size of interest threshold}
 
-\item{SESOI_upper}{Smallest Effect Size Of Interest. Uses to differentiate between equivalent/higher difference. Default is 0}
+\item{SESOI_upper}{Upper smallest effect size of interest threshold}
 
 \item{method}{Select "brute-force" or "algebraic" method to calculate CLES. Default is "algebraic"}
 
 \item{count_equivalent}{How should equivalent differences be counted? Ignored, counted as higher or lower difference.
 Default is "ignore". Other options are "higher" and "lower"}
 
-\item{na.rm}{Should NAs be removed? Default is FALSE}
+\item{na.rm}{Should NAs be removed? Default is \code{FALSE}}
 }
 \value{
 Numeric
