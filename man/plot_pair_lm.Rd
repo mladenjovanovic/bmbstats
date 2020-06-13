@@ -5,13 +5,13 @@
 \title{Linear model plot}
 \usage{
 plot_pair_lm(
-  group_a,
-  group_b,
+  predictor,
+  outcome,
   SESOI_lower = 0,
   SESOI_upper = 0,
   confidence = 0.95,
-  group_a_label = "Group A",
-  group_b_label = "Group B",
+  predictor_label = "Predictor",
+  outcome_label = "Outcome",
   fitted_label = "Fitted",
   residuals_label = "Residuals",
   control = plot_control(),
@@ -19,9 +19,9 @@ plot_pair_lm(
 )
 }
 \arguments{
-\item{group_a}{Numeric vector. This group represents baseline/control, observed variable, Pre-test in the paired design, or "practical" measure}
+\item{predictor}{Numeric vector}
 
-\item{group_b}{Numeric vector. This group represents experimental, predicted variable, Post-test in the paired design, or "criterion" measure}
+\item{outcome}{Vector}
 
 \item{SESOI_lower}{Lower smallest effect size of interest threshold}
 
@@ -29,9 +29,9 @@ plot_pair_lm(
 
 \item{confidence}{Default is 0.95}
 
-\item{group_a_label}{Character vector. The name of the \code{group_a}. Default is "Group A"}
+\item{predictor_label}{Character vector. The name of the \code{predictor}. Default is "Predictor"}
 
-\item{group_b_label}{Character vector. The name of the \code{group_b}. Default is "Group B"}
+\item{outcome_label}{Character vector. The name of the \code{outcome}. Default is "Outcome"}
 
 \item{fitted_label}{Character vector. The label to be used for fitted. Default is "Fitted"}
 
@@ -60,8 +60,8 @@ plot_pair_lm(practical,
   criterion,
   SESOI_lower = -10,
   SESOI_upper = 10,
-  group_a_label = "Practical",
-  group_b_label = "Criterion"
+  predictor_label = "Practical",
+  outcome_label = "Criterion"
 )
 }
 \seealso{

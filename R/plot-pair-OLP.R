@@ -21,16 +21,16 @@
 #'   criterion,
 #'   SESOI_lower = -10,
 #'   SESOI_upper = 10,
-#'   group_a_label = "Practical",
-#'   group_b_label = "Criterion"
+#'   predictor_label = "Practical",
+#'   outcome_label = "Criterion"
 #' )
-plot_pair_OLP <- function(group_a,
-                          group_b,
+plot_pair_OLP <- function(predictor,
+                          outcome,
                           SESOI_lower = 0,
                           SESOI_upper = 0,
                           confidence = 0.95,
-                          group_a_label = "Group A",
-                          group_b_label = "Group B",
+                          predictor_label = "Predictor",
+                          outcome_label = "Outcome",
                           fitted_label = "Fitted",
                           residuals_label = "Residuals",
                           control = plot_control(),
@@ -42,21 +42,21 @@ plot_pair_OLP <- function(group_a,
   y <- NULL
   # +++++++++++++++++++++++++++++++++++++++++++
 
-  if (length(group_a) != length(group_b)) {
-    stop("Group A and Group B differ in size. Unable to proceed")
+  if (length(predictor) != length(outcome)) {
+    stop("Predictor and Outcome variables differ in size. Unable to proceed")
   }
 
   # Prepare DF
   plot_data <- data.frame(
-    x = group_a,
-    y = group_b
+    x = predictor,
+    y = outcome
   )
   if (na.rm) plot_data <- stats::na.omit(plot_data)
   n_observations <- nrow(plot_data)
 
   olp_model <- OLP_regression(
-    group_a = plot_data$x,
-    group_b = plot_data$y,
+    predictor = plot_data$x,
+    outcome = plot_data$y,
     na.rm = na.rm
   )
 
@@ -107,7 +107,7 @@ plot_pair_OLP <- function(group_a,
   ) +
 
     ggplot2::geom_abline(intercept = olp_model$intercept, slope = olp_model$slope) +
-    ggplot2::labs(x = group_a_label, y = group_b_label)
+    ggplot2::labs(x = predictor_label, y = outcome_label)
 
   # Residuals plot
   gg_resid <- ggplot2::ggplot(

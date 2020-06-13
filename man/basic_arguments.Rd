@@ -14,6 +14,10 @@
 
 \item{outcome}{Vector}
 
+\item{predictor_label}{Character vector. The name of the \code{predictor}. Default is "Predictor"}
+
+\item{outcome_label}{Character vector. The name of the \code{outcome}. Default is "Outcome"}
+
 \item{pre}{Numeric vector}
 
 \item{post}{Numeric vector}

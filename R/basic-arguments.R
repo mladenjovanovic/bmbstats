@@ -4,6 +4,8 @@
 #' @param predictors Data frame
 #' @param predictor Numeric vector
 #' @param outcome Vector
+#' @param predictor_label Character vector. The name of the \code{predictor}. Default is "Predictor"
+#' @param outcome_label Character vector. The name of the \code{outcome}. Default is "Outcome"
 #' @param pre Numeric vector
 #' @param post Numeric vector
 #' @param observed Numeric vector

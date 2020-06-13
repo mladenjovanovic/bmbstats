@@ -20,16 +20,16 @@
 #'   criterion,
 #'   SESOI_lower = -10,
 #'   SESOI_upper = 10,
-#'   group_a_label = "Practical",
-#'   group_b_label = "Criterion"
+#'   predictor_label = "Practical",
+#'   outcome_label = "Criterion"
 #' )
-plot_pair_BA <- function(group_a,
-                         group_b,
+plot_pair_BA <- function(predictor,
+                         outcome,
                          SESOI_lower = 0,
                          SESOI_upper = 0,
                          confidence = 0.95,
-                         group_a_label = "Group A",
-                         group_b_label = "Group B",
+                         predictor_label = "Predictor",
+                         outcome_label = "Outcome",
                          control = plot_control(),
                          na.rm = FALSE) {
 
@@ -39,25 +39,25 @@ plot_pair_BA <- function(group_a,
   difference <- NULL
   # +++++++++++++++++++++++++++++++++++++++++++
 
-  if (length(group_a) != length(group_b)) {
-    stop("Group A and Group B differ in size. Unable to proceed")
+  if (length(predictor) != length(outcome)) {
+    stop("Predictor and Outcome variables differ in size. Unable to proceed")
   }
 
   # Prepare DF for plotting
   plot_data <- data.frame(
-    group_a = group_a,
-    group_b = group_b
+    predictor = predictor,
+    outcome = outcome
   )
 
   if (na.rm) plot_data <- stats::na.omit(plot_data)
 
   n_observations <- nrow(plot_data)
 
-  plot_data$difference <- plot_data$group_b - plot_data$group_a
-  plot_data$midway <- (plot_data$group_a + plot_data$group_b) / 2
+  plot_data$difference <- plot_data$outcome - plot_data$predictor
+  plot_data$midway <- (plot_data$predictor + plot_data$outcome) / 2
 
-  plot_data$SESOI_lower <- plot_data$group_a + SESOI_lower
-  plot_data$SESOI_upper <- plot_data$group_a + SESOI_upper
+  plot_data$SESOI_lower <- plot_data$predictor + SESOI_lower
+  plot_data$SESOI_upper <- plot_data$predictor + SESOI_upper
 
   # Level of agreement
   mean_difference <- mean(plot_data$difference)
@@ -73,8 +73,8 @@ plot_pair_BA <- function(group_a,
   bland_altman_A <- ggplot2::ggplot(
     plot_data,
     ggplot2::aes(
-      x = group_a,
-      y = group_b
+      x = predictor,
+      y = outcome
     )
   ) +
     cowplot::theme_cowplot(control$font_size)
@@ -119,8 +119,8 @@ plot_pair_BA <- function(group_a,
       fill = control$smooth_fill,
       color = control$smooth_color
     ) +
-    ggplot2::xlab(group_a_label) +
-    ggplot2::ylab(group_b_label)
+    ggplot2::xlab(predictor_label) +
+    ggplot2::ylab(outcome_label)
 
 
   bland_altman_B <- ggplot2::ggplot(
@@ -194,18 +194,18 @@ plot_pair_BA <- function(group_a,
     ggplot2::xlab(
       paste(
         "(",
-        group_a_label,
+        predictor_label,
         " + ",
-        group_b_label,
+        outcome_label,
         ") / 2",
         sep = ""
       )
     ) +
     ggplot2::ylab(
       paste(
-        group_b_label,
+        outcome_label,
         " - ",
-        group_a_label,
+        predictor_label,
         sep = ""
       )
     )

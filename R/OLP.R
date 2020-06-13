@@ -12,18 +12,18 @@
 #'   weight_data,
 #'   OLP_regression(`OS 1`, `OS 3`)
 #' )
-OLP_regression <- function(group_a, group_b, na.rm = FALSE) {
+OLP_regression <- function(predictor, outcome, na.rm = FALSE) {
   if (na.rm) {
-    na.idx <- is.na(group_a) | is.na(group_b)
-    group_a <- group_a[!na.idx]
-    group_b <- group_b[!na.idx]
+    na.idx <- is.na(predictor) | is.na(outcome)
+    predictor <- predictor[!na.idx]
+    outcome <- outcome[!na.idx]
   }
 
-  slope <- sign(stats::cov(group_a, group_b)) * stats::sd(group_b) / stats::sd(group_a)
-  int <- mean(group_b) - slope * mean(group_a)
+  slope <- sign(stats::cov(predictor, outcome)) * stats::sd(outcome) / stats::sd(predictor)
+  int <- mean(outcome) - slope * mean(predictor)
 
-  y_pred <- int + slope * group_a
-  rse <- sqrt((sum((y_pred - group_b)^2)) / (length(group_b) - 2))
+  y_pred <- int + slope * predictor
+  rse <- sqrt((sum((y_pred - outcome)^2)) / (length(outcome) - 2))
 
   list(
     intercept = int,

@@ -8,12 +8,12 @@ Function modified using the function from
 \url{https://stat.ethz.ch/pipermail/r-help/2011-July/285022.html}
 }
 \usage{
-OLP_regression(group_a, group_b, na.rm = FALSE)
+OLP_regression(predictor, outcome, na.rm = FALSE)
 }
 \arguments{
-\item{group_a}{Numeric vector. This group represents baseline/control, observed variable, Pre-test in the paired design, or "practical" measure}
+\item{predictor}{Numeric vector}
 
-\item{group_b}{Numeric vector. This group represents experimental, predicted variable, Post-test in the paired design, or "criterion" measure}
+\item{outcome}{Vector}
 
 \item{na.rm}{Should NAs be removed? Default is \code{FALSE}}
 }
