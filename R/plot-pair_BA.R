@@ -40,7 +40,7 @@ plot_pair_BA <- function(predictor,
   # +++++++++++++++++++++++++++++++++++++++++++
 
   if (length(predictor) != length(outcome)) {
-    stop("Predictor and Outcome variables differ in size. Unable to proceed")
+    stop("Predictor and Outcome variables differ in size. Unable to proceed", call. = FALSE)
   }
 
   # Prepare DF for plotting

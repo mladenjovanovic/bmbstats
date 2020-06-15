@@ -30,7 +30,7 @@ plot_pair_changes <- function(group_a,
   # +++++++++++++++++++++++++++++++++++++++++++
 
   if (length(group_a) != length(group_b)) {
-    stop("Group A and Group B differ in size. Unable to proceed")
+    stop("Group A and Group B differ in size. Unable to proceed", call. = FALSE)
   }
 
   n_obs <- length(group_a)

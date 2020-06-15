@@ -44,7 +44,7 @@ plot_pair_lm <- function(predictor,
   # +++++++++++++++++++++++++++++++++++++++++++
 
   if (length(predictor) != length(outcome)) {
-    stop("Predictor and Outcome variables differ in size. Unable to proceed")
+    stop("Predictor and Outcome variables differ in size. Unable to proceed", call. = FALSE)
   }
 
   # Prepare DF
