@@ -9,7 +9,8 @@ baseline_model(
   outcome,
   SESOI_lower = 0,
   SESOI_upper = 0,
-  na.rm = FALSE
+  na.rm = FALSE,
+  ...
 )
 }
 \arguments{
@@ -22,6 +23,8 @@ baseline_model(
 \item{SESOI_upper}{Upper smallest effect size of interest threshold}
 
 \item{na.rm}{Should NAs be removed? Default is \code{FALSE}}
+
+\item{...}{Extra arguments forwarded to \code{\link[stats]{lm}} function}
 }
 \value{
 \code{model} object

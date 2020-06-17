@@ -164,7 +164,8 @@ cv_model_impl <- function(predictors,
                           SESOI_lower = SESOI_lower_func,
                           SESOI_upper = SESOI_upper_func,
                           control = model_control(),
-                          na.rm = FALSE) {
+                          na.rm = FALSE,
+                          ...) {
 
   # Set-up seed for reproducibility
   set.seed(control$seed)
@@ -175,7 +176,8 @@ cv_model_impl <- function(predictors,
     outcome = outcome,
     SESOI_lower = func_num(SESOI_lower, predictors, outcome, na.rm),
     SESOI_upper = func_num(SESOI_upper, predictors, outcome, na.rm),
-    na.rm = na.rm
+    na.rm = na.rm,
+    ...
   )
 
   predicted <- predict_func(
@@ -289,7 +291,8 @@ cv_model_impl <- function(predictors,
       outcome = train_outcome,
       SESOI_lower = func_num(SESOI_lower, train_predictors, train_outcome, na.rm),
       SESOI_upper = func_num(SESOI_upper, train_predictors, train_outcome, na.rm),
-      na.rm = na.rm
+      na.rm = na.rm,
+      ...
     )
 
     train_predicted <- predict_func(
@@ -556,6 +559,7 @@ cv_model_impl <- function(predictors,
 #' This model uses all \code{predictors} to model the \code{outcome} with
 #'     \code{\link[stats]{lm}} function
 #' @inheritParams basic_arguments
+#' @param ... Extra arguments forwarded to \code{\link[stats]{lm}} function
 #' @returns \code{model} object
 #' @export
 #' @examples
@@ -567,9 +571,10 @@ lm_model <- function(predictors,
                      outcome,
                      SESOI_lower = 0,
                      SESOI_upper = 0,
-                     na.rm = FALSE) {
+                     na.rm = FALSE,
+                     ...) {
   data <- cbind(.outcome = outcome, predictors)
-  stats::lm(.outcome ~ . - 1, data)
+  stats::lm(.outcome ~ . - 1, data = data, ...)
 }
 
 
@@ -578,6 +583,7 @@ lm_model <- function(predictors,
 #'
 #' This model return the mean of the \code{outcome} as a prediction
 #' @inheritParams basic_arguments
+#' @param ... Extra arguments forwarded to \code{\link[stats]{lm}} function
 #' @returns \code{model} object
 #' @export
 #' @examples
@@ -589,10 +595,11 @@ baseline_model <- function(predictors,
                            outcome,
                            SESOI_lower = 0,
                            SESOI_upper = 0,
-                           na.rm = FALSE) {
+                           na.rm = FALSE,
+                           ...) {
   data <- cbind(.outcome = outcome, predictors)
 
-  stats::lm(.outcome ~ 1, data)
+  stats::lm(.outcome ~ 1, data = data, ...)
 }
 
 # ------------------------------------------------------------------------------

@@ -4,7 +4,14 @@
 \alias{lm_model}
 \title{Simple linear regression model}
 \usage{
-lm_model(predictors, outcome, SESOI_lower = 0, SESOI_upper = 0, na.rm = FALSE)
+lm_model(
+  predictors,
+  outcome,
+  SESOI_lower = 0,
+  SESOI_upper = 0,
+  na.rm = FALSE,
+  ...
+)
 }
 \arguments{
 \item{predictors}{Data frame}
@@ -16,6 +23,8 @@ lm_model(predictors, outcome, SESOI_lower = 0, SESOI_upper = 0, na.rm = FALSE)
 \item{SESOI_upper}{Upper smallest effect size of interest threshold}
 
 \item{na.rm}{Should NAs be removed? Default is \code{FALSE}}
+
+\item{...}{Extra arguments forwarded to \code{\link[stats]{lm}} function}
 }
 \value{
 \code{model} object
