@@ -7,7 +7,7 @@
 #' @param groups Character string. Name of  the column in \code{data}. Default is \code{NULL}
 #' @param control Plotting control object returned from \code{\link{plot_control}}
 #'
-#' @return \code{\link[ggplot2]{ggplot2}} object
+#' @return \code{\link[ggplot2]{ggplot}} object
 #' @seealso \code{\link{plot_raincloud_SESOI}}
 #' @export
 #'
@@ -131,7 +131,7 @@ plot_raincloud <- function(data,
 #' @inheritParams basic_arguments
 #' @export
 #' @seealso \code{\link{plot_raincloud}}
-#' @return \code{\link[ggplot2]{ggplot2}} object
+#' @return \code{\link[ggplot2]{ggplot}} object
 #' @examples
 #' plot_raincloud_SESOI(
 #'   iris,

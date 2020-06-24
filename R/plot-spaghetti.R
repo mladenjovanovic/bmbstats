@@ -5,7 +5,7 @@
 #' @param id Character string. Name of  the column in \code{data}
 #' @param observations Character string. Name of the column in \code{data}
 #' @param observations_label Character string. Label to be used for x-axis. Default is \code{observations}
-#' @return \code{\link[ggplot2]{ggplot2}} object
+#' @return \code{\link[ggplot2]{ggplot}} object
 #' @export
 #' @examples
 #' test_data <- expand.grid(

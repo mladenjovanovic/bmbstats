@@ -24,7 +24,7 @@ plot_raincloud(
 \item{control}{Plotting control object returned from \code{\link{plot_control}}}
 }
 \value{
-\code{\link[ggplot2]{ggplot2}} object
+\code{\link[ggplot2]{ggplot}} object
 }
 \description{
 Raincloud plot

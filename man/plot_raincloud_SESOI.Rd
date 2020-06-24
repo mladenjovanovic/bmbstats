@@ -30,7 +30,7 @@ plot_raincloud_SESOI(
 \item{control}{Plotting control object returned from \code{\link{plot_control}}}
 }
 \value{
-\code{\link[ggplot2]{ggplot2}} object
+\code{\link[ggplot2]{ggplot}} object
 }
 \description{
 Raincloud plot with smallest effect size of interest

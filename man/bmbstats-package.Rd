@@ -4,7 +4,7 @@
 \name{bmbstats-package}
 \alias{bmbstats-package}
 \alias{_PACKAGE}
-\title{bmbstats: Bootstrap Magnitude-based Statistics}
+\title{bmbstats: Bootstrap Magnitude-Based Statistics}
 \description{
 \if{html}{\figure{logo.png}{options: align='right' alt='logo' width='120'}}
 

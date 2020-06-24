@@ -15,7 +15,7 @@
 #'   control_label = "Control",
 #'   pre_test = "Pre-test",
 #'   post_test = "Post-test",
-#'   control = model_control(boot_type = "perc", boot_samples = 1000)
+#'   control = model_control(boot_type = "perc", boot_samples = 500)
 #' )
 #'
 #' rct_model
@@ -34,7 +34,6 @@ print.bmbstats_RCT_analysis <- function(x, ...) {
 
 
 #' S3 method for plotting \code{\link{RCT_analysis}} results
-#'
 #'
 #' @param x Object of class \code{bmbstats_RCT_analysis}
 #' @param type Type of plot. Options are "boot", "control-pre-post", "treatment-pre-post",
@@ -55,7 +54,7 @@ print.bmbstats_RCT_analysis <- function(x, ...) {
 #'   control_label = "Control",
 #'   pre_test = "Pre-test",
 #'   post_test = "Post-test",
-#'   control = model_control(boot_type = "perc", boot_samples = 1000)
+#'   control = model_control(boot_type = "perc", boot_samples = 500)
 #' )
 #'
 #' rct_model

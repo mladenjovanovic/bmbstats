@@ -1,5 +1,5 @@
 Package: bmbstats
-Title: Bootstrap Magnitude-based Statistics
+Title: Bootstrap Magnitude-Based Statistics
 Version: 0.0.0.9000
 Authors@R: 
     person(given = "Mladen",
