@@ -26,11 +26,11 @@ validity_estimators <- function(data,
                                 na.rm = FALSE) {
 
   # Check the length of the criterion and practical
-  if(length(criterion) != 1) {
+  if (length(criterion) != 1) {
     stop("Criterion must be a single column", call. = FALSE)
   }
 
-  if(length(practical) != 1) {
+  if (length(practical) != 1) {
     stop("Practical must be a single column", call. = FALSE)
   }
 
@@ -40,7 +40,7 @@ validity_estimators <- function(data,
   SESOI_range <- SESOI_upper - SESOI_lower
 
   olp_model <- OLP_regression(
-    predictor =  practical_obs,
+    predictor = practical_obs,
     outcome = criterion_obs,
     na.rm = na.rm
   )
@@ -55,7 +55,7 @@ validity_estimators <- function(data,
   pearson_r <- stats::cor(practical_obs, criterion_obs)
   r_squared <- pearson_r^2
 
-  sdc <- olp_model$rse * stats::qt(1 - ((1 - 0.95)/2), df = length(criterion_obs) - 1)
+  sdc <- olp_model$rse * stats::qt(1 - ((1 - 0.95) / 2), df = length(criterion_obs) - 1)
 
   c(
     "SESOI lower" = SESOI_lower,
@@ -70,7 +70,6 @@ validity_estimators <- function(data,
     "PPER" = pper,
     "SDC" = sdc
   )
-
 }
 
 
@@ -102,7 +101,8 @@ validity_estimators <- function(data,
 #'   control = model_control(
 #'     boot_type = "perc",
 #'     boot_samples = 1000,
-#'     seed = 1667)
+#'     seed = 1667
+#'   )
 #' )
 #'
 #' val_analysis
@@ -145,7 +145,6 @@ validity_analysis <- function(data,
                                           SESOI_upper,
                                           na.rm,
                                           init_boot) {
-
     estimators_list <- estimator_function(
       data = data,
       criterion = criterion,
@@ -168,8 +167,6 @@ validity_analysis <- function(data,
     control = control,
     na.rm = na.rm
   )
-
-
 }
 
 
@@ -187,7 +184,7 @@ validity_analysis <- function(data,
 #' data("agreement_data")
 #' SESOI_lower_validity_func(
 #'   data = agreement_data,
-#'   criterion =  "Criterion_score.trial1",
+#'   criterion = "Criterion_score.trial1",
 #'   practical = "Practical_score.trial1"
 #' )
 SESOI_lower_validity_func <- function(data,
@@ -211,12 +208,12 @@ SESOI_lower_validity_func <- function(data,
 #' data("agreement_data")
 #' SESOI_upper_validity_func(
 #'   data = agreement_data,
-#'   criterion =  "Criterion_score.trial1",
+#'   criterion = "Criterion_score.trial1",
 #'   practical = "Practical_score.trial1"
 #' )
 SESOI_upper_validity_func <- function(data,
                                       criterion,
                                       practical,
-                                         na.rm = FALSE) {
+                                      na.rm = FALSE) {
   stats::sd(data[[criterion]], na.rm = na.rm) * 0.2
 }

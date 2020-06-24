@@ -105,14 +105,14 @@ plot_bmbstats_observations_MET <- function(x, true_observations = NULL, control 
       )
   }
 
-    gg <- gg + ggplot2::geom_text(ggplot2::aes(
-      y = observations_label,
-      x = observations_upper,
-      label = inference_label
-    ),
-    hjust = "left",
-    size = control$text_label_size
-    ) +
+  gg <- gg + ggplot2::geom_text(ggplot2::aes(
+    y = observations_label,
+    x = observations_upper,
+    label = inference_label
+  ),
+  hjust = "left",
+  size = control$text_label_size
+  ) +
     ggplot2::ylab(NULL) +
     ggplot2::xlab(NULL) +
     ggplot2::theme(legend.position = "none")

@@ -19,18 +19,18 @@
 #'   trial2 = "Practical_score.trial2"
 #' )
 reliability_estimators <- function(data,
-                                trial1,
-                                trial2,
-                                SESOI_lower = 0,
-                                SESOI_upper = 0,
-                                na.rm = FALSE) {
+                                   trial1,
+                                   trial2,
+                                   SESOI_lower = 0,
+                                   SESOI_upper = 0,
+                                   na.rm = FALSE) {
 
   # Check the length of the trial1 and trial2
-  if(length(trial1) != 1) {
+  if (length(trial1) != 1) {
     stop("Trial1 must be a single column", call. = FALSE)
   }
 
-  if(length(trial2) != 1) {
+  if (length(trial2) != 1) {
     stop("Trial2 must be a single column", call. = FALSE)
   }
 
@@ -40,7 +40,7 @@ reliability_estimators <- function(data,
   SESOI_range <- SESOI_upper - SESOI_lower
 
   olp_model <- OLP_regression(
-    predictor =  trial2_obs,
+    predictor = trial2_obs,
     outcome = trial1_obs,
     na.rm = na.rm
   )
@@ -55,7 +55,7 @@ reliability_estimators <- function(data,
   pearson_r <- stats::cor(trial2_obs, trial1_obs)
   r_squared <- pearson_r^2
 
-  sdc <- olp_model$rse * stats::qt(1 - ((1 - 0.95)/2), df = length(trial1_obs) - 1)
+  sdc <- olp_model$rse * stats::qt(1 - ((1 - 0.95) / 2), df = length(trial1_obs) - 1)
 
   c(
     "SESOI lower" = SESOI_lower,
@@ -71,7 +71,6 @@ reliability_estimators <- function(data,
     "TE" = olp_model$rse / sqrt(2),
     "SDC" = sdc
   )
-
 }
 
 
@@ -103,20 +102,21 @@ reliability_estimators <- function(data,
 #'   control = model_control(
 #'     boot_type = "perc",
 #'     boot_samples = 1000,
-#'     seed = 1667)
+#'     seed = 1667
+#'   )
 #' )
 #'
 #' val_analysis
 #'
 #' plot(val_analysis)
 reliability_analysis <- function(data,
-                              trial1,
-                              trial2,
-                              SESOI_lower = SESOI_lower_reliability_func,
-                              SESOI_upper = SESOI_upper_reliability_func,
-                              estimator_function = reliability_estimators,
-                              control = model_control(),
-                              na.rm = FALSE) {
+                                 trial1,
+                                 trial2,
+                                 SESOI_lower = SESOI_lower_reliability_func,
+                                 SESOI_upper = SESOI_upper_reliability_func,
+                                 estimator_function = reliability_estimators,
+                                 control = model_control(),
+                                 na.rm = FALSE) {
 
   # --------------------------------------------
   # Wrapper functions
@@ -146,7 +146,6 @@ reliability_analysis <- function(data,
                                           SESOI_upper,
                                           na.rm,
                                           init_boot) {
-
     estimators_list <- estimator_function(
       data = data,
       trial1 = trial1,
@@ -186,13 +185,13 @@ reliability_analysis <- function(data,
 #' data("agreement_data")
 #' SESOI_lower_reliability_func(
 #'   data = agreement_data,
-#'   trial1 =  "Practical_score.trial1",
+#'   trial1 = "Practical_score.trial1",
 #'   trial2 = "Practical_score.trial2"
 #' )
 SESOI_lower_reliability_func <- function(data,
-                                      trial1,
-                                      trial2,
-                                      na.rm = FALSE) {
+                                         trial1,
+                                         trial2,
+                                         na.rm = FALSE) {
   sd_pooled(data[[trial1]], data[[trial2]], na.rm = na.rm) * 0.2
 }
 
@@ -210,13 +209,12 @@ SESOI_lower_reliability_func <- function(data,
 #' data("agreement_data")
 #' SESOI_lower_reliability_func(
 #'   data = agreement_data,
-#'   trial1 =  "Practical_score.trial1",
+#'   trial1 = "Practical_score.trial1",
 #'   trial2 = "Practical_score.trial2"
 #' )
 SESOI_upper_reliability_func <- function(data,
-                                      trial1,
-                                      trial2,
-                                      na.rm = FALSE) {
-
+                                         trial1,
+                                         trial2,
+                                         na.rm = FALSE) {
   sd_pooled(data[[trial1]], data[[trial2]], na.rm = na.rm) * 0.2
 }
