@@ -7,7 +7,7 @@ citEntry(entry = "Manual",
   year         = "2020",
   address      = "Belgrade, Serbia",
   url          = "https://github.com/mladenjovanovic/bmbstats",
-  doi          = "10.5281/zenodo.3906857"
+  doi          = "10.5281/zenodo.3906857",
 
   textVersion  =
   paste("Mladen Jovanović (2020).",
