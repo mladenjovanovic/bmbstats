@@ -95,7 +95,7 @@ reliability_estimators <- function(data,
 #' @examples
 #' data("agreement_data")
 #'
-#' val_analysis <- reliability_analysis(
+#' rel_analysis <- reliability_analysis(
 #'   data = agreement_data,
 #'   trial1 = "Practical_score.trial1",
 #'   trial2 = "Practical_score.trial2",
@@ -106,9 +106,9 @@ reliability_estimators <- function(data,
 #'   )
 #' )
 #'
-#' val_analysis
+#' rel_analysis
 #'
-#' plot(val_analysis)
+#' plot(rel_analysis)
 reliability_analysis <- function(data,
                                  trial1,
                                  trial2,
@@ -160,7 +160,7 @@ reliability_analysis <- function(data,
 
   # --------------------------------------------
   # Call bmbstats
-  results <- bmbstats(
+  bmbstats(
     data = data,
     SESOI_lower_function = bmbstats_SESOI_lower_function,
     SESOI_upper_function = bmbstats_SESOI_upper_function,
@@ -192,7 +192,7 @@ SESOI_lower_reliability_func <- function(data,
                                          trial1,
                                          trial2,
                                          na.rm = FALSE) {
-  sd_pooled(data[[trial1]], data[[trial2]], na.rm = na.rm) * 0.2
+  -sd_pooled(data[[trial1]], data[[trial2]], na.rm = na.rm) * 0.2
 }
 
 #' SESOI upper threshold for \code{\link{reliability_analysis}}

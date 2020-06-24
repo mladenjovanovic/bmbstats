@@ -159,7 +159,7 @@ validity_analysis <- function(data,
 
   # --------------------------------------------
   # Call bmbstats
-  results <- bmbstats(
+  bmbstats(
     data = data,
     SESOI_lower_function = bmbstats_SESOI_lower_function,
     SESOI_upper_function = bmbstats_SESOI_upper_function,
