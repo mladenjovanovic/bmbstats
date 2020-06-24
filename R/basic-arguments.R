@@ -1,4 +1,5 @@
 #' Basic arguments
+#' @param data Data frame
 #' @param x Numeric vector
 #' @param model Model object
 #' @param predictors Data frame

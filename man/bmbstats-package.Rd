@@ -8,6 +8,15 @@
 \description{
 Set of functions for analysis and graphing of common sport science problems.
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/mladenjovanovic/bmbstats}
+  \item \url{https://github.com/mladenjovanovic/bmbstats-book}
+  \item Report bugs at \url{https://github.com/mladenjovanovic/bmbstats/issues}
+}
+
+}
 \author{
 \strong{Maintainer}: Mladen Jovanović \email{coach.mladen.jovanovic@gmail.com}
 

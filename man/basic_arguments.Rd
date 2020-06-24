@@ -4,6 +4,8 @@
 \alias{basic_arguments}
 \title{Basic arguments}
 \arguments{
+\item{data}{Data frame}
+
 \item{x}{Numeric vector}
 
 \item{model}{Model object}
