@@ -6,6 +6,8 @@
 \alias{_PACKAGE}
 \title{bmbstats: Bootstrap Magnitude-based Statistics}
 \description{
+\if{html}{\figure{logo.png}{options: align='right' alt='logo' width='120'}}
+
 Set of functions for analysis and graphing of common sport science problems. Statistical
     inference is done using bootstrap method. Extensive documentation is available in the links provided,
     particularly in the "bmbstats: Bootstrap Magnitude-based Statistics for Sports Scientists" book.

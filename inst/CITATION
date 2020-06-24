@@ -7,10 +7,12 @@ citEntry(entry = "Manual",
   year         = "2020",
   address      = "Belgrade, Serbia",
   url          = "https://github.com/mladenjovanovic/bmbstats",
+  doi          = "10.5281/zenodo.3906857"
 
   textVersion  =
   paste("Mladen Jovanović (2020).",
         "bmbstats: Bootstrap Magnitude-based Statistics.",
         "R package version 0.0.0.900.",
-        "URL https://github.com/mladenjovanovic/bmbstats")
+        "url: https://github.com/mladenjovanovic/bmbstats",
+        "doi: 10.5281/zenodo.3906857")
 )

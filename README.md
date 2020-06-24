@@ -1,10 +1,13 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# bmbstats: Bootstrap Magnitude-base Statistics
+# bmbstats: Bootstrap Magnitude-base Statistics <img src="man/figures/logo.png" align="right" width="200" />
 
 <!-- badges: start -->
 
+[![CRAN
+status](https://www.r-pkg.org/badges/version/bmbstats)](https://cran.r-project.org/package=bmbstats)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3906857.svg)](https://doi.org/10.5281/zenodo.3906857)
 <!-- badges: end -->
 
 The goal of `bmbstats` is to provide a set of analysis and visualization
@@ -33,3 +36,5 @@ devtools::install_github("mladenjovanovic/bmbstats")
 Extensive documentation and examples can be found in [Bootstrap
 Magnitude-based Statistics for Sports
 Scientists](https://mladenjovanovic.github.io/bmbstats-book/) book.
+
+<img src="man/figures/book-logo.jpg" align="left"/>
