@@ -51,7 +51,8 @@ val_analysis <- validity_analysis(
   control = model_control(
     boot_type = "perc",
     boot_samples = 1000,
-    seed = 1667)
+    seed = 1667
+  )
 )
 
 val_analysis

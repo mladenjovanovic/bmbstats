@@ -26,7 +26,7 @@ SESOI lower threshold for \code{\link{validity_analysis}}
 data("agreement_data")
 SESOI_lower_validity_func(
   data = agreement_data,
-  criterion =  "Criterion_score.trial1",
+  criterion = "Criterion_score.trial1",
   practical = "Practical_score.trial1"
 )
 }

@@ -44,17 +44,18 @@ Object of class \code{bmbstats}
 \examples{
 data("agreement_data")
 
-val_analysis <- reliability_analysis(
+rel_analysis <- reliability_analysis(
   data = agreement_data,
   trial1 = "Practical_score.trial1",
   trial2 = "Practical_score.trial2",
   control = model_control(
     boot_type = "perc",
     boot_samples = 1000,
-    seed = 1667)
+    seed = 1667
+  )
 )
 
-val_analysis
+rel_analysis
 
-plot(val_analysis)
+plot(rel_analysis)
 }

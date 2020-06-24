@@ -26,7 +26,7 @@ SESOI upper threshold for \code{\link{reliability_analysis}}
 data("agreement_data")
 SESOI_lower_reliability_func(
   data = agreement_data,
-  trial1 =  "Practical_score.trial1",
+  trial1 = "Practical_score.trial1",
   trial2 = "Practical_score.trial2"
 )
 }
