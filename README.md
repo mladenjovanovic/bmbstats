@@ -37,4 +37,4 @@ Extensive documentation and examples can be found in [Bootstrap
 Magnitude-based Statistics for Sports
 Scientists](https://mladenjovanovic.github.io/bmbstats-book/) book.
 
-<img src="man/figures/book-logo.jpg" align="left"/>
+<a href="https://mladenjovanovic.github.io/bmbstats-book/"><img src="man/figures/book-logo.jpg" align="left"/></a>
