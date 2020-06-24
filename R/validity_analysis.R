@@ -7,7 +7,7 @@
 #' @param criterion Character vector indicating column name in the \code{data}
 #' @param practical Character vector indicating column name in the \code{data}
 #'
-#' @return Named vector with estimators
+#' @return Named vector with validity estimators
 #' @export
 #'
 #' @examples

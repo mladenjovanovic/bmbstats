@@ -27,7 +27,7 @@ validity_estimators(
 \item{na.rm}{Should NAs be removed? Default is \code{FALSE}}
 }
 \value{
-Named vector with estimators
+Named vector with validity estimators
 }
 \description{
 \code{validity_estimators} provides validity estimators using the OLP regression model, where

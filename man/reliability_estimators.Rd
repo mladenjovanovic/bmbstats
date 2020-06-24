@@ -27,7 +27,7 @@ reliability_estimators(
 \item{na.rm}{Should NAs be removed? Default is \code{FALSE}}
 }
 \value{
-Named vector with estimators
+Named vector with reliability estimators
 }
 \description{
 \code{reliability_estimators} provides reliability estimators using the OLP regression model, where

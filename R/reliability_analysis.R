@@ -7,7 +7,7 @@
 #' @param trial1 Character vector indicating column name in the \code{data}
 #' @param trial2 Character vector indicating column name in the \code{data}
 #'
-#' @return Named vector with estimators
+#' @return Named vector with reliability estimators
 #' @export
 #'
 #' @examples
@@ -68,6 +68,7 @@ reliability_estimators <- function(data,
     "R Squared" = r_squared,
     "SESOI to RSE" = SESOI_range / olp_model$rse,
     "PPER" = pper,
+    "TE" = olp_model$rse / sqrt(2),
     "SDC" = sdc
   )
 
