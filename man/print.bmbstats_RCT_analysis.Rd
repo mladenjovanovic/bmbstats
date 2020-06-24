@@ -26,7 +26,7 @@ rct_model <- RCT_analysis(
   control_label = "Control",
   pre_test = "Pre-test",
   post_test = "Post-test",
-  control = model_control(boot_type = "perc", boot_samples = 1000)
+  control = model_control(boot_type = "perc", boot_samples = 500)
 )
 
 rct_model
