@@ -2,8 +2,7 @@
 % Please edit documentation in R/utils.R
 \name{perfect_rnorm}
 \alias{perfect_rnorm}
-\title{Perfect Normal Distribution
-Generates perfect normally distributed numbers (used for plotting)}
+\title{Perfect Normal Distribution}
 \usage{
 perfect_rnorm(n, mean = 0, sd = 1)
 }
@@ -18,7 +17,6 @@ perfect_rnorm(n, mean = 0, sd = 1)
 Numeric vector, length of \code{n}
 }
 \description{
-Perfect Normal Distribution
 Generates perfect normally distributed numbers (used for plotting)
 }
 \examples{

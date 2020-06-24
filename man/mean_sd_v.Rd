@@ -2,7 +2,7 @@
 % Please edit documentation in R/utils.R
 \name{mean_sd_v}
 \alias{mean_sd_v}
-\title{Define  \code{\link[ggplot2]{ggplot}} summary function to return mean +/- SD VERTICAL}
+\title{Vertical Mean +/- SD}
 \usage{
 mean_sd_v(x)
 }
@@ -13,7 +13,7 @@ mean_sd_v(x)
 Data frame with xmin, x, and xmax summaries
 }
 \description{
-Define  \code{\link[ggplot2]{ggplot}} summary function to return mean +/- SD VERTICAL
+Define \code{\link[ggplot2]{ggplot}} summary function to return mean +/- SD VERTICAL
 }
 \examples{
 mean_sd_v(rnorm(100))

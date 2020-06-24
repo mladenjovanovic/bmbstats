@@ -2,10 +2,7 @@
 % Please edit documentation in R/utils.R
 \name{func_num}
 \alias{func_num}
-\title{Function or numeric
-Check if the parameter \code{x} is a function, or numeric. If it is a function,
-then parameters \code{...} are forwarded to \code{x}. If it is a numeric, then
-the \code{x} is returned}
+\title{Function or numeric}
 \usage{
 func_num(x, ...)
 }
@@ -18,7 +15,6 @@ func_num(x, ...)
 If function \code{x{...}} is returned. If numeric \code{x} is returned
 }
 \description{
-Function or numeric
 Check if the parameter \code{x} is a function, or numeric. If it is a function,
 then parameters \code{...} are forwarded to \code{x}. If it is a numeric, then
 the \code{x} is returned

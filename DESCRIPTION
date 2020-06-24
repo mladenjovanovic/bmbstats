@@ -6,7 +6,9 @@ Authors@R:
            family = "Jovanović",
            role = c("aut", "cre"),
            email = "coach.mladen.jovanovic@gmail.com")
-Description: Set of functions for analysis and graphing of common sport science problems.
+Description: Set of functions for analysis and graphing of common sport science problems. Statistical
+    inference is done using bootstrap method. Extensive documentation is available in the links provided,
+    particularly in the "bmbstats: Bootstrap Magnitude-based Statistics for Sports Scientists" book.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
@@ -33,6 +35,8 @@ Suggests:
     recipes
 Roxygen: list(markdown = TRUE)
 URL: 
+    https://mladenjovanovic.github.io/bmbstats/,
     https://github.com/mladenjovanovic/bmbstats,
+    https://mladenjovanovic.github.io/bmbstats-book/,
     https://github.com/mladenjovanovic/bmbstats-book
 BugReports: https://github.com/mladenjovanovic/bmbstats/issues

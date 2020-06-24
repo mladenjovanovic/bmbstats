@@ -1,3 +1,5 @@
+#' Horizontal Mean +/- SD
+#'
 #' Define \code{\link[ggplot2]{ggplot}} summary function to return mean +/- SD HORIZONTAL
 #'
 #' @param x Numeric vector
@@ -17,7 +19,9 @@ mean_sd_h <- function(x) {
   )
 }
 
-#' Define  \code{\link[ggplot2]{ggplot}} summary function to return mean +/- SD VERTICAL
+#' Vertical Mean +/- SD
+#'
+#' Define \code{\link[ggplot2]{ggplot}} summary function to return mean +/- SD VERTICAL
 #'
 #' @param x Numeric vector
 #' @return Data frame with xmin, x, and xmax summaries
@@ -85,6 +89,7 @@ get_magnitude <- function(x,
 }
 
 #' Function or numeric
+#'
 #' Check if the parameter \code{x} is a function, or numeric. If it is a function,
 #'      then parameters \code{...} are forwarded to \code{x}. If it is a numeric, then
 #'      the \code{x} is returned
@@ -101,6 +106,7 @@ func_num <- function(x, ...) {
 
 
 #' Perfect Normal Distribution
+#'
 #' Generates perfect normally distributed numbers (used for plotting)
 #' @param n Number of samples
 #' @param mean Mean of the distribution. Default is 0

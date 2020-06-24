@@ -1,7 +1,7 @@
 citHeader("To cite 'bmbstats' in publications use:")
 
 citEntry(entry = "Manual",
-  title        = "{bmbstats}: bootstrap magnitude-based statistics",
+  title        = "{bmbstats}: Bootstrap Magnitude-based Statistics",
   author       = personList(as.person("Mladen Jovanović")),
   note         = "R package version 0.0.0.900",
   year         = "2020",
@@ -10,7 +10,7 @@ citEntry(entry = "Manual",
 
   textVersion  =
   paste("Mladen Jovanović (2020).",
-        "bmbstats: bootstrap magnitude-based statistics.",
+        "bmbstats: Bootstrap Magnitude-based Statistics.",
         "R package version 0.0.0.900.",
         "URL https://github.com/mladenjovanovic/bmbstats")
 )

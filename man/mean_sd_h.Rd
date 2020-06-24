@@ -2,7 +2,7 @@
 % Please edit documentation in R/utils.R
 \name{mean_sd_h}
 \alias{mean_sd_h}
-\title{Define \code{\link[ggplot2]{ggplot}} summary function to return mean +/- SD HORIZONTAL}
+\title{Horizontal Mean +/- SD}
 \usage{
 mean_sd_h(x)
 }

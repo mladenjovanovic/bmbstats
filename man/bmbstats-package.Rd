@@ -6,12 +6,16 @@
 \alias{_PACKAGE}
 \title{bmbstats: Bootstrap Magnitude-based Statistics}
 \description{
-Set of functions for analysis and graphing of common sport science problems.
+Set of functions for analysis and graphing of common sport science problems. Statistical
+    inference is done using bootstrap method. Extensive documentation is available in the links provided,
+    particularly in the "bmbstats: Bootstrap Magnitude-based Statistics for Sports Scientists" book.
 }
 \seealso{
 Useful links:
 \itemize{
+  \item \url{https://mladenjovanovic.github.io/bmbstats/}
   \item \url{https://github.com/mladenjovanovic/bmbstats}
+  \item \url{https://mladenjovanovic.github.io/bmbstats-book/}
   \item \url{https://github.com/mladenjovanovic/bmbstats-book}
   \item Report bugs at \url{https://github.com/mladenjovanovic/bmbstats/issues}
 }
