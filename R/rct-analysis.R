@@ -186,8 +186,13 @@ RCT_estimators_simple <- function(control_pre_test,
 
   # Treatment effects
   systematic_effect <- (mean(treatment_change, na.rm = na.rm) - mean(control_change, na.rm = na.rm))
-  random_effect <- sqrt(stats::var(treatment_change, na.rm = na.rm) - stats::var(control_change, na.rm = na.rm))
 
+  # Make sure there is no sqrt of negative number
+  if (stats::var(treatment_change, na.rm = na.rm) >  stats::var(control_change, na.rm = na.rm)) {
+    random_effect <- sqrt(stats::var(treatment_change, na.rm = na.rm) - stats::var(control_change, na.rm = na.rm))
+  } else {
+    random_effect <- -sqrt(stats::var(control_change, na.rm = na.rm) - stats::var(treatment_change, na.rm = na.rm))
+  }
   # For n observations use mean between treatment group and control group
   n_obs <- (length(treatment_change) + length(control_change)) / 2
 
