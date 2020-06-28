@@ -30,8 +30,8 @@ validity_estimators(
 Named vector with validity estimators
 }
 \description{
-\code{validity_estimators} provides validity estimators using the OLP regression model, where
-\code{criterion} is the outcome variable, and \code{practical} is the predictor.
+\code{validity_estimators} provides validity estimators using the simple linear regression model,
+where \code{criterion} is the outcome variable, and \code{practical} is the predictor.
 }
 \examples{
 data("agreement_data")

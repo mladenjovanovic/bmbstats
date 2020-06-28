@@ -1,7 +1,7 @@
 #' Validity estimators
 #'
-#' \code{validity_estimators} provides validity estimators using the OLP regression model, where
-#'     \code{criterion} is the outcome variable, and \code{practical} is the predictor.
+#' \code{validity_estimators} provides validity estimators using the simple linear regression model,
+#'    where \code{criterion} is the outcome variable, and \code{practical} is the predictor.
 #'
 #' @inheritParams basic_arguments
 #' @param criterion Character vector indicating column name in the \code{data}
@@ -39,14 +39,12 @@ validity_estimators <- function(data,
 
   SESOI_range <- SESOI_upper - SESOI_lower
 
-  olp_model <- OLP_regression(
-    predictor = practical_obs,
-    outcome = criterion_obs,
-    na.rm = na.rm
-  )
+  lm_model <- stats::lm(criterion_obs~practical_obs)
+
+  rse <- summary(lm_model)$sigma
 
   pper <- PPER(
-    sigma = olp_model$rse,
+    sigma = rse,
     SESOI_lower = SESOI_lower,
     SESOI_upper = SESOI_upper,
     df = length(criterion_obs) - 1
@@ -55,18 +53,18 @@ validity_estimators <- function(data,
   pearson_r <- stats::cor(practical_obs, criterion_obs)
   r_squared <- pearson_r^2
 
-  sdc <- olp_model$rse * stats::qt(1 - ((1 - 0.95) / 2), df = length(criterion_obs) - 1)
+  sdc <- rse * stats::qt(1 - ((1 - 0.95) / 2), df = length(criterion_obs) - 1)
 
   c(
     "SESOI lower" = SESOI_lower,
     "SESOI upper" = SESOI_upper,
     "SESOI range" = SESOI_range,
-    "Intercept" = olp_model$intercept,
-    "Slope" = olp_model$slope,
-    "RSE" = olp_model$rse,
+    "Intercept" = stats::coef(lm_model)[[1]],
+    "Slope" = stats::coef(lm_model)[[2]],
+    "RSE" = rse,
     "Pearson's r" = pearson_r,
     "R Squared" = r_squared,
-    "SESOI to RSE" = SESOI_range / olp_model$rse,
+    "SESOI to RSE" = SESOI_range / rse,
     "PPER" = pper,
     "SDC" = sdc
   )
