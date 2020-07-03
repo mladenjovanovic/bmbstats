@@ -38,8 +38,8 @@ print.bmbstats_RCT_analysis <- function(x, ...) {
 #' @param x Object of class \code{bmbstats_RCT_analysis}
 #' @param type Type of plot. Options are "boot", "control-pre-post", "treatment-pre-post",
 #'     "control-change", "treatment-change", "change", "control-paired-change",
-#'     "treatment-paired-change", "change-distribution", "effect-distribution", and "treatment-responses".
-#'     Default is "boot"
+#'     "treatment-paired-change", "change-distribution", "effect-distribution",
+#'     "adjusted-treatment-responses", and "treatment-responses". Default is "boot"
 #' @param ... Extra arguments. Use \code{\link{plot_control}} to control plotting style
 #' @export
 #' @examples
@@ -72,6 +72,7 @@ plot.bmbstats_RCT_analysis <- function(x, type = "boot", ...) {
     "treatment-paired-change",
     "change-distribution",
     "effect-distribution",
+    "adjusted-treatment-responses",
     "treatment-responses"
   ))
 
@@ -128,6 +129,10 @@ plot.bmbstats_RCT_analysis <- function(x, type = "boot", ...) {
     gg <- RCT_plot_effect_distribution(x, ...)
   }
 
+  # Adjusted Treatment response
+  if (type == "adjusted-treatment-responses") {
+    gg <- RCT_plot_adjusted_treatment_responses(x, ...)
+  }
 
   # Treatment response
   if (type == "treatment-responses") {
@@ -437,7 +442,7 @@ RCT_plot_effect_distribution <- function(x, control = plot_control()) {
 
 
 # ---------------------------------------------------------
-RCT_plot_treatment_responses <- function(x, control = plot_control()) {
+RCT_plot_adjusted_treatment_responses <- function(x, control = plot_control()) {
 
   # +++++++++++++++++++++++++++++++++++++++++++
   # Code chunk for dealing with R CMD check note
@@ -489,5 +494,61 @@ RCT_plot_treatment_responses <- function(x, control = plot_control()) {
       alpha = control$points_alpha
     ) +
     ggplot2::xlab("Adjusted change") +
+    ggplot2::ylab(NULL)
+}
+
+# ---------------------------------------------------------
+RCT_plot_treatment_responses <- function(x, control = plot_control()) {
+
+  # +++++++++++++++++++++++++++++++++++++++++++
+  # Code chunk for dealing with R CMD check note
+  change <- NULL
+  id <- NULL
+  change_upper <- NULL
+  change_lower <- NULL
+  # +++++++++++++++++++++++++++++++++++++++++++
+
+  responses_data <- x$extra$treatment_responses
+
+  SESOI_lower <- x$extra$SESOI_lower
+  SESOI_upper <- x$extra$SESOI_upper
+
+  if (control$sort) {
+    responses_data$id <- factor(
+      responses_data$id,
+      levels = responses_data$id[order(responses_data$change)]
+    )
+  }
+
+  # Plot
+  ggplot2::ggplot(
+    responses_data,
+    ggplot2::aes(x = change, y = id)
+  ) +
+    cowplot::theme_cowplot(control$font_size) +
+    ggplot2::annotate(
+      "rect",
+      xmin = SESOI_lower,
+      xmax = SESOI_upper,
+      ymin = -Inf,
+      ymax = Inf,
+      alpha = control$SESOI_alpha,
+      fill = control$SESOI_color
+    ) +
+    ggplot2::geom_vline(xintercept = 0, color = control$SESOI_color) +
+    ggstance::geom_linerangeh(ggplot2::aes(
+      xmax = change_upper,
+      xmin = change_lower
+    ),
+    size = control$summary_bar_size,
+    color = control$summary_bar_color,
+    alpha = control$summary_bar_alpha
+    ) +
+    ggplot2::geom_point(
+      shape = control$points_shape,
+      size = control$points_size,
+      alpha = control$points_alpha
+    ) +
+    ggplot2::xlab("Change") +
     ggplot2::ylab(NULL)
 }

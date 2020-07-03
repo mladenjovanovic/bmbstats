@@ -11,8 +11,8 @@
 
 \item{type}{Type of plot. Options are "boot", "control-pre-post", "treatment-pre-post",
 "control-change", "treatment-change", "change", "control-paired-change",
-"treatment-paired-change", "change-distribution", "effect-distribution", and "treatment-responses".
-Default is "boot"}
+"treatment-paired-change", "change-distribution", "effect-distribution",
+"adjusted-treatment-responses", and "treatment-responses". Default is "boot"}
 
 \item{...}{Extra arguments. Use \code{\link{plot_control}} to control plotting style}
 }
