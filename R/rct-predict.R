@@ -110,14 +110,14 @@ RCT_predict <- function(model,
   results$pITE_magnitude <- predicted_effect_magnitude
 
   pATE_control <- mean(predicted_effect[new_data[[group]] == control_label], na.rm = na.rm)
-  pATE_treatment <- mean(-predicted_effect[new_data[[group]] == treatment_label], na.rm = na.rm)
+  pATE_treatment <- mean(predicted_effect[new_data[[group]] == treatment_label], na.rm = na.rm)
   pATE_overall <- mean(abs(predicted_effect))
 
 
   # Effect heterogeneity - Variable treatment effect
   # Expressed used SD
   pVTE_control <- stats::sd(predicted_effect[new_data[[group]] == control_label], na.rm = na.rm)
-  pVTE_treatment <- stats::sd(-predicted_effect[new_data[[group]] == treatment_label], na.rm = na.rm)
+  pVTE_treatment <- stats::sd(predicted_effect[new_data[[group]] == treatment_label], na.rm = na.rm)
   pVTE_overall <- stats::sd(abs(predicted_effect))
 
   counterfactual_summary <- data.frame(
