@@ -305,6 +305,13 @@ RCT_analysis <- function(data,
     )
   )
 
+  # Set strata
+  if (!is.null(control$boot_strata)) {
+    warning("Strata cannot be used in this function. Using group strata", immediate. = TRUE, call. = FALSE)
+  }
+  control$boot_strata <- factor(rct_df$group)
+
+
   # ----------------------------------------------------
   # Wrapper functions
   bmbstats_SESOI_lower_function <- function(data, na.rm, init_boot) {
