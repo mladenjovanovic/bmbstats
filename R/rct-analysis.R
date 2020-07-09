@@ -1,4 +1,3 @@
-
 #' RCT Estimators
 #'
 #' \code{RCT_estimators} is used as a function for \code{\link{RCT_analysis}} function to provide
@@ -212,6 +211,98 @@ RCT_estimators_simple <- function(control_pre_test,
     pLower = stats::pt((SESOI_lower - systematic_effect) / random_effect, df = n_obs - 1),
     pEquivalent = 1 - (stats::pt((SESOI_lower - systematic_effect) / random_effect, df = n_obs - 1) +
       (1 - stats::pt((SESOI_upper - systematic_effect) / random_effect, df = n_obs - 1))),
+    pHigher = 1 - stats::pt((SESOI_upper - systematic_effect) / random_effect, df = n_obs - 1)
+  )
+
+  return(c(
+    SESOI_summary,
+    treatment_summary
+  ))
+}
+
+#' RCT Estimators - Simple Linear Regression approach
+#'
+#' \code{RCT_estimators_lm} is used as a function for \code{\link{RCT_analysis}} function to provide a
+#'     simple (or reduced) estimators for RCT analysis using simple linear regression
+#' @inheritParams RCT_estimators
+#'
+#' @return Named numeric vector
+#' @export
+#'
+#' @examples
+#' set.seed(1666)
+#'
+#' RCT_estimators_lm(
+#'   control_pre_test = rnorm(20, 100, 10),
+#'   control_post_test = rnorm(20, 105, 10),
+#'   treatment_pre_test = rnorm(20, 100, 10),
+#'   treatment_post_test = rnorm(20, 120, 10),
+#'   SESOI_lower = -5,
+#'   SESOI_upper = 5
+#' )
+RCT_estimators_lm <- function(control_pre_test,
+                              control_post_test,
+                              treatment_pre_test,
+                              treatment_post_test,
+                              SESOI_lower = 0,
+                              SESOI_upper = 0,
+                              na.rm = FALSE) {
+
+  SESOI_range <- SESOI_upper - SESOI_lower
+
+  # SESOI summary
+  SESOI_summary <- c(
+    `SESOI lower` = SESOI_lower,
+    `SESOI upper` = SESOI_upper,
+    `SESOI range` = SESOI_range
+  )
+
+  # create df
+  rct_df <- rbind(
+    data.frame(
+      group = "Control",
+      pre_test = control_pre_test,
+      post_test = control_post_test
+    ),
+    data.frame(
+      group = "Treatment",
+      pre_test = treatment_pre_test,
+      post_test = treatment_post_test
+    )
+  )
+
+  # Make model
+  model <- stats::lm(
+    post_test ~ pre_test + group,
+    rct_df
+  )
+
+  systematic_effect <- stats::coef(model)[[3]]
+
+  rct_df$.res <- stats::residuals(model)
+
+  treatment_sd <- stats::sd(rct_df[rct_df$group == "Treatment", ]$.res, na.rm = na.rm)
+  control_sd <- stats::sd(rct_df[rct_df$group == "Control", ]$.res, na.rm = na.rm)
+
+  # Make sure there is no sqrt of negative number
+  if (treatment_sd > control_sd) {
+    random_effect <- sqrt(treatment_sd^2 - control_sd^2)
+  } else {
+    random_effect <- -sqrt(control_sd^2 - treatment_sd^2)
+  }
+
+  n_obs <- nrow(rct_df)
+
+  treatment_summary <- c(
+    `Systematic effect` = systematic_effect,
+    `Random effect` = random_effect,
+    `Systematic effect to SESOI` = systematic_effect / SESOI_range,
+    `SESOI to Random effect` = SESOI_range / random_effect,
+
+    # These use t-distribution to estimate effect proportions
+    pLower = stats::pt((SESOI_lower - systematic_effect) / random_effect, df = n_obs - 1),
+    pEquivalent = 1 - (stats::pt((SESOI_lower - systematic_effect) / random_effect, df = n_obs - 1) +
+                         (1 - stats::pt((SESOI_upper - systematic_effect) / random_effect, df = n_obs - 1))),
     pHigher = 1 - stats::pt((SESOI_upper - systematic_effect) / random_effect, df = n_obs - 1)
   )
 
