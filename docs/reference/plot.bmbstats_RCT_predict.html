@@ -179,25 +179,25 @@ use <code>predictor</code> to select predictor for plotting (default is <code>gr
 #&gt; Model performance:
 #&gt; 
 #&gt;         metric      training training.pooled testing.pooled       mean
-#&gt;            MBE -7.342304e-15   -1.788123e-15     -0.0367697 -0.0367697
-#&gt;            MAE  2.410129e+00    2.374538e+00      2.8361246  2.8361246
-#&gt;           RMSE  3.314293e+00    3.193300e+00      3.8917732  3.7868755
-#&gt;           PPER  3.077021e-01    3.216044e-01      0.2659921  0.2695521
-#&gt;  SESOI to RMSE  8.130894e-01    8.304050e-01      0.6813687  0.7696884
-#&gt;      R-squared  7.496390e-01    7.675848e-01      0.6548235  0.6703945
-#&gt;         MinErr -7.076575e+00   -7.782727e+00     -9.5536230 -5.8426280
-#&gt;         MaxErr  8.795609e+00    9.434450e+00     11.2751262  5.9695767
-#&gt;      MaxAbsErr  8.795609e+00    9.434450e+00     11.2751262  7.9879548
-#&gt;          SD        min        max
-#&gt;  1.73392874 -3.5406935  3.5433573
-#&gt;  0.65364258  1.4861264  4.1837937
-#&gt;  0.91282407  1.8450230  5.2254373
-#&gt;  0.09567345  0.1505055  0.5631101
-#&gt;  0.28912758  0.4370377  1.7130507
-#&gt;  0.19714789 -0.1335403  0.8855486
-#&gt;  2.88159366 -9.5536230 -0.7418022
-#&gt;  3.19939507  1.2756085 11.2751262
-#&gt;  2.07638795  3.5401620 11.2751262
+#&gt;            MBE -7.342304e-15   -3.718485e-15     -0.0804454 -0.0804454
+#&gt;            MAE  2.410129e+00    2.379582e+00      2.7824510  2.7824510
+#&gt;           RMSE  3.314293e+00    3.207164e+00      3.8348030  3.6996958
+#&gt;           PPER  3.077021e-01    3.202917e-01      0.2697899  0.2838745
+#&gt;  SESOI to RMSE  8.130894e-01    8.268153e-01      0.6914912  0.8135316
+#&gt;      R-squared  7.496390e-01    7.655623e-01      0.6649729  0.6897063
+#&gt;         MinErr -7.076575e+00   -8.369427e+00     -8.7990381 -5.7301641
+#&gt;         MaxErr  8.795609e+00    9.960685e+00     11.3918573  5.8722501
+#&gt;      MaxAbsErr  8.795609e+00    9.960685e+00     11.3918573  7.7946851
+#&gt;         SD        min         max
+#&gt;  1.6346763 -3.4772322  3.22283737
+#&gt;  0.7365765  1.2780682  4.00023556
+#&gt;  1.0261909  1.6667244  5.01630511
+#&gt;  0.1110023  0.1592281  0.55673703
+#&gt;  0.3364630  0.4806244  1.69046764
+#&gt;  0.1679314  0.3532905  0.94067071
+#&gt;  2.7566454 -8.7990381 -0.07646052
+#&gt;  3.3123319 -0.5696611 11.39185726
+#&gt;  2.2187002  3.0889519 11.39185726
 #&gt; 
 #&gt; Individual model results:
 #&gt; 
@@ -272,10 +272,16 @@ use <code>predictor</code> to select predictor for plotting (default is <code>gr
 #&gt; 
 #&gt; Summary of counterfactual effects of RCT group:
 #&gt; 
-#&gt;      group     pATE pVTE
-#&gt;  Treatment 7.847828    0
-#&gt;    Control 7.847828    0
-#&gt;     pooled 7.847828    0</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>m1_rct</span>)</div><div class='img'><img src='plot.bmbstats_RCT_predict-1.png' alt='' width='700' height='433' /></div></pre>
+#&gt;      group      pATE pVTE
+#&gt;  Treatment -7.847828    0
+#&gt;    Control  7.847828    0
+#&gt;     pooled  7.847828    0
+#&gt; 
+#&gt; Treatment effect summary
+#&gt; 
+#&gt; Average Treatment effect:  7.847828
+#&gt; Variable Treatment effect:  0
+#&gt; Random Treatment effect:  4.412559</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>m1_rct</span>)</div><div class='img'><img src='plot.bmbstats_RCT_predict-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

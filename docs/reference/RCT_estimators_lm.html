@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>S3 method for printing <code><a href='bootstrap_MET.html'>bootstrap_MET</a></code> results — print.bmbstats_MET • bmbstats</title>
+<title>RCT Estimators - Simple Linear Regression approach — RCT_estimators_lm • bmbstats</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,9 @@
 
 
 
-<meta property="og:title" content="S3 method for printing <code><a href='bootstrap_MET.html'>bootstrap_MET</a></code> results — print.bmbstats_MET" />
-<meta property="og:description" content="S3 method for printing bootstrap_MET results" />
+<meta property="og:title" content="RCT Estimators - Simple Linear Regression approach — RCT_estimators_lm" />
+<meta property="og:description" content="RCT_estimators_lm is used as a function for RCT_analysis function to provide a
+simple (or reduced) estimators for RCT analysis using simple linear regression" />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -119,51 +120,83 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>S3 method for printing <code><a href='bootstrap_MET.html'>bootstrap_MET</a></code> results</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mladenjovanovic/bmbstats/blob/master/R/MET-S3.R'><code>R/MET-S3.R</code></a></small>
-    <div class="hidden name"><code>print.bmbstats_MET.Rd</code></div>
+    <h1>RCT Estimators - Simple Linear Regression approach</h1>
+    <small class="dont-index">Source: <a href='https://github.com/mladenjovanovic/bmbstats/blob/master/R/rct-analysis.R'><code>R/rct-analysis.R</code></a></small>
+    <div class="hidden name"><code>RCT_estimators_lm.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>S3 method for printing <code><a href='bootstrap_MET.html'>bootstrap_MET</a></code> results</p>
+    <p><code>RCT_estimators_lm</code> is used as a function for <code><a href='RCT_analysis.html'>RCT_analysis</a></code> function to provide a
+simple (or reduced) estimators for RCT analysis using simple linear regression</p>
     </div>
 
-    <pre class="usage"><span class='co'># S3 method for bmbstats_MET</span>
-<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>RCT_estimators_lm</span>(
+  <span class='no'>control_pre_test</span>,
+  <span class='no'>control_post_test</span>,
+  <span class='no'>treatment_pre_test</span>,
+  <span class='no'>treatment_post_test</span>,
+  <span class='kw'>SESOI_lower</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>SESOI_upper</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>x</th>
-      <td><p>Object of class <code>bmbstats_MET</code></p></td>
+      <th>control_pre_test</th>
+      <td><p>Numeric vector containing Control Pre-test observations</p></td>
     </tr>
     <tr>
-      <th>...</th>
-      <td><p>Extra arguments. Not used</p></td>
+      <th>control_post_test</th>
+      <td><p>Numeric vector containing Control Post-test observations</p></td>
+    </tr>
+    <tr>
+      <th>treatment_pre_test</th>
+      <td><p>Numeric vector containing Treatment Pre-test observations</p></td>
+    </tr>
+    <tr>
+      <th>treatment_post_test</th>
+      <td><p>Numeric vector containing Treatment Post-test observations</p></td>
+    </tr>
+    <tr>
+      <th>SESOI_lower</th>
+      <td><p>Lower smallest effect size of interest threshold</p></td>
+    </tr>
+    <tr>
+      <th>SESOI_upper</th>
+      <td><p>Upper smallest effect size of interest threshold</p></td>
+    </tr>
+    <tr>
+      <th>na.rm</th>
+      <td><p>Should NAs be removed? Default is <code>FALSE</code></p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>Named numeric vector</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>mean_MET</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='bootstrap_MET.html'>bootstrap_MET</a></span>(
-  <span class='fu'><a href='describe_data.html'>describe_data</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>10</span>, <span class='fl'>100</span>, <span class='fl'>20</span>)),
-  <span class='kw'>estimator</span> <span class='kw'>=</span> <span class='st'>"mean"</span>,
-  <span class='kw'>SESOI_lower</span> <span class='kw'>=</span> <span class='fl'>95</span>,
-  <span class='kw'>SESOI_upper</span> <span class='kw'>=</span> <span class='fl'>105</span>,
-  <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>0.05</span>
-)</div><div class='output co'>#&gt; <span class='message'>Bootstraping: 2000 resamples</span></div><div class='output co'>#&gt; <span class='message'>Calculating confidence intervals...</span></div><div class='output co'>#&gt; <span class='warning'>Warning: extreme order statistics used as endpoints</span></div><div class='output co'>#&gt; <span class='warning'>Warning: boot::boot.ci returned error or NULL when estimating CIs for min estimator. Returning NAs for upper and lower CIs</span></div><div class='output co'>#&gt; <span class='message'>Done!</span></div><div class='input'><span class='no'>mean_MET</span></div><div class='output co'>#&gt; Minimum effect tests for the `mean` estimator
-#&gt; Bootstrap result: mean=92.375, 95% CI [86.738, 98.403]
-#&gt; SESOI: [95, 105], alpha=0.05
-#&gt; 
-#&gt;             Test      p.value
-#&gt;      inferiority 0.1895000000
-#&gt;  non-superiority 0.0004997501
-#&gt;      equivalence 0.8105000000
-#&gt;  non-inferiority 0.8105000000
-#&gt;      superiority 1.0000000000
-#&gt; 
-#&gt; Final inference: Not-Higher</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>mean_MET</span>)</div><div class='img'><img src='print.bmbstats_MET-1.png' alt='' width='700' height='433' /></div></pre>
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>1666</span>)
+
+<span class='fu'>RCT_estimators_lm</span>(
+  <span class='kw'>control_pre_test</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>20</span>, <span class='fl'>100</span>, <span class='fl'>10</span>),
+  <span class='kw'>control_post_test</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>20</span>, <span class='fl'>105</span>, <span class='fl'>10</span>),
+  <span class='kw'>treatment_pre_test</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>20</span>, <span class='fl'>100</span>, <span class='fl'>10</span>),
+  <span class='kw'>treatment_post_test</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>20</span>, <span class='fl'>120</span>, <span class='fl'>10</span>),
+  <span class='kw'>SESOI_lower</span> <span class='kw'>=</span> -<span class='fl'>5</span>,
+  <span class='kw'>SESOI_upper</span> <span class='kw'>=</span> <span class='fl'>5</span>
+)</div><div class='output co'>#&gt;                SESOI lower                SESOI upper 
+#&gt;                -5.00000000                 5.00000000 
+#&gt;                SESOI range          Systematic effect 
+#&gt;                10.00000000                17.29339553 
+#&gt;              Random effect Systematic effect to SESOI 
+#&gt;                 9.68390174                 1.72933955 
+#&gt;     SESOI to Random effect                     pLower 
+#&gt;                 1.03264162                 0.01337697 
+#&gt;                pEquivalent                    pHigher 
+#&gt;                 0.09252191                 0.89410111 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

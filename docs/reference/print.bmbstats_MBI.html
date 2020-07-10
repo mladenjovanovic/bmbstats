@@ -152,15 +152,15 @@
   <span class='kw'>SESOI_lower</span> <span class='kw'>=</span> <span class='fl'>95</span>,
   <span class='kw'>SESOI_upper</span> <span class='kw'>=</span> <span class='fl'>105</span>
 )</div><div class='output co'>#&gt; <span class='message'>Bootstraping: 2000 resamples</span></div><div class='output co'>#&gt; <span class='message'>Calculating confidence intervals...</span></div><div class='output co'>#&gt; <span class='warning'>Warning: boot::boot.ci returned error or NULL when estimating CIs for min estimator. Returning NAs for upper and lower CIs</span></div><div class='output co'>#&gt; <span class='message'>Done!</span></div><div class='input'><span class='no'>mean_MBI</span></div><div class='output co'>#&gt; Magnitude-based inference for the `mean` estimator
-#&gt; Bootstrap result: mean=103.318, 95% CI [93.446, 115.969]
+#&gt; Bootstrap result: mean=103.145, 95% CI [95.473, 113.765]
 #&gt; SESOI: [95, 105]
 #&gt; 
 #&gt;        Test   prob
-#&gt;       lower 0.0635
-#&gt;  equivalent 0.5590
-#&gt;      higher 0.3775
+#&gt;       lower 0.0300
+#&gt;  equivalent 0.6405
+#&gt;      higher 0.3295
 #&gt; 
-#&gt; Final inference: Unclear difference</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>mean_MBI</span>, <span class='kw'>control</span> <span class='kw'>=</span> <span class='fu'><a href='plot_control.html'>plot_control</a></span>(<span class='kw'>points_jitter</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>))</div><div class='output co'>#&gt; <span class='message'>Picking joint bandwidth of 1.13</span></div><div class='img'><img src='print.bmbstats_MBI-1.png' alt='' width='700' height='433' /></div></pre>
+#&gt; Final inference: Possibly equivalent</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>mean_MBI</span>, <span class='kw'>control</span> <span class='kw'>=</span> <span class='fu'><a href='plot_control.html'>plot_control</a></span>(<span class='kw'>points_jitter</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>))</div><div class='output co'>#&gt; <span class='message'>Picking joint bandwidth of 0.921</span></div><div class='img'><img src='print.bmbstats_MBI-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
