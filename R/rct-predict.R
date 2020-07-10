@@ -80,6 +80,9 @@ RCT_predict <- function(model,
     )
   })
 
+  # Estimated random treatment effect
+  random_treatment_effect <- sqrt(residual_summary$SD[2]^2 - residual_summary$SD[1]^2)
+
   # Counterfactuals
   new_data_counterfactual <- new_data
 
@@ -138,7 +141,10 @@ RCT_predict <- function(model,
     results = results,
     residual_summary = residual_summary,
     counterfactual_df = new_data_counterfactual,
-    counterfactual_summary = counterfactual_summary
+    counterfactual_summary = counterfactual_summary,
+    random_treatment_effect = random_treatment_effect,
+    average_treatment_effect = pATE_overall,
+    variable_treatment_effect = pVTE_overall
   )
 
   class(model) <- "bmbstats_RCT_predict"

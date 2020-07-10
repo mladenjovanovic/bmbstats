@@ -90,6 +90,11 @@ print.bmbstats_RCT_predict <- function(x, ...) {
 
   cat("\nSummary of counterfactual effects of RCT group:\n\n")
   print(x$extra$counterfactual_summary, row.names = FALSE)
+
+  cat("\nTreatment effect summary\n\n")
+  cat("Average Treatment effect: ", x$extra$average_treatment_effect)
+  cat("\nVariable Treatment effect: ", x$extra$variable_treatment_effect)
+  cat("\nRandom Treatment effect: ", x$extra$random_treatment_effect)
 }
 
 #' S3 method for plotting \code{\link{RCT_predict}} results
