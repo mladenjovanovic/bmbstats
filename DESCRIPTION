@@ -29,7 +29,7 @@ Imports:
     tidyr,
     boot,
     pdp
-RoxygenNote: 7.1.0
+RoxygenNote: 7.1.1
 Suggests: 
     testthat,
     recipes
