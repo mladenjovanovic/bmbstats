@@ -71,7 +71,7 @@ print.bmbstats_RCT_predict <- function(x, ...) {
 
   if (is.list(x$cross_validation)) {
     cat(
-      " Cross-Validation of the model was performed using", x$control$cv_repeats,
+      "\nCross-Validation of the model was performed using", x$control$cv_repeats,
       ifelse(x$control$cv_repeats == 1, "repeat", "repeats"), "of",
       x$control$cv_folds, "folds.\n"
     )
